@@ -11,13 +11,14 @@
 		6E412180A53D89CCAE50C4EA /* Pods_Fitness_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6B394742CCED85F0C4D91E7 /* Pods_Fitness_App.framework */; };
 		720A29A8FC73191863A7F122 /* Pods_Fitness_AppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 579D80D3CC27417F7D2716D4 /* Pods_Fitness_AppUITests.framework */; };
 		7D416AE422D5054800B8A1D9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D416AE322D5054800B8A1D9 /* AppDelegate.m */; };
-		7D416AE722D5054800B8A1D9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D416AE622D5054800B8A1D9 /* ViewController.m */; };
 		7D416AEA22D5054800B8A1D9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D416AE822D5054800B8A1D9 /* Main.storyboard */; };
 		7D416AEC22D5054900B8A1D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D416AEB22D5054900B8A1D9 /* Assets.xcassets */; };
 		7D416AEF22D5054900B8A1D9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D416AED22D5054900B8A1D9 /* LaunchScreen.storyboard */; };
 		7D416AF222D5054900B8A1D9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D416AF122D5054900B8A1D9 /* main.m */; };
 		7D416AFC22D5054900B8A1D9 /* Fitness_AppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D416AFB22D5054900B8A1D9 /* Fitness_AppTests.m */; };
 		7D416B0722D5054900B8A1D9 /* Fitness_AppUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D416B0622D5054900B8A1D9 /* Fitness_AppUITests.m */; };
+		7DA8AF8022DE911000BD4098 /* SignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DA8AF7F22DE911000BD4098 /* SignupViewController.m */; };
+		7DEF648222DE8B580028C1BB /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DEF648122DE8B580028C1BB /* LoginViewController.m */; };
 		82659799CFA19C69AE9F8E37 /* Pods_Fitness_AppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C2DF848574A271A742E4868 /* Pods_Fitness_AppTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -52,8 +53,6 @@
 		7D416ADF22D5054800B8A1D9 /* Fitness App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fitness App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D416AE222D5054800B8A1D9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7D416AE322D5054800B8A1D9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		7D416AE522D5054800B8A1D9 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		7D416AE622D5054800B8A1D9 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		7D416AE922D5054800B8A1D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7D416AEB22D5054900B8A1D9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7D416AEE22D5054900B8A1D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -65,6 +64,10 @@
 		7D416B0222D5054900B8A1D9 /* Fitness AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Fitness AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D416B0622D5054900B8A1D9 /* Fitness_AppUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Fitness_AppUITests.m; sourceTree = "<group>"; };
 		7D416B0822D5054900B8A1D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7DA8AF7E22DE910F00BD4098 /* SignupViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SignupViewController.h; sourceTree = "<group>"; };
+		7DA8AF7F22DE911000BD4098 /* SignupViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SignupViewController.m; sourceTree = "<group>"; };
+		7DEF648022DE8B580028C1BB /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		7DEF648122DE8B580028C1BB /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		B6B394742CCED85F0C4D91E7 /* Pods_Fitness_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fitness_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -143,9 +146,8 @@
 				131E758E22DE93B80044CC08 /* View Controllers */,
 				7D416AE222D5054800B8A1D9 /* AppDelegate.h */,
 				7D416AE322D5054800B8A1D9 /* AppDelegate.m */,
-				7D416AE522D5054800B8A1D9 /* ViewController.h */,
-				7D416AE622D5054800B8A1D9 /* ViewController.m */,
 				7D416AE822D5054800B8A1D9 /* Main.storyboard */,
+				7DEF648322DE8B770028C1BB /* View Controllers */,
 				7D416AEB22D5054900B8A1D9 /* Assets.xcassets */,
 				7D416AED22D5054900B8A1D9 /* LaunchScreen.storyboard */,
 				7D416AF022D5054900B8A1D9 /* Info.plist */,
@@ -170,6 +172,17 @@
 				7D416B0822D5054900B8A1D9 /* Info.plist */,
 			);
 			path = "Fitness AppUITests";
+			sourceTree = "<group>";
+		};
+		7DEF648322DE8B770028C1BB /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				7DEF648022DE8B580028C1BB /* LoginViewController.h */,
+				7DEF648122DE8B580028C1BB /* LoginViewController.m */,
+				7DA8AF7E22DE910F00BD4098 /* SignupViewController.h */,
+				7DA8AF7F22DE911000BD4098 /* SignupViewController.m */,
+			);
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 		8BD4C23AB6A38F3103EF5E9E /* Pods */ = {
@@ -423,10 +436,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7D416AE722D5054800B8A1D9 /* ViewController.m in Sources */,
 				7D416AF222D5054900B8A1D9 /* main.m in Sources */,
 				131E759122DE95C20044CC08 /* ProfileViewController.m in Sources */,
 				7D416AE422D5054800B8A1D9 /* AppDelegate.m in Sources */,
+				7DA8AF8022DE911000BD4098 /* SignupViewController.m in Sources */,
+				7DEF648222DE8B580028C1BB /* LoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
