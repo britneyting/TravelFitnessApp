@@ -18,6 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+
 }
 
 - (void)createAlert:(NSString *)message withTitle:(NSString *)title {
@@ -47,13 +48,31 @@
     // this code is to sign a user up -- login is a separate page
     // initialize a user object
     PFUser *newUser = [PFUser user];
-    
+
     // set user properties
+    newUser[@"name"] = self.nameField.text;
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc]init];
+    newUser[@"age"] = [formatter numberFromString:self.ageField.text];
+    newUser[@"gender"] = self.genderField.text;
+    newUser[@"description"] = self.descriptionField.text;
     newUser.username = self.usernameField.text;
     newUser.email = self.emailField.text;
     newUser.password = self.passwordField.text;
     
-    if ([self.usernameField.text isEqual:@""]) {
+    
+    if ([self.nameField.text isEqual:@""]) {
+        [self createAlert:@"Please enter your name" withTitle:@"Name Required"];
+    }
+    else if ([self.ageField.text isEqual:@""]) {
+        [self createAlert:@"Please enter your age" withTitle:@"Age Required"];
+    }
+    else if ([self.genderField.text isEqual:@""]) {
+        [self createAlert:@"Please enter a gender" withTitle:@"Gender Required"];
+    }
+    else if ([self.descriptionField.text isEqual:@""]) {
+        [self createAlert:@"Please enter a description" withTitle:@"Description Required"];
+    }
+    else if ([self.usernameField.text isEqual:@""]) {
         [self createAlert:@"Please enter a username" withTitle:@"Username Required"];
     }
     else if ([self.passwordField.text isEqual:@""]) {

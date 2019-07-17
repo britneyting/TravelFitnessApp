@@ -182,10 +182,10 @@
 			children = (
 				7DEF648022DE8B580028C1BB /* LoginViewController.h */,
 				7DEF648122DE8B580028C1BB /* LoginViewController.m */,
-				131E758F22DE95C20044CC08 /* ProfileViewController.h */,
-				131E759022DE95C20044CC08 /* ProfileViewController.m */,
 				7DA8AF7E22DE910F00BD4098 /* SignupViewController.h */,
 				7DA8AF7F22DE911000BD4098 /* SignupViewController.m */,
+				131E758F22DE95C20044CC08 /* ProfileViewController.h */,
+				131E759022DE95C20044CC08 /* ProfileViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
