@@ -42,7 +42,6 @@
                                 <state key="normal" title="Login"/>
                                 <connections>
                                     <action selector="loginButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ux5-7h-8xA"/>
-                                    <segue destination="aFi-IQ-q24" kind="presentation" identifier="segueToHome" id="Vv0-p7-axQ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gGb-SQ-MdZ">
@@ -63,6 +62,7 @@
                         <outlet property="passwordField" destination="q6g-HA-mXJ" id="ZAc-tE-Cqd"/>
                         <outlet property="signupButton" destination="gGb-SQ-MdZ" id="51S-Kf-M51"/>
                         <outlet property="usernameField" destination="6OJ-Gp-K3v" id="trG-2h-6Z5"/>
+                        <segue destination="aFi-IQ-q24" kind="presentation" identifier="segueToHomeFromLogin" id="0kw-6X-pc0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -108,7 +108,6 @@
                                 <state key="normal" title="Signup"/>
                                 <connections>
                                     <action selector="signupButton:" destination="A3V-ln-pPw" eventType="touchUpInside" id="t7D-0d-KHY"/>
-                                    <segue destination="aFi-IQ-q24" kind="presentation" identifier="segueToHome" id="7gH-Kh-bZw"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -120,6 +119,7 @@
                         <outlet property="passwordField" destination="Iqk-Kt-ilv" id="Bjm-LF-uFf"/>
                         <outlet property="signupButton" destination="vSi-vG-0SM" id="ugP-XQ-F1U"/>
                         <outlet property="usernameField" destination="jFE-pY-LoK" id="BbB-3G-pzW"/>
+                        <segue destination="aFi-IQ-q24" kind="presentation" identifier="segueToHomeFromSignup" id="Izl-Ce-9Fu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E1P-Jp-u4V" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -157,9 +157,6 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="313"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="QQD-Hu-n36" appends="YES" id="XXi-Ox-Q5c"/>
-                                </connections>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -170,7 +167,6 @@
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MtE-2r-vak" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="QQD-Hu-n36"/>
             </objects>
             <point key="canvasLocation" x="2328.8000000000002" y="394.45277361319341"/>
         </scene>
@@ -429,18 +425,9 @@
                     </navigationItem>
                     <connections>
                         <outlet property="age" destination="kow-O8-8Ae" id="8r6-Yu-c4p"/>
-                        <outlet property="description" destination="LSc-ah-ihf" id="ARc-3J-b3e"/>
-                        <outlet property="gender" destination="gMG-5h-hWS" id="TtN-9G-gkZ"/>
-                        <outlet property="mapView" destination="tp5-Wm-JxE" id="B0N-OQ-FO3"/>
-                        <outlet property="profilePicture" destination="OyE-EZ-4G6" id="qBS-cH-HdP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Te6-on-frM" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="oaQ-td-L1Y">
-                    <connections>
-                        <segue destination="XOK-SA-Gjl" kind="show" id="qEy-MO-sA8"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2328.8000000000002" y="-293.70314842578711"/>
         </scene>
@@ -584,7 +571,6 @@
         <image name="profile_tab" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="qEy-MO-sA8"/>
-        <segue reference="Vv0-p7-axQ"/>
+        <segue reference="0kw-6X-pc0"/>
     </inferredMetricsTieBreakers>
 </document>

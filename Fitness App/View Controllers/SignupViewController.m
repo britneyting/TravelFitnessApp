@@ -72,7 +72,7 @@
             NSLog(@"User registered successfully");
             
             // manually segue to logged in view
-            [self performSegueWithIdentifier:@"segueToHome" sender:self];
+            [self performSegueWithIdentifier:@"segueToHomeFromSignup" sender:self];
             
         }
     }];

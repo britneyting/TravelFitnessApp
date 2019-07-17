@@ -55,7 +55,7 @@
             NSLog(@"User logged in successfully");
             
             // display view controller that needs to shown after successful login
-            [self performSegueWithIdentifier:@"segueToHome" sender:self];
+            [self performSegueWithIdentifier:@"segueToHomeFromLogin" sender:self];
         }
     }];
 }
