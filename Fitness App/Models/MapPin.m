@@ -10,6 +10,10 @@
 #import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>
 
-@implementation
-@synthesize title, subtitle, coordinate;
+@implementation MapPin
+
+@synthesize title;
+@synthesize subtitle;
+@synthesize coordinate;
+
 @end

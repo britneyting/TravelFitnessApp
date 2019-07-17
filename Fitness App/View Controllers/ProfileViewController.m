@@ -12,6 +12,7 @@
 #import "Parse/Parse.h"
 #import "AppDelegate.h"
 #import "LoginViewController.h"
+#import "MapPin.h"
 
 
 @interface ProfileViewController ()
@@ -48,5 +49,9 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+
+
+
 
 @end
