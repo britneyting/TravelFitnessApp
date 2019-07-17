@@ -462,15 +462,12 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-<<<<<<< HEAD
                         <outlet property="ageLabel" destination="kow-O8-8Ae" id="6l3-hS-UaQ"/>
                         <outlet property="descriptionLabel" destination="LSc-ah-ihf" id="f9X-OI-lpH"/>
                         <outlet property="genderLabel" destination="gMG-5h-hWS" id="0zN-xp-8v1"/>
                         <outlet property="nameLabel" destination="y8s-mc-Qnc" id="7D4-C5-kyo"/>
                         <outlet property="profilePictureImage" destination="OyE-EZ-4G6" id="BI0-dT-3oq"/>
-=======
                         <outlet property="myMapView" destination="tp5-Wm-JxE" id="xvQ-IO-pM0"/>
->>>>>>> 497805d9ff4c4c0139974df0ed4d11824cff3e5c
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="logoutSegue" id="P2Q-rR-Rfd"/>
                     </connections>
                 </viewController>
