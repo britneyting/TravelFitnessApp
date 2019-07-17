@@ -464,6 +464,14 @@
                                             <action selector="saveDescription:" destination="1Vm-Iq-0cG" eventType="touchUpInside" id="Wpb-4W-8mf"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2gI-Rw-jbR">
+                                        <rect key="frame" x="145" y="191" width="67" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="View Map"/>
+                                        <connections>
+                                            <segue destination="v0y-1Z-7tL" kind="show" id="Bqn-NJ-VBj"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <gestureRecognizers/>
                                 <connections>
@@ -499,10 +507,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="tp5-Wm-JxE" userLabel="mapView">
-                                <rect key="frame" x="25" y="217" width="323" height="383"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Mwe-8i-RNF"/>
@@ -519,7 +523,6 @@
                         <outlet property="descriptionField" destination="Mb4-jw-v7c" id="ovH-jk-ccx"/>
                         <outlet property="editProfilePic" destination="2iV-hS-7vp" id="FUo-bz-L6B"/>
                         <outlet property="genderLabel" destination="gMG-5h-hWS" id="0zN-xp-8v1"/>
-                        <outlet property="myMapView" destination="tp5-Wm-JxE" id="xvQ-IO-pM0"/>
                         <outlet property="nameLabel" destination="y8s-mc-Qnc" id="7D4-C5-kyo"/>
                         <outlet property="profilePictureImage" destination="OyE-EZ-4G6" id="BI0-dT-3oq"/>
                         <outlet property="saveButton" destination="96i-tb-ffq" id="PDC-w1-48B"/>
@@ -544,6 +547,31 @@
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2328.8000000000002" y="-293.70314842578711"/>
+        </scene>
+        <!--Map View Controller-->
+        <scene sceneID="TnC-oE-sRL">
+            <objects>
+                <viewController id="v0y-1Z-7tL" customClass="MapViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="aTE-5A-ghb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="JPk-2e-D7O">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="73q-qO-yeh"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="ao3-Rl-5WG"/>
+                    <connections>
+                        <outlet property="myMapView" destination="JPk-2e-D7O" id="FIt-QP-8cl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dge-HK-yuu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4004" y="-291.00449775112446"/>
         </scene>
         <!--Profile-->
         <scene sceneID="FrK-c6-EQK">
@@ -679,6 +707,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dNn-Dk-dIg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3260" y="1666"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="LLi-SW-fov">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fM0-Dq-sID" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GyK-4Z-a4Q" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="1gg-YH-bYF">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="3137" y="-291"/>
         </scene>
     </scenes>
     <resources>

@@ -17,8 +17,7 @@
 
 @interface ProfileViewController () <MKMapViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
-@property (weak, nonatomic) IBOutlet MKMapView *myMapView;
-@property CLLocationManager *locationManager;
+
 @property (strong, nonatomic) UIImage *originalImage;
 @property (strong, nonatomic) UIImage *editedImage;
 @property (strong, nonatomic) UIImage *propic;
@@ -28,8 +27,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.myMapView.showsUserLocation = YES;
-    self.myMapView.showsBuildings = YES;
+
     self.saveButton.hidden = YES;
     // Do any additional setup after loading the view.
     
@@ -40,11 +38,6 @@
     self.descriptionField.text = currentUser[@"description"];
     self.profilePictureImage.file = currentUser[@"profilePicture"];
     [self.profilePictureImage loadInBackground];
-    self.locationManager = [CLLocationManager new];
-    if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)])
-        [self.locationManager requestWhenInUseAuthorization];
-        
-    [self.locationManager startUpdatingLocation];
 }
 - (IBAction)editProfilePic:(id)sender {
     [self choosePicture:@"Choose an image using your camera or photo library" withTitle:@"Change Your Profile Picture"];
@@ -140,10 +133,7 @@
     self.saveButton.hidden = YES;
     [self.view endEditing:YES];
 }
--(void)mapView: (MKMapView *) mapView didUpdateUserLocation:(nonnull MKUserLocation *)userLocation{
-    MKMapCamera *camera = [MKMapCamera cameraLookingAtCenterCoordinate:userLocation.coordinate fromEyeCoordinate:CLLocationCoordinate2DMake(userLocation.coordinate.latitude, userLocation.coordinate.longitude) eyeAltitude:10000];
-    [mapView setCamera:camera animated:YES];
-}
+
 - (IBAction)didTapLogout:(id)sender {
     [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
         if(PFUser.currentUser == nil) {
@@ -158,6 +148,7 @@
         }
     }];
 }
+
 
 /*
 #pragma mark - Navigation
