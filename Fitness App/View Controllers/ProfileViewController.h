@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) IBOutlet UILabel *ageLabel;
 @property (strong, nonatomic) IBOutlet UILabel *genderLabel;
 @property (strong, nonatomic) IBOutlet UILabel *descriptionLabel;
-
+@property bool shared;
 @end
 
 NS_ASSUME_NONNULL_END
