@@ -13,7 +13,7 @@
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="LoginViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="login" id="BYZ-38-t0r" customClass="LoginViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -62,7 +62,7 @@
                         <outlet property="passwordField" destination="q6g-HA-mXJ" id="ZAc-tE-Cqd"/>
                         <outlet property="signupButton" destination="gGb-SQ-MdZ" id="51S-Kf-M51"/>
                         <outlet property="usernameField" destination="6OJ-Gp-K3v" id="trG-2h-6Z5"/>
-                        <segue destination="aFi-IQ-q24" kind="presentation" identifier="segueToHomeFromLogin" id="0kw-6X-pc0"/>
+                        <segue destination="aFi-IQ-q24" kind="presentation" identifier="segueToHomeFromLogin" id="v0F-gj-8R5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -129,7 +129,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="xKv-VZ-gae">
             <objects>
-                <tabBarController id="aFi-IQ-q24" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="AuthenticatedViewController" id="aFi-IQ-q24" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="NdP-Fm-2ok">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -143,7 +143,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="puM-lP-ado" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="846" y="398"/>
+            <point key="canvasLocation" x="844" y="396"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="0p5-cd-C8D">
@@ -421,10 +421,14 @@
                         <viewLayoutGuide key="safeArea" id="Mwe-8i-RNF"/>
                     </view>
                     <navigationItem key="navigationItem" id="NnF-go-3Hp">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="UMr-XG-F4v"/>
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="UMr-XG-F4v">
+                            <connections>
+                                <action selector="didTapLogout:" destination="1Vm-Iq-0cG" id="CpT-Mc-w4o"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="age" destination="kow-O8-8Ae" id="8r6-Yu-c4p"/>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="logoutSegue" id="P2Q-rR-Rfd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Te6-on-frM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -571,6 +575,6 @@
         <image name="profile_tab" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="0kw-6X-pc0"/>
+        <segue reference="v0F-gj-8R5"/>
     </inferredMetricsTieBreakers>
 </document>
