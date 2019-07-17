@@ -402,7 +402,7 @@
             </objects>
             <point key="canvasLocation" x="4049" y="1666"/>
         </scene>
-        <!--Profile View Controller-->
+        <!--Profile-->
         <scene sceneID="rBv-aG-Kp4">
             <objects>
                 <viewController id="1Vm-Iq-0cG" customClass="ProfileViewController" sceneMemberID="viewController">
@@ -414,9 +414,13 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </scrollView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OyE-EZ-4G6" userLabel="ProfilePicture" customClass="PFImageView">
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OyE-EZ-4G6" userLabel="ProfilePicture" customClass="PFImageView">
                                 <rect key="frame" x="7" y="73" width="100" height="97"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="2iV-hS-7vp" appends="YES" id="pHa-NG-uEe"/>
+                                </connections>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y8s-mc-Qnc">
                                 <rect key="frame" x="124" y="73" width="45" height="21"/>
@@ -439,8 +443,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LSc-ah-ihf">
-                                <rect key="frame" x="124" y="111" width="235" height="98"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Description" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LSc-ah-ihf">
+                                <rect key="frame" x="124" y="111" width="235" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -454,7 +458,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Mwe-8i-RNF"/>
                     </view>
-                    <navigationItem key="navigationItem" id="NnF-go-3Hp">
+                    <navigationItem key="navigationItem" title="Profile" id="NnF-go-3Hp">
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="UMr-XG-F4v">
                             <connections>
                                 <action selector="didTapLogout:" destination="1Vm-Iq-0cG" id="CpT-Mc-w4o"/>
@@ -464,14 +468,20 @@
                     <connections>
                         <outlet property="ageLabel" destination="kow-O8-8Ae" id="6l3-hS-UaQ"/>
                         <outlet property="descriptionLabel" destination="LSc-ah-ihf" id="f9X-OI-lpH"/>
+                        <outlet property="editProfilePic" destination="2iV-hS-7vp" id="FUo-bz-L6B"/>
                         <outlet property="genderLabel" destination="gMG-5h-hWS" id="0zN-xp-8v1"/>
+                        <outlet property="myMapView" destination="tp5-Wm-JxE" id="xvQ-IO-pM0"/>
                         <outlet property="nameLabel" destination="y8s-mc-Qnc" id="7D4-C5-kyo"/>
                         <outlet property="profilePictureImage" destination="OyE-EZ-4G6" id="BI0-dT-3oq"/>
-                        <outlet property="myMapView" destination="tp5-Wm-JxE" id="xvQ-IO-pM0"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="logoutSegue" id="P2Q-rR-Rfd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Te6-on-frM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="2iV-hS-7vp">
+                    <connections>
+                        <action selector="editProfilePic:" destination="1Vm-Iq-0cG" id="J9w-nk-f6v"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2328.8000000000002" y="-293.70314842578711"/>
         </scene>
@@ -482,6 +492,7 @@
                     <tabBarItem key="tabBarItem" title="Profile" selectedImage="profile_tab" id="6dw-a5-c8V"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="F92-nQ-vef">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -500,6 +511,7 @@
                     <tabBarItem key="tabBarItem" title="Explore" id="nWc-Ds-ADH"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5vZ-6a-gM8">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -560,6 +572,7 @@
                     <tabBarItem key="tabBarItem" title="Camera" id="nEa-KW-P2U"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="O0H-Th-xEE">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -577,6 +590,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ByD-fl-hvA" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="NIz-kA-vSD">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -594,6 +608,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="TWL-aC-CdN" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="IRE-tY-ZdJ">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

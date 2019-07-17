@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ProfileViewController : UIViewController
 
 @property (strong, nonatomic) IBOutlet PFImageView *profilePictureImage;
+@property (strong, nonatomic) IBOutlet UITapGestureRecognizer *editProfilePic;
 @property (strong, nonatomic) IBOutlet UILabel *nameLabel;
 @property (strong, nonatomic) IBOutlet UILabel *ageLabel;
 @property (strong, nonatomic) IBOutlet UILabel *genderLabel;
