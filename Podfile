@@ -7,6 +7,8 @@ target 'Fitness App' do
 
   # Pods for Fitness App
   pod 'Parse'
+  pod 'Parse/UI'
+  pod 'GoogleMaps'
 
   target 'Fitness AppTests' do
     inherit! :search_paths
