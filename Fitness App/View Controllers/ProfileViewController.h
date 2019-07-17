@@ -7,11 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <MapKit/MapKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
+@import Parse;
+
 @interface ProfileViewController : UIViewController
+
+@property (strong, nonatomic) IBOutlet PFImageView *profilePictureImage;
+@property (strong, nonatomic) IBOutlet UILabel *nameLabel;
+@property (strong, nonatomic) IBOutlet UILabel *ageLabel;
+@property (strong, nonatomic) IBOutlet UILabel *genderLabel;
+@property (strong, nonatomic) IBOutlet UILabel *descriptionLabel;
 
 @end
 

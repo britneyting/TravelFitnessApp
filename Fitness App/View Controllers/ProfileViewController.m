@@ -13,6 +13,7 @@
 #import "AppDelegate.h"
 #import "LoginViewController.h"
 
+@import Parse;
 
 @interface ProfileViewController ()
 

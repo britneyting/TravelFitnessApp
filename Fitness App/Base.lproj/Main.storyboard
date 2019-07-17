@@ -380,7 +380,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </scrollView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OyE-EZ-4G6" userLabel="ProfilePicture">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OyE-EZ-4G6" userLabel="ProfilePicture" customClass="PFImageView">
                                 <rect key="frame" x="7" y="73" width="100" height="97"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -428,6 +428,11 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="ageLabel" destination="kow-O8-8Ae" id="6l3-hS-UaQ"/>
+                        <outlet property="descriptionLabel" destination="LSc-ah-ihf" id="f9X-OI-lpH"/>
+                        <outlet property="genderLabel" destination="gMG-5h-hWS" id="0zN-xp-8v1"/>
+                        <outlet property="nameLabel" destination="y8s-mc-Qnc" id="7D4-C5-kyo"/>
+                        <outlet property="profilePictureImage" destination="OyE-EZ-4G6" id="BI0-dT-3oq"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="logoutSegue" id="P2Q-rR-Rfd"/>
                     </connections>
                 </viewController>
