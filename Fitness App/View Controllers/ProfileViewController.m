@@ -30,13 +30,14 @@
     [super viewDidLoad];
     self.myMapView.showsUserLocation = YES;
     self.myMapView.showsBuildings = YES;
+    self.saveButton.hidden = YES;
     // Do any additional setup after loading the view.
     
     PFUser *currentUser = [PFUser currentUser];
     self.nameLabel.text = currentUser[@"name"];
     self.ageLabel.text = [NSString stringWithFormat:@"%@", currentUser[@"age"]];
     self.genderLabel.text = currentUser[@"gender"];
-    self.descriptionLabel.text = currentUser[@"description"];
+    self.descriptionField.text = currentUser[@"description"];
     self.profilePictureImage.file = currentUser[@"profilePicture"];
     [self.profilePictureImage loadInBackground];
     self.locationManager = [CLLocationManager new];
@@ -117,6 +118,27 @@
     UIGraphicsEndImageContext();
     
     return newImage;
+}
+- (IBAction)editDescription:(id)sender {
+    [self.descriptionField setUserInteractionEnabled:YES];
+    [self.descriptionField becomeFirstResponder];
+    self.saveButton.hidden = NO;
+}
+- (IBAction)finishEditing:(id)sender {
+    [self.view endEditing:YES];
+}
+- (IBAction)saveDescription:(id)sender {
+    PFUser *currentUser = [PFUser currentUser];
+    currentUser[@"description"] = self.descriptionField.text;
+    [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (succeeded) {
+            NSLog(@"Successfully updated description in backend");
+        } else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
+    self.saveButton.hidden = YES;
+    [self.view endEditing:YES];
 }
 -(void)mapView: (MKMapView *) mapView didUpdateUserLocation:(nonnull MKUserLocation *)userLocation{
     MKMapCamera *camera = [MKMapCamera cameraLookingAtCenterCoordinate:userLocation.coordinate fromEyeCoordinate:CLLocationCoordinate2DMake(userLocation.coordinate.latitude, userLocation.coordinate.longitude) eyeAltitude:10000];

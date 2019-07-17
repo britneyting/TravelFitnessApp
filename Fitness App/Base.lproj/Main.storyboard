@@ -130,8 +130,17 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zHA-qq-2BS">
+                                        <rect key="frame" x="66" y="512" width="256" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Already have an account? Login here."/>
+                                        <connections>
+                                            <action selector="loginButton:" destination="A3V-ln-pPw" eventType="touchUpInside" id="SwC-LK-q7m"/>
+                                            <segue destination="BYZ-38-t0r" kind="presentation" identifier="segueToLogin" id="FwR-YR-iEQ"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vSi-vG-0SM">
-                                        <rect key="frame" x="163" y="483" width="48" height="30"/>
+                                        <rect key="frame" x="163" y="474" width="48" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Signup"/>
                                         <connections>
@@ -139,6 +148,10 @@
                                         </connections>
                                     </button>
                                 </subviews>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="e3O-Pm-rYf" appends="YES" id="CWr-J5-xJ0"/>
+                                </connections>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -149,6 +162,7 @@
                         <outlet property="descriptionField" destination="j3B-6R-AcX" id="CmV-9J-iKu"/>
                         <outlet property="emailField" destination="sMU-ga-c49" id="HTa-p1-bSH"/>
                         <outlet property="genderField" destination="KeV-jP-nXA" id="hUh-iV-WMx"/>
+                        <outlet property="loginButton" destination="zHA-qq-2BS" id="vR8-Lx-X37"/>
                         <outlet property="nameField" destination="QxY-j6-0Vr" id="i6D-xo-eTe"/>
                         <outlet property="passwordField" destination="Iqk-Kt-ilv" id="Bjm-LF-uFf"/>
                         <outlet property="signupButton" destination="vSi-vG-0SM" id="ugP-XQ-F1U"/>
@@ -157,6 +171,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E1P-Jp-u4V" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="e3O-Pm-rYf" userLabel="Finished Editing">
+                    <connections>
+                        <action selector="finishEditing:" destination="A3V-ln-pPw" id="Olp-rm-LkH"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-210.40000000000001" y="765.96701649175418"/>
         </scene>
@@ -413,6 +432,34 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="788-EZ-7Bb">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Mb4-jw-v7c">
+                                        <rect key="frame" x="113" y="33" width="254" height="113"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <accessibility key="accessibilityConfiguration">
+                                            <accessibilityTraits key="traits" notEnabled="YES"/>
+                                        </accessibility>
+                                        <gestureRecognizers/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="Cp2-fJ-IgF" appends="YES" id="hqF-As-amx"/>
+                                        </connections>
+                                    </textView>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="96i-tb-ffq">
+                                        <rect key="frame" x="327" y="116" width="34" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Save"/>
+                                        <connections>
+                                            <action selector="saveDescription:" destination="1Vm-Iq-0cG" eventType="touchUpInside" id="Wpb-4W-8mf"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="5R4-9V-YzE" appends="YES" id="udw-0Y-gVM"/>
+                                </connections>
                             </scrollView>
                             <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OyE-EZ-4G6" userLabel="ProfilePicture" customClass="PFImageView">
                                 <rect key="frame" x="7" y="73" width="100" height="97"/>
@@ -443,13 +490,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Description" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LSc-ah-ihf">
-                                <rect key="frame" x="124" y="111" width="235" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="tp5-Wm-JxE" userLabel="mapView">
                                 <rect key="frame" x="25" y="217" width="323" height="383"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -467,12 +507,13 @@
                     </navigationItem>
                     <connections>
                         <outlet property="ageLabel" destination="kow-O8-8Ae" id="6l3-hS-UaQ"/>
-                        <outlet property="descriptionLabel" destination="LSc-ah-ihf" id="f9X-OI-lpH"/>
+                        <outlet property="descriptionField" destination="Mb4-jw-v7c" id="ovH-jk-ccx"/>
                         <outlet property="editProfilePic" destination="2iV-hS-7vp" id="FUo-bz-L6B"/>
                         <outlet property="genderLabel" destination="gMG-5h-hWS" id="0zN-xp-8v1"/>
                         <outlet property="myMapView" destination="tp5-Wm-JxE" id="xvQ-IO-pM0"/>
                         <outlet property="nameLabel" destination="y8s-mc-Qnc" id="7D4-C5-kyo"/>
                         <outlet property="profilePictureImage" destination="OyE-EZ-4G6" id="BI0-dT-3oq"/>
+                        <outlet property="saveButton" destination="96i-tb-ffq" id="PDC-w1-48B"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="logoutSegue" id="P2Q-rR-Rfd"/>
                     </connections>
                 </viewController>
@@ -480,6 +521,16 @@
                 <tapGestureRecognizer id="2iV-hS-7vp">
                     <connections>
                         <action selector="editProfilePic:" destination="1Vm-Iq-0cG" id="J9w-nk-f6v"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="Cp2-fJ-IgF" userLabel="Edit Description">
+                    <connections>
+                        <action selector="editDescription:" destination="1Vm-Iq-0cG" id="vff-Rb-r5g"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="5R4-9V-YzE" userLabel="Finished Editing">
+                    <connections>
+                        <action selector="finishEditing:" destination="1Vm-Iq-0cG" id="J43-16-raE"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -626,5 +677,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Izl-Ce-9Fu"/>
+        <segue reference="P2Q-rR-Rfd"/>
     </inferredMetricsTieBreakers>
 </document>

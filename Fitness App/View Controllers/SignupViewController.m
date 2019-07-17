@@ -101,6 +101,13 @@
     [self registerUser];
 }
 
+- (IBAction)loginButton:(id)sender {
+    [self performSegueWithIdentifier:@"segueToLogin" sender:self];
+}
+
+- (IBAction)finishEditing:(id)sender {
+    [self.view endEditing:YES];
+}
 
 /*
 #pragma mark - Navigation
