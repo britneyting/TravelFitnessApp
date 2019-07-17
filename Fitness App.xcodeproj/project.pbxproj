@@ -18,6 +18,10 @@
 		7D416AF222D5054900B8A1D9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D416AF122D5054900B8A1D9 /* main.m */; };
 		7D416AFC22D5054900B8A1D9 /* Fitness_AppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D416AFB22D5054900B8A1D9 /* Fitness_AppTests.m */; };
 		7D416B0722D5054900B8A1D9 /* Fitness_AppUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D416B0622D5054900B8A1D9 /* Fitness_AppUITests.m */; };
+		7D5755CB22DFDE5000C2823C /* PeopleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5755CA22DFDE5000C2823C /* PeopleViewController.m */; };
+		7D5755CE22DFDE5900C2823C /* PlacesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5755CD22DFDE5900C2823C /* PlacesViewController.m */; };
+		7D5755D122DFDEB800C2823C /* PeopleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5755D022DFDEB800C2823C /* PeopleCell.m */; };
+		7D5C339022DFD46E00E667DD /* ExploreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5C338F22DFD46E00E667DD /* ExploreViewController.m */; };
 		7DA8AF8022DE911000BD4098 /* SignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DA8AF7F22DE911000BD4098 /* SignupViewController.m */; };
 		7DEF648222DE8B580028C1BB /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DEF648122DE8B580028C1BB /* LoginViewController.m */; };
 		82659799CFA19C69AE9F8E37 /* Pods_Fitness_AppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C2DF848574A271A742E4868 /* Pods_Fitness_AppTests.framework */; };
@@ -67,6 +71,14 @@
 		7D416B0222D5054900B8A1D9 /* Fitness AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Fitness AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D416B0622D5054900B8A1D9 /* Fitness_AppUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Fitness_AppUITests.m; sourceTree = "<group>"; };
 		7D416B0822D5054900B8A1D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7D5755C922DFDE5000C2823C /* PeopleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PeopleViewController.h; sourceTree = "<group>"; };
+		7D5755CA22DFDE5000C2823C /* PeopleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PeopleViewController.m; sourceTree = "<group>"; };
+		7D5755CC22DFDE5900C2823C /* PlacesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlacesViewController.h; sourceTree = "<group>"; };
+		7D5755CD22DFDE5900C2823C /* PlacesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlacesViewController.m; sourceTree = "<group>"; };
+		7D5755CF22DFDEB800C2823C /* PeopleCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PeopleCell.h; sourceTree = "<group>"; };
+		7D5755D022DFDEB800C2823C /* PeopleCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PeopleCell.m; sourceTree = "<group>"; };
+		7D5C338E22DFD46E00E667DD /* ExploreViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExploreViewController.h; sourceTree = "<group>"; };
+		7D5C338F22DFD46E00E667DD /* ExploreViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExploreViewController.m; sourceTree = "<group>"; };
 		7DA8AF7E22DE910F00BD4098 /* SignupViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SignupViewController.h; sourceTree = "<group>"; };
 		7DA8AF7F22DE911000BD4098 /* SignupViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SignupViewController.m; sourceTree = "<group>"; };
 		7DEF648022DE8B580028C1BB /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -140,6 +152,7 @@
 				7D416AE222D5054800B8A1D9 /* AppDelegate.h */,
 				7D416AE322D5054800B8A1D9 /* AppDelegate.m */,
 				7D416AE822D5054800B8A1D9 /* Main.storyboard */,
+				7D5755D222DFDEBE00C2823C /* Views */,
 				7DEF648322DE8B770028C1BB /* View Controllers */,
 				7D416AEB22D5054900B8A1D9 /* Assets.xcassets */,
 				7D416AED22D5054900B8A1D9 /* LaunchScreen.storyboard */,
@@ -167,6 +180,15 @@
 			path = "Fitness AppUITests";
 			sourceTree = "<group>";
 		};
+		7D5755D222DFDEBE00C2823C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7D5755CF22DFDEB800C2823C /* PeopleCell.h */,
+				7D5755D022DFDEB800C2823C /* PeopleCell.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		7DEF648322DE8B770028C1BB /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -178,6 +200,12 @@
 				131E759022DE95C20044CC08 /* ProfileViewController.m */,
 				13780E2922DFDDF900689605 /* MapViewController.h */,
 				13780E2A22DFDDF900689605 /* MapViewController.m */,
+				7D5C338E22DFD46E00E667DD /* ExploreViewController.h */,
+				7D5C338F22DFD46E00E667DD /* ExploreViewController.m */,
+				7D5755C922DFDE5000C2823C /* PeopleViewController.h */,
+				7D5755CA22DFDE5000C2823C /* PeopleViewController.m */,
+				7D5755CC22DFDE5900C2823C /* PlacesViewController.h */,
+				7D5755CD22DFDE5900C2823C /* PlacesViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -433,11 +461,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D5755CE22DFDE5900C2823C /* PlacesViewController.m in Sources */,
 				7D416AF222D5054900B8A1D9 /* main.m in Sources */,
+				7D5755CB22DFDE5000C2823C /* PeopleViewController.m in Sources */,
 				131E759122DE95C20044CC08 /* ProfileViewController.m in Sources */,
 				7D416AE422D5054800B8A1D9 /* AppDelegate.m in Sources */,
 				13780E2B22DFDDF900689605 /* MapViewController.m in Sources */,
 				7DA8AF8022DE911000BD4098 /* SignupViewController.m in Sources */,
+				7D5C339022DFD46E00E667DD /* ExploreViewController.m in Sources */,
+				7D5755D122DFDEB800C2823C /* PeopleCell.m in Sources */,
 				7DEF648222DE8B580028C1BB /* LoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

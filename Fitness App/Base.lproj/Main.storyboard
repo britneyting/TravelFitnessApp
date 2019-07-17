@@ -232,16 +232,16 @@
             </objects>
             <point key="canvasLocation" x="2328.8000000000002" y="394.45277361319341"/>
         </scene>
-        <!--View Controller-->
+        <!--People View Controller-->
         <scene sceneID="lBX-nx-B3C">
             <objects>
-                <viewController id="54l-QG-jOD" sceneMemberID="viewController">
+                <viewController id="54l-QG-jOD" customClass="PeopleViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="7s6-VV-ayu">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="115" id="oZ4-3u-uWL">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="115" id="oZ4-3u-uWL" customClass="PeopleCell">
                                 <rect key="frame" x="0.0" y="28" width="375" height="115"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oZ4-3u-uWL" id="p2E-my-1iS">
@@ -270,26 +270,18 @@
                     <navigationItem key="navigationItem" id="9c9-AB-QOZ">
                         <nil key="title"/>
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="Bb7-7m-Ctr"/>
-                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="pVd-sH-urV">
-                            <rect key="frame" x="131" y="7.5" width="113" height="29"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <segments>
-                                <segment title="People"/>
-                                <segment title="Places"/>
-                            </segments>
-                        </segmentedControl>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LfK-rV-l32" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4048.8000000000002" y="965.6671664167917"/>
+            <point key="canvasLocation" x="3260" y="966"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Vbu-Sz-WuQ">
             <objects>
                 <viewController id="mUy-Ue-bsC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DXr-8u-RrQ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kGh-Q9-yz8">
@@ -347,14 +339,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MdN-YE-YL2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4752.8000000000002" y="965.6671664167917"/>
+            <point key="canvasLocation" x="4009" y="966"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="vu4-Oj-wAm">
             <objects>
                 <viewController id="cTC-4g-PaH" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pSh-E3-UST">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xeA-5y-DfD">
@@ -380,32 +372,32 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1XT-Ts-COJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4753" y="1666"/>
+            <point key="canvasLocation" x="4009" y="1666"/>
         </scene>
-        <!--View Controller-->
+        <!--Places View Controller-->
         <scene sceneID="wvq-9G-pWA">
             <objects>
-                <viewController id="mJ4-8e-puD" sceneMemberID="viewController">
+                <viewController id="mJ4-8e-puD" customClass="PlacesViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cXc-3V-vLY">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="a9u-Iz-uAM">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="rZp-B6-7vZ">
-                                    <size key="itemSize" width="179" height="291"/>
+                                    <size key="itemSize" width="171" height="259"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gBj-hx-co1">
-                                        <rect key="frame" x="0.0" y="0.0" width="179" height="291"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="171" height="259"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="179" height="291"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="171" height="259"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b8B-Y0-TEz">
@@ -428,7 +420,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pyP-qF-gx5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4049" y="1666"/>
+            <point key="canvasLocation" x="3260" y="1665.9670164917543"/>
         </scene>
         <!--Profile-->
         <scene sceneID="rBv-aG-Kp4">
@@ -611,26 +603,26 @@
             </objects>
             <point key="canvasLocation" x="1620" y="1171"/>
         </scene>
-        <!--View Controller-->
+        <!--Explore View Controller-->
         <scene sceneID="MPC-cU-uAR">
             <objects>
-                <viewController id="UHr-8i-K1z" sceneMemberID="viewController">
+                <viewController id="UHr-8i-K1z" customClass="ExploreViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="utX-Bb-gwm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pb4-Cd-oxQ">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8ag-fE-fx3" userLabel="Places Container View">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <connections>
-                                    <segue destination="ByD-fl-hvA" kind="embed" id="sn4-Wl-Bas"/>
+                                    <segue destination="mJ4-8e-puD" kind="embed" id="owq-Gq-Jcp"/>
                                 </connections>
                             </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8ag-fE-fx3">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pb4-Cd-oxQ" userLabel="People Container View">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <connections>
-                                    <segue destination="TWL-aC-CdN" kind="embed" id="tXY-0z-Hhh"/>
+                                    <segue destination="54l-QG-jOD" kind="embed" id="7FZ-5t-BLT"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -646,8 +638,16 @@
                                 <segment title="People"/>
                                 <segment title="Places"/>
                             </segments>
+                            <connections>
+                                <action selector="switchViews:" destination="UHr-8i-K1z" eventType="valueChanged" id="wgI-7e-aNG"/>
+                            </connections>
                         </segmentedControl>
                     </navigationItem>
+                    <connections>
+                        <outlet property="peopleContainerView" destination="pb4-Cd-oxQ" id="Sbc-xg-G9M"/>
+                        <outlet property="placesContainerView" destination="8ag-fE-fx3" id="8KG-gF-UqO"/>
+                        <outlet property="segmentControl" destination="VRO-w0-bji" id="ENO-OU-sd4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d03-zP-YEi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -729,6 +729,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Izl-Ce-9Fu"/>
-        <segue reference="P2Q-rR-Rfd"/>
+        <segue reference="FwR-YR-iEQ"/>
     </inferredMetricsTieBreakers>
 </document>
