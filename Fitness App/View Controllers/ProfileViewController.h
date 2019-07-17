@@ -7,16 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ProfileViewController : UIViewController
-@property (weak, nonatomic) IBOutlet UIImageView *profilePicture;
-@property (weak, nonatomic) IBOutlet UILabel *name;
-@property (weak, nonatomic) IBOutlet UILabel *age;
-@property (weak, nonatomic) IBOutlet UILabel *gender;
-@property (weak, nonatomic) IBOutlet UILabel *description;
-@property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
 @end
 

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ProfileViewController.h"
+#import <MapKit/MapKit.h>
 
 @interface ProfileViewController ()
 
