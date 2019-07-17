@@ -15,15 +15,29 @@
 
 @import Parse;
 
-@interface ProfileViewController ()
+@interface ProfileViewController () <MKMapViewDelegate>
 
+@property (weak, nonatomic) IBOutlet MKMapView *myMapView;
+@property CLLocationManager *locationManager;
 @end
 
 @implementation ProfileViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.myMapView.showsUserLocation = YES;
+    self.myMapView.showsBuildings = YES;
     // Do any additional setup after loading the view.
+    
+    self.locationManager = [CLLocationManager new];
+    if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)])
+        [self.locationManager requestWhenInUseAuthorization];
+        
+    [self.locationManager startUpdatingLocation];
+}
+-(void)mapView: (MKMapView *) mapView didUpdateUserLocation:(nonnull MKUserLocation *)userLocation{
+    MKMapCamera *camera = [MKMapCamera cameraLookingAtCenterCoordinate:userLocation.coordinate fromEyeCoordinate:CLLocationCoordinate2DMake(userLocation.coordinate.latitude, userLocation.coordinate.longitude) eyeAltitude:10000];
+    [mapView setCamera:camera animated:YES];
 }
 - (IBAction)didTapLogout:(id)sender {
     [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
