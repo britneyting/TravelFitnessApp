@@ -428,6 +428,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="myMapView" destination="tp5-Wm-JxE" id="xvQ-IO-pM0"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="logoutSegue" id="P2Q-rR-Rfd"/>
                     </connections>
                 </viewController>
@@ -575,6 +576,6 @@
         <image name="profile_tab" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="v0F-gj-8R5"/>
+        <segue reference="Izl-Ce-9Fu"/>
     </inferredMetricsTieBreakers>
 </document>
