@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		131E759122DE95C20044CC08 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 131E759022DE95C20044CC08 /* ProfileViewController.m */; };
 		6E412180A53D89CCAE50C4EA /* Pods_Fitness_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6B394742CCED85F0C4D91E7 /* Pods_Fitness_App.framework */; };
 		720A29A8FC73191863A7F122 /* Pods_Fitness_AppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 579D80D3CC27417F7D2716D4 /* Pods_Fitness_AppUITests.framework */; };
 		7D416AE422D5054800B8A1D9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D416AE322D5054800B8A1D9 /* AppDelegate.m */; };
@@ -39,6 +40,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		131E758F22DE95C20044CC08 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		131E759022DE95C20044CC08 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		1ADF65D351FCE03F46CC99DD /* Pods-Fitness AppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fitness AppUITests.release.xcconfig"; path = "Target Support Files/Pods-Fitness AppUITests/Pods-Fitness AppUITests.release.xcconfig"; sourceTree = "<group>"; };
 		1E0D1C4AC5810F04B6AD9931 /* Pods-Fitness App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fitness App.debug.xcconfig"; path = "Target Support Files/Pods-Fitness App/Pods-Fitness App.debug.xcconfig"; sourceTree = "<group>"; };
 		1F2B17734B8D66B60D0B34E1 /* Pods-Fitness App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fitness App.release.xcconfig"; path = "Target Support Files/Pods-Fitness App/Pods-Fitness App.release.xcconfig"; sourceTree = "<group>"; };
@@ -166,6 +169,8 @@
 			children = (
 				7DEF648022DE8B580028C1BB /* LoginViewController.h */,
 				7DEF648122DE8B580028C1BB /* LoginViewController.m */,
+				131E758F22DE95C20044CC08 /* ProfileViewController.h */,
+				131E759022DE95C20044CC08 /* ProfileViewController.m */,
 				7DA8AF7E22DE910F00BD4098 /* SignupViewController.h */,
 				7DA8AF7F22DE911000BD4098 /* SignupViewController.m */,
 			);
@@ -197,6 +202,7 @@
 				7D416ADC22D5054800B8A1D9 /* Frameworks */,
 				7D416ADD22D5054800B8A1D9 /* Resources */,
 				E3BD50350FFED539BBF4D389 /* [CP] Embed Pods Frameworks */,
+				816D89704E11F7C97F61C1F2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -359,6 +365,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		816D89704E11F7C97F61C1F2 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Fitness App/Pods-Fitness App-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Fitness App/Pods-Fitness App-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Fitness App/Pods-Fitness App-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		E3BD50350FFED539BBF4D389 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -406,6 +429,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D416AF222D5054900B8A1D9 /* main.m in Sources */,
+				131E759122DE95C20044CC08 /* ProfileViewController.m in Sources */,
 				7D416AE422D5054800B8A1D9 /* AppDelegate.m in Sources */,
 				7DA8AF8022DE911000BD4098 /* SignupViewController.m in Sources */,
 				7DEF648222DE8B580028C1BB /* LoginViewController.m in Sources */,
