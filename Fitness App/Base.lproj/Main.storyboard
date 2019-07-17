@@ -55,7 +55,11 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <gestureRecognizers/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="Myy-CB-WRW" appends="YES" id="jHZ-z7-z8a"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="loginButton" destination="Had-t6-3f9" id="zL3-PD-I2E"/>
@@ -66,6 +70,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Myy-CB-WRW">
+                    <connections>
+                        <action selector="finishEditing:" destination="BYZ-38-t0r" id="4aN-fE-WJI"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-210.40000000000001" y="58.920539730134934"/>
         </scene>

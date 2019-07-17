@@ -68,6 +68,9 @@
     [self performSegueWithIdentifier:@"segueToSignup" sender:self];
 }
 
+- (IBAction)finishEditing:(id)sender {
+    [self.view endEditing:YES];
+}
 
 /*
 #pragma mark - Navigation
