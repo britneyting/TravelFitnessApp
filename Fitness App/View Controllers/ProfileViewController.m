@@ -13,11 +13,11 @@
 #import "AppDelegate.h"
 #import "LoginViewController.h"
 #import "MapPin.h"
-
+#import <CoreLocation/CoreLocation.h>
 
 @import Parse;
 
-@interface ProfileViewController () <MKMapViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@interface ProfileViewController () <MKMapViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, CLLocationManagerDelegate>
 
 @property (strong, nonatomic) UIImage *originalImage;
 @property (strong, nonatomic) UIImage *editedImage;
@@ -46,10 +46,10 @@
     self.myMapView.showsUserLocation = YES;
     self.myMapView.showsBuildings = YES;
     self.myMapView.delegate = self;
-    self.locationManager = [CLLocationManager new];
-    if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)])
+    self.locationManager = [[CLLocationManager alloc] init];
+    if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]){
         [self.locationManager requestWhenInUseAuthorization];
-    
+    }
     [self.locationManager startUpdatingLocation];
 }
 
@@ -170,9 +170,8 @@
     }];
 }
 - (IBAction)didTapPinLocation:(id)sender {
-    MKMapPoint userLocationMapPoint =
-    MKMapPointForCoordinate(self.myMapView.userLocation.coordinate);
-    NSString *display_coordinates = [NSString stringWithFormat:@"my latitude is %f and longitude is %f", self.myMapView.userLocation.coordinate.longitude, self.myMapView.userLocation.coordinate.latitude];
+    MKMapPoint userLocationMapPoint = MKMapPointForCoordinate(self.myMapView.userLocation.coordinate);
+    NSString *display_coordinates = [NSString stringWithFormat:@"my latitude is %f and longitude is %f", self.myMapView.userLocation.coordinate.latitude, self.myMapView.userLocation.coordinate.longitude];
 
     MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
     [annotation setCoordinate:self.myMapView.userLocation.coordinate];

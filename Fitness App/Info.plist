@@ -2,8 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key></key>
-	<string></string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>This App wants to Know your location</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Please give me your permission to get your location!</string>
 	<key>CFBundleName</key>
 	<string>$(PRODUCT_NAME)</string>
 	<key>UILaunchStoryboardName</key>
@@ -14,18 +16,20 @@
 	<string>1</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Need camera access to take pictures</string>
-	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
-	<key>UIMainStoryboardFile</key>
-	<string>Main</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
+	<key>UIMainStoryboardFile</key>
+	<string>Main</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSExceptionDomains</key>
 		<dict>
 			<key>fitrip.herokuapp.com</key>
 			<dict>
+				<key>NSLocationWhenInUseUsageDescription</key>
+				<true/>
 				<key>NSThirdPartyExceptionAllowsInsecureHTTPLoads</key>
 				<true/>
 				<key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
@@ -66,7 +70,5 @@
 	<string>Maps needs access to location to function</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Need library access to upload images</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Please give me your permission to get your location!</string>
 </dict>
 </plist>
