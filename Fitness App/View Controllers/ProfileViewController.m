@@ -171,8 +171,7 @@
     }];
 }
 - (IBAction)didTapPinLocation:(id)sender {
-    MKMapPoint userLocationMapPoint =
-    MKMapPointForCoordinate(self.myMapView.userLocation.coordinate);
+    MKMapPoint userLocationMapPoint = MKMapPointForCoordinate(self.myMapView.userLocation.coordinate);
     NSString *display_coordinates = [NSString stringWithFormat:@"my latitude is %f and longitude is %f", self.myMapView.userLocation.coordinate.longitude, self.myMapView.userLocation.coordinate.latitude];
 
     MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];

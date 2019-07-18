@@ -12,6 +12,7 @@
 @interface postViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (strong, nonatomic) IBOutlet UIImage *photo;
+
 @property (strong, nonatomic) UIImage *originalImage;
 @property (strong, nonatomic) UIImage *editedImage;
 
@@ -78,11 +79,14 @@
     }];
 }
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+
     self.originalImage = info[UIImagePickerControllerOriginalImage];
     self.editedImage = info[UIImagePickerControllerEditedImage];
     self.editedImage = [self resizeImage:self.originalImage withSize:CGSizeMake(400, 400)];
 
     self.photo = self.editedImage;
+    self.imageView.image = self.photo;
+    
     NSData *imageData = UIImagePNGRepresentation(self.photo);
     PFFileObject *file = [PFFileObject fileObjectWithName:@"image.png" data:imageData];
     PFUser *currentUser = [PFUser currentUser];
@@ -116,7 +120,7 @@
 - (void)textViewDidBeginEditing:(UITextView *)textView {
     if ([textView.text isEqualToString:self.placeholderText]) {
         textView.text = @"";
-        textView.textColor = [UIColor blackColor]; //optional
+        textView.textColor = [UIColor blackColor];
     }
     [textView becomeFirstResponder];
 }
@@ -124,7 +128,7 @@
 - (void)textViewDidEndEditing:(UITextView *)textView {
     if ([textView.text isEqualToString:@""]) {
         textView.text = self.placeholderText;
-        textView.textColor = [UIColor lightGrayColor]; //optional
+        textView.textColor = [UIColor lightGrayColor];
     }
     [textView resignFirstResponder];
 }
