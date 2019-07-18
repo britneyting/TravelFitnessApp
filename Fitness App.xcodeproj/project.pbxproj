@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		131E759122DE95C20044CC08 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 131E759022DE95C20044CC08 /* ProfileViewController.m */; };
-		13780E2B22DFDDF900689605 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13780E2A22DFDDF900689605 /* MapViewController.m */; };
 		137077B522DFAA91003DEC12 /* MapPin.m in Sources */ = {isa = PBXBuildFile; fileRef = 137077B422DFAA91003DEC12 /* MapPin.m */; };
 		13780E2822DFD6EB00689605 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13780E2722DFD6EB00689605 /* ViewController.m */; };
 		13780E2E22E0201700689605 /* postViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13780E2D22E0201700689605 /* postViewController.m */; };
@@ -50,8 +49,6 @@
 /* Begin PBXFileReference section */
 		131E758F22DE95C20044CC08 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		131E759022DE95C20044CC08 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
-		13780E2922DFDDF900689605 /* MapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
-		13780E2A22DFDDF900689605 /* MapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		137077B322DFAA91003DEC12 /* MapPin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapPin.h; sourceTree = "<group>"; };
 		137077B422DFAA91003DEC12 /* MapPin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapPin.m; sourceTree = "<group>"; };
 		13780E2622DFD6EB00689605 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
@@ -217,8 +214,6 @@
 				7DA8AF7F22DE911000BD4098 /* SignupViewController.m */,
 				131E758F22DE95C20044CC08 /* ProfileViewController.h */,
 				131E759022DE95C20044CC08 /* ProfileViewController.m */,
-				13780E2922DFDDF900689605 /* MapViewController.h */,
-				13780E2A22DFDDF900689605 /* MapViewController.m */,
 				7D5C338E22DFD46E00E667DD /* ExploreViewController.h */,
 				7D5C338F22DFD46E00E667DD /* ExploreViewController.m */,
 				7D5755C922DFDE5000C2823C /* PeopleViewController.h */,
@@ -493,7 +488,6 @@
 				131E759122DE95C20044CC08 /* ProfileViewController.m in Sources */,
 				13780E2E22E0201700689605 /* postViewController.m in Sources */,
 				7D416AE422D5054800B8A1D9 /* AppDelegate.m in Sources */,
-				13780E2B22DFDDF900689605 /* MapViewController.m in Sources */,
 				7DA8AF8022DE911000BD4098 /* SignupViewController.m in Sources */,
 				7D5C339022DFD46E00E667DD /* ExploreViewController.m in Sources */,
 				7D5755D122DFDEB800C2823C /* PeopleCell.m in Sources */,
