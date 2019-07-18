@@ -10,6 +10,7 @@
 		131E759122DE95C20044CC08 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 131E759022DE95C20044CC08 /* ProfileViewController.m */; };
 		137077B522DFAA91003DEC12 /* MapPin.m in Sources */ = {isa = PBXBuildFile; fileRef = 137077B422DFAA91003DEC12 /* MapPin.m */; };
 		13780E2822DFD6EB00689605 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13780E2722DFD6EB00689605 /* ViewController.m */; };
+		13780E2E22E0201700689605 /* postViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13780E2D22E0201700689605 /* postViewController.m */; };
 		6E412180A53D89CCAE50C4EA /* Pods_Fitness_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6B394742CCED85F0C4D91E7 /* Pods_Fitness_App.framework */; };
 		720A29A8FC73191863A7F122 /* Pods_Fitness_AppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 579D80D3CC27417F7D2716D4 /* Pods_Fitness_AppUITests.framework */; };
 		7D416AE422D5054800B8A1D9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D416AE322D5054800B8A1D9 /* AppDelegate.m */; };
@@ -48,6 +49,8 @@
 		137077B422DFAA91003DEC12 /* MapPin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapPin.m; sourceTree = "<group>"; };
 		13780E2622DFD6EB00689605 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		13780E2722DFD6EB00689605 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		13780E2C22E0201700689605 /* postViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = postViewController.h; sourceTree = "<group>"; };
+		13780E2D22E0201700689605 /* postViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = postViewController.m; sourceTree = "<group>"; };
 		1ADF65D351FCE03F46CC99DD /* Pods-Fitness AppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fitness AppUITests.release.xcconfig"; path = "Target Support Files/Pods-Fitness AppUITests/Pods-Fitness AppUITests.release.xcconfig"; sourceTree = "<group>"; };
 		1E0D1C4AC5810F04B6AD9931 /* Pods-Fitness App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fitness App.debug.xcconfig"; path = "Target Support Files/Pods-Fitness App/Pods-Fitness App.debug.xcconfig"; sourceTree = "<group>"; };
 		1F2B17734B8D66B60D0B34E1 /* Pods-Fitness App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fitness App.release.xcconfig"; path = "Target Support Files/Pods-Fitness App/Pods-Fitness App.release.xcconfig"; sourceTree = "<group>"; };
@@ -191,6 +194,8 @@
 				131E759022DE95C20044CC08 /* ProfileViewController.m */,
 				13780E2622DFD6EB00689605 /* ViewController.h */,
 				13780E2722DFD6EB00689605 /* ViewController.m */,
+				13780E2C22E0201700689605 /* postViewController.h */,
+				13780E2D22E0201700689605 /* postViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -450,6 +455,7 @@
 				7D416AF222D5054900B8A1D9 /* main.m in Sources */,
 				13780E2822DFD6EB00689605 /* ViewController.m in Sources */,
 				131E759122DE95C20044CC08 /* ProfileViewController.m in Sources */,
+				13780E2E22E0201700689605 /* postViewController.m in Sources */,
 				7D416AE422D5054800B8A1D9 /* AppDelegate.m in Sources */,
 				7DA8AF8022DE911000BD4098 /* SignupViewController.m in Sources */,
 				7DEF648222DE8B580028C1BB /* LoginViewController.m in Sources */,

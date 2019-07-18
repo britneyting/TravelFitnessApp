@@ -14,6 +14,7 @@
 #import "LoginViewController.h"
 #import "MapPin.h"
 
+
 @import Parse;
 
 @interface ProfileViewController () <MKMapViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
@@ -29,7 +30,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.shared = false;
     self.myMapView.showsUserLocation = YES;
     self.myMapView.showsBuildings = YES;
     // Do any additional setup after loading the view.
@@ -106,6 +106,11 @@
     
     // Dismiss UIImagePickerController to go back to your original view controller
     [self dismissViewControllerAnimated:YES completion:nil];
+
+    
+    
+    
+
 }
 - (UIImage *)resizeImage:(UIImage *)image withSize:(CGSize)size {
     UIImageView *resizeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
@@ -121,7 +126,7 @@
     return newImage;
 }
 -(void)mapView: (MKMapView *) mapView didUpdateUserLocation:(nonnull MKUserLocation *)userLocation{
-    MKMapCamera *camera = [MKMapCamera cameraLookingAtCenterCoordinate:userLocation.coordinate fromEyeCoordinate:CLLocationCoordinate2DMake(userLocation.coordinate.latitude, userLocation.coordinate.longitude) eyeAltitude:10000];
+    MKMapCamera *camera = [MKMapCamera cameraLookingAtCenterCoordinate:userLocation.coordinate fromEyeCoordinate:CLLocationCoordinate2DMake(userLocation.coordinate.latitude, userLocation.coordinate.longitude) eyeAltitude:100];
     [mapView setCamera:camera animated:YES];
     }
 - (IBAction)didTapLogout:(id)sender {
@@ -137,6 +142,17 @@
             NSLog(@"Error logging out: %@", error);
         }
     }];
+}
+- (IBAction)didTapPinLocation:(id)sender {
+    MKMapPoint userLocationMapPoint =
+    MKMapPointForCoordinate(self.myMapView.userLocation.coordinate);
+    NSString *display_coordinates = [NSString stringWithFormat:@"my latitude is %f and longitude is %f", self.myMapView.userLocation.coordinate.longitude, self.myMapView.userLocation.coordinate.latitude];
+
+    MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
+    [annotation setCoordinate:self.myMapView.userLocation.coordinate];
+    [annotation setTitle:@"Test"];
+    [annotation setSubtitle:display_coordinates];
+    [self.myMapView addAnnotation:annotation];
 }
 
 /*

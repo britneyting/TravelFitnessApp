@@ -7,10 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-
-NS_ASSUME_NONNULL_BEGIN
+#import "MapPin.h"
 
 @import Parse;
+
+@class ProfileViewControllerDelegate;
+
+
+@protocol ProfileViewControllerDelegate
+@end
 
 @interface ProfileViewController : UIViewController
 
@@ -20,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) IBOutlet UILabel *ageLabel;
 @property (strong, nonatomic) IBOutlet UILabel *genderLabel;
 @property (strong, nonatomic) IBOutlet UILabel *descriptionLabel;
-@property bool shared;
+
+@property (weak, nonatomic) id<ProfileViewControllerDelegate> delegate;
 @end
 
-NS_ASSUME_NONNULL_END
