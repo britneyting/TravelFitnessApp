@@ -28,5 +28,9 @@
 @property (strong, nonatomic) IBOutlet UIButton *saveButton;
 
 @property (weak, nonatomic) id<ProfileViewControllerDelegate> delegate;
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error;
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation;
 @end
 
