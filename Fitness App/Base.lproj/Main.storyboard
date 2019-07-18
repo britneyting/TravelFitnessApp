@@ -207,10 +207,10 @@
             </objects>
             <point key="canvasLocation" x="844" y="396"/>
         </scene>
-        <!--View Controller-->
+        <!--Post View Controller-->
         <scene sceneID="0p5-cd-C8D">
             <objects>
-                <viewController id="XOK-SA-Gjl" sceneMemberID="viewController">
+                <viewController id="XOK-SA-Gjl" customClass="postViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="P93-9J-I83">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -227,10 +227,13 @@
                     <navigationItem key="navigationItem" id="6dd-dL-dlt">
                         <barButtonItem key="rightBarButtonItem" title="Share" id="J2B-tO-q8q"/>
                     </navigationItem>
+                    <connections>
+                        <segue destination="1Vm-Iq-0cG" kind="show" identifier="backToProfile" id="aF9-xi-Jrq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MtE-2r-vak" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2328.8000000000002" y="394.45277361319341"/>
+            <point key="canvasLocation" x="2329" y="396"/>
         </scene>
         <!--People View Controller-->
         <scene sceneID="lBX-nx-B3C">
@@ -245,7 +248,7 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </activityIndicatorView>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="129" id="oZ4-3u-uWL" customClass="PeopleCell">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PeopleCell" rowHeight="129" id="oZ4-3u-uWL" customClass="PeopleCell">
                                 <rect key="frame" x="0.0" y="28" width="375" height="129"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oZ4-3u-uWL" id="p2E-my-1iS">
@@ -308,7 +311,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LfK-rV-l32" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3260" y="965.21739130434787"/>
+            <point key="canvasLocation" x="3967" y="966"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Vbu-Sz-WuQ">
@@ -373,7 +376,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MdN-YE-YL2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4009" y="966"/>
+            <point key="canvasLocation" x="4646" y="966"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="vu4-Oj-wAm">
@@ -406,7 +409,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1XT-Ts-COJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4009" y="1666"/>
+            <point key="canvasLocation" x="4646" y="1654"/>
         </scene>
         <!--Places View Controller-->
         <scene sceneID="wvq-9G-pWA">
@@ -454,7 +457,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pyP-qF-gx5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3260" y="1665.9670164917543"/>
+            <point key="canvasLocation" x="3978" y="1673"/>
         </scene>
         <!--Profile-->
         <scene sceneID="rBv-aG-Kp4">
@@ -468,8 +471,8 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Mb4-jw-v7c">
-                                        <rect key="frame" x="113" y="33" width="254" height="113"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Description" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Mb4-jw-v7c">
+                                        <rect key="frame" x="113" y="33" width="254" height="75"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <accessibility key="accessibilityConfiguration">
@@ -483,13 +486,25 @@
                                         </connections>
                                     </textView>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="96i-tb-ffq">
-                                        <rect key="frame" x="327" y="116" width="34" height="30"/>
+                                        <rect key="frame" x="333" y="78" width="34" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Save"/>
                                         <connections>
                                             <action selector="saveDescription:" destination="1Vm-Iq-0cG" eventType="touchUpInside" id="Wpb-4W-8mf"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2gI-Rw-jbR">
+                                        <rect key="frame" x="145" y="191" width="67" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="View Map"/>
+                                        <connections>
+                                            <segue destination="v0y-1Z-7tL" kind="show" id="Bqn-NJ-VBj"/>
+                                        </connections>
+                                    </button>
+                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="tp5-Wm-JxE" userLabel="mapView">
+                                        <rect key="frame" x="0.0" y="115" width="375" height="489"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </mapView>
                                 </subviews>
                                 <gestureRecognizers/>
                                 <connections>
@@ -525,10 +540,14 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="tp5-Wm-JxE" userLabel="mapView">
-                                <rect key="frame" x="25" y="217" width="323" height="383"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xIL-WP-4DX">
+                                <rect key="frame" x="275" y="252" width="84" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </mapView>
+                                <state key="normal" title="Pin Location"/>
+                                <connections>
+                                    <action selector="didTapPinLocation:" destination="1Vm-Iq-0cG" eventType="touchUpInside" id="cbs-SO-Eqx"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Mwe-8i-RNF"/>
@@ -536,7 +555,7 @@
                     <navigationItem key="navigationItem" title="Profile" id="NnF-go-3Hp">
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="UMr-XG-F4v">
                             <connections>
-                                <action selector="didTapLogout:" destination="1Vm-Iq-0cG" id="CpT-Mc-w4o"/>
+                                <action selector="didTapLogout:" destination="1Vm-Iq-0cG" id="fYB-9c-64Q"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -545,7 +564,7 @@
                         <outlet property="descriptionField" destination="Mb4-jw-v7c" id="ovH-jk-ccx"/>
                         <outlet property="editProfilePic" destination="2iV-hS-7vp" id="FUo-bz-L6B"/>
                         <outlet property="genderLabel" destination="gMG-5h-hWS" id="0zN-xp-8v1"/>
-                        <outlet property="myMapView" destination="tp5-Wm-JxE" id="xvQ-IO-pM0"/>
+                        <outlet property="myMapView" destination="tp5-Wm-JxE" id="vgQ-28-w2g"/>
                         <outlet property="nameLabel" destination="y8s-mc-Qnc" id="7D4-C5-kyo"/>
                         <outlet property="profilePictureImage" destination="OyE-EZ-4G6" id="BI0-dT-3oq"/>
                         <outlet property="saveButton" destination="96i-tb-ffq" id="PDC-w1-48B"/>
@@ -570,6 +589,31 @@
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2328.8000000000002" y="-293.70314842578711"/>
+        </scene>
+        <!--Map View Controller-->
+        <scene sceneID="TnC-oE-sRL">
+            <objects>
+                <viewController id="v0y-1Z-7tL" customClass="MapViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="aTE-5A-ghb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="JPk-2e-D7O">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="73q-qO-yeh"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="ao3-Rl-5WG"/>
+                    <connections>
+                        <outlet property="myMapView" destination="JPk-2e-D7O" id="FIt-QP-8cl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dge-HK-yuu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3151" y="-293"/>
         </scene>
         <!--Profile-->
         <scene sceneID="FrK-c6-EQK">
@@ -683,7 +727,8 @@
         <image name="profile_tab" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="aF9-xi-Jrq"/>
         <segue reference="Izl-Ce-9Fu"/>
-        <segue reference="FwR-YR-iEQ"/>
+        <segue reference="P2Q-rR-Rfd"/>
     </inferredMetricsTieBreakers>
 </document>

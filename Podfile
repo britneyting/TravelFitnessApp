@@ -9,15 +9,12 @@ target 'Fitness App' do
   pod 'Parse'
   pod 'Parse/UI'
   pod 'GoogleMaps'
+  pod 'MaterialComponents'
+  pod 'DateTools'
+  pod 'ComponentKit'
+  pod 'YPImagePicker'
+  pod 'AFNetworking'
+  pod 'ActivityBar'
 
-  target 'Fitness AppTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-
-  target 'Fitness AppUITests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
 
 end
