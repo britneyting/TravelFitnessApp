@@ -14,6 +14,7 @@
 @interface postViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (strong, nonatomic) IBOutlet UIImage *photo;
+
 @property (strong, nonatomic) UIImage *originalImage;
 @property (strong, nonatomic) UIImage *editedImage;
 
@@ -78,6 +79,7 @@
     // Do something with the images (based on your use case)
     self.photo = editedImage;
     self.imageView.image = self.photo;
+
     
     // Dismiss UIImagePickerController to go back to your original view controller
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -100,7 +102,7 @@
 - (void)textViewDidBeginEditing:(UITextView *)textView {
     if ([textView.text isEqualToString:self.placeholderText]) {
         textView.text = @"";
-        textView.textColor = [UIColor blackColor]; //optional
+        textView.textColor = [UIColor blackColor];
     }
     [textView becomeFirstResponder];
 }
@@ -108,7 +110,7 @@
 - (void)textViewDidEndEditing:(UITextView *)textView {
     if ([textView.text isEqualToString:@""]) {
         textView.text = self.placeholderText;
-        textView.textColor = [UIColor lightGrayColor]; //optional
+        textView.textColor = [UIColor lightGrayColor];
     }
     [textView resignFirstResponder];
 }
