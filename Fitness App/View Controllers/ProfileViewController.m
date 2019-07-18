@@ -17,7 +17,7 @@
 
 @interface ProfileViewController () <MKMapViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
-@property (weak, nonatomic) IBOutlet MKMapView *myMapView;
+@property (strong, nonatomic) IBOutlet MKMapView *myMapView;
 @property CLLocationManager *locationManager;
 @property (strong, nonatomic) UIImage *originalImage;
 @property (strong, nonatomic) UIImage *editedImage;
