@@ -14,9 +14,6 @@
 #import "LoginViewController.h"
 #import "MapPin.h"
 
-
-@import Parse;
-
 @interface ProfileViewController () <MKMapViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @property (strong, nonatomic) UIImage *originalImage;
@@ -24,6 +21,8 @@
 @property (strong, nonatomic) UIImage *propic;
 @property (weak, nonatomic) IBOutlet MKMapView *myMapView;
 @property CLLocationManager *locationManager;
+@property CLGeocoder *loc;
+
 
 @end
 
@@ -50,10 +49,70 @@
     if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)])
         [self.locationManager requestWhenInUseAuthorization];
     
+    self.locationManager = [[CLLocationManager alloc]init];
+    self.locationManager.delegate = self;
     [self.locationManager startUpdatingLocation];
 }
 
+-(void)viewDidAppear:(BOOL)animated{
+    [self.locationManager startUpdatingLocation];
+    self.loc= [[CLGeocoder alloc]init];
+    [self.locationManager requestWhenInUseAuthorization];
+    if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+        [self.locationManager requestWhenInUseAuthorization];
+    }
+    CLLocationCoordinate2D coordinate;
+    coordinate.latitude=self.locationManager.location.coordinate.latitude;
+    coordinate.longitude=self.locationManager.location.coordinate.longitude;
+    MKPointAnnotation *marker = [MKPointAnnotation new];
+    marker.coordinate = coordinate;
+    NSLog(@"%f",coordinate.latitude);
+    CLLocation *loc = [[CLLocation alloc]initWithLatitude:coordinate.latitude longitude:coordinate.longitude];
+   
+    [self.loc reverseGeocodeLocation:loc completionHandler:^(NSArray *placemarks, NSError *error) {
+    CLPlacemark *placemark = [placemarks objectAtIndex:0];
+                  NSLog(@"placemark %@",placemark);
+        
+        //address starts here
+         NSString *locatedAt = [[placemark.addressDictionary valueForKey:@"FormattedAddressLines"] componentsJoinedByString:@", "];
+          NSLog(@"addressDictionary %@", placemark.addressDictionary);
+        
+          NSLog(@"placemark %@",placemark.region);
+          NSLog(@"placemark %@",placemark.country);
+          NSLog(@"placemark %@",placemark.locality);
+          NSLog(@"location %@",placemark.name);
+          NSLog(@"location %@",placemark.ocean);
+          NSLog(@"location %@",placemark.postalCode);
+          NSLog(@"location %@",placemark.subLocality);
+        
+          NSLog(@"location %@",placemark.location);
+          //Print the location to console
+          NSLog(@"I am currently at %@",locatedAt);
+          [self getCurrentLocation];
+          [self.locationManager stopUpdatingLocation];
+        }
+     ];
+}
+
+-(void)getCurrentLocation {
+    PFUser *currentUser = [PFUser currentUser];
+    CLLocationCoordinate2D coordinate;
+    coordinate.latitude=self.locationManager.location.coordinate.latitude;
+    coordinate.longitude=self.locationManager.location.coordinate.longitude;
+    PFGeoPoint *geoPoint = [PFGeoPoint geoPointWithLatitude:coordinate.latitude longitude:coordinate.longitude];
+    currentUser[@"coordinates"] = geoPoint;
+    [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (succeeded) {
+            NSLog(@"Successfully updated user's current location in backend");
+        }
+        else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
+}
+
 -(void)mapView: (MKMapView *) mapView didUpdateUserLocation:(nonnull MKUserLocation *)userLocation{
+    NSLog(@"%f , %f", self.myMapView.userLocation.coordinate.latitude, self.myMapView.userLocation.coordinate.longitude);    
     MKMapCamera *camera = [MKMapCamera cameraLookingAtCenterCoordinate:userLocation.coordinate fromEyeCoordinate:CLLocationCoordinate2DMake(userLocation.coordinate.latitude, userLocation.coordinate.longitude) eyeAltitude:10000];
     [mapView setCamera:camera animated:YES];
 }
@@ -62,6 +121,7 @@
 - (IBAction)editProfilePic:(id)sender {
     [self choosePicture:@"Choose an image using your camera or photo library" withTitle:@"Change Your Profile Picture"];
 }
+
 - (void)choosePicture:(NSString *)message withTitle:(NSString *)title {
     UIImagePickerController *imagePickerVC = [UIImagePickerController new];
     imagePickerVC.delegate = self;
@@ -191,9 +251,5 @@
     // Pass the selected object to the new view controller.
 }
 */
-
-
-
-
 
 @end
