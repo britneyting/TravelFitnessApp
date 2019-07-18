@@ -215,23 +215,44 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JdZ-IC-auU">
-                                <rect key="frame" x="0.0" y="64" width="375" height="313"/>
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="profile_tab" translatesAutoresizingMaskIntoConstraints="NO" id="JdZ-IC-auU" userLabel="image view" customClass="PFImageView">
+                                <rect key="frame" x="16" y="93" width="119" height="106"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Vzk-LP-WQ9" appends="YES" id="Olg-xW-ncf"/>
+                                </connections>
                             </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="OaA-fS-GIk" userLabel="Caption Text View">
+                                <rect key="frame" x="133" y="82" width="226" height="129"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="4EO-wV-y6S"/>
                     </view>
                     <navigationItem key="navigationItem" id="6dd-dL-dlt">
-                        <barButtonItem key="rightBarButtonItem" title="Share" id="J2B-tO-q8q"/>
+                        <barButtonItem key="rightBarButtonItem" title="Share" id="J2B-tO-q8q">
+                            <connections>
+                                <action selector="didTapShare:" destination="XOK-SA-Gjl" id="6hl-01-cBs"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="captionTextView" destination="OaA-fS-GIk" id="anf-br-WDp"/>
+                        <outlet property="imageView" destination="JdZ-IC-auU" id="bTO-7c-YmZ"/>
                         <segue destination="1Vm-Iq-0cG" kind="show" identifier="backToProfile" id="aF9-xi-Jrq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MtE-2r-vak" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Vzk-LP-WQ9">
+                    <connections>
+                        <action selector="didTapPicture:" destination="XOK-SA-Gjl" id="jxv-yV-2ns"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2328.8000000000002" y="394.45277361319341"/>
         </scene>
