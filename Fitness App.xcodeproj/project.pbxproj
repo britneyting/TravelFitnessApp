@@ -10,7 +10,6 @@
 		131E759122DE95C20044CC08 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 131E759022DE95C20044CC08 /* ProfileViewController.m */; };
 		1355E47E22E0D3D8003036E3 /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 1355E47D22E0D3D8003036E3 /* Post.m */; };
 		137077B522DFAA91003DEC12 /* MapPin.m in Sources */ = {isa = PBXBuildFile; fileRef = 137077B422DFAA91003DEC12 /* MapPin.m */; };
-		13780E2822DFD6EB00689605 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13780E2722DFD6EB00689605 /* ViewController.m */; };
 		13780E2E22E0201700689605 /* postViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13780E2D22E0201700689605 /* postViewController.m */; };
 		6E412180A53D89CCAE50C4EA /* Pods_Fitness_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6B394742CCED85F0C4D91E7 /* Pods_Fitness_App.framework */; };
 		720A29A8FC73191863A7F122 /* Pods_Fitness_AppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 579D80D3CC27417F7D2716D4 /* Pods_Fitness_AppUITests.framework */; };
@@ -54,8 +53,6 @@
 		1355E47D22E0D3D8003036E3 /* Post.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
 		137077B322DFAA91003DEC12 /* MapPin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapPin.h; sourceTree = "<group>"; };
 		137077B422DFAA91003DEC12 /* MapPin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapPin.m; sourceTree = "<group>"; };
-		13780E2622DFD6EB00689605 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		13780E2722DFD6EB00689605 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		13780E2C22E0201700689605 /* postViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = postViewController.h; sourceTree = "<group>"; };
 		13780E2D22E0201700689605 /* postViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = postViewController.m; sourceTree = "<group>"; };
 		1ADF65D351FCE03F46CC99DD /* Pods-Fitness AppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fitness AppUITests.release.xcconfig"; path = "Target Support Files/Pods-Fitness AppUITests/Pods-Fitness AppUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -225,8 +222,6 @@
 				7D5755CA22DFDE5000C2823C /* PeopleViewController.m */,
 				7D5755CC22DFDE5900C2823C /* PlacesViewController.h */,
 				7D5755CD22DFDE5900C2823C /* PlacesViewController.m */,
-				13780E2622DFD6EB00689605 /* ViewController.h */,
-				13780E2722DFD6EB00689605 /* ViewController.m */,
 				13780E2C22E0201700689605 /* postViewController.h */,
 				13780E2D22E0201700689605 /* postViewController.m */,
 			);
@@ -489,7 +484,6 @@
 				7D5755CB22DFDE5000C2823C /* PeopleViewController.m in Sources */,
 				137077B522DFAA91003DEC12 /* MapPin.m in Sources */,
 				7D416AF222D5054900B8A1D9 /* main.m in Sources */,
-				13780E2822DFD6EB00689605 /* ViewController.m in Sources */,
 				131E759122DE95C20044CC08 /* ProfileViewController.m in Sources */,
 				13780E2E22E0201700689605 /* postViewController.m in Sources */,
 				7D416AE422D5054800B8A1D9 /* AppDelegate.m in Sources */,

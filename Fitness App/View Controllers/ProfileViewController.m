@@ -19,7 +19,6 @@
 
 @interface ProfileViewController () <MKMapViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
-
 @property (strong, nonatomic) UIImage *originalImage;
 @property (strong, nonatomic) UIImage *editedImage;
 @property (strong, nonatomic) UIImage *propic;
