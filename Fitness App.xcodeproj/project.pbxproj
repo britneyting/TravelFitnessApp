@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		131E759122DE95C20044CC08 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 131E759022DE95C20044CC08 /* ProfileViewController.m */; };
 		13780E2B22DFDDF900689605 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13780E2A22DFDDF900689605 /* MapViewController.m */; };
+		137077B522DFAA91003DEC12 /* MapPin.m in Sources */ = {isa = PBXBuildFile; fileRef = 137077B422DFAA91003DEC12 /* MapPin.m */; };
+		13780E2822DFD6EB00689605 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13780E2722DFD6EB00689605 /* ViewController.m */; };
+		13780E2E22E0201700689605 /* postViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13780E2D22E0201700689605 /* postViewController.m */; };
 		6E412180A53D89CCAE50C4EA /* Pods_Fitness_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6B394742CCED85F0C4D91E7 /* Pods_Fitness_App.framework */; };
 		720A29A8FC73191863A7F122 /* Pods_Fitness_AppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 579D80D3CC27417F7D2716D4 /* Pods_Fitness_AppUITests.framework */; };
 		7D416AE422D5054800B8A1D9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D416AE322D5054800B8A1D9 /* AppDelegate.m */; };
@@ -49,6 +52,12 @@
 		131E759022DE95C20044CC08 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		13780E2922DFDDF900689605 /* MapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		13780E2A22DFDDF900689605 /* MapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		137077B322DFAA91003DEC12 /* MapPin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapPin.h; sourceTree = "<group>"; };
+		137077B422DFAA91003DEC12 /* MapPin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapPin.m; sourceTree = "<group>"; };
+		13780E2622DFD6EB00689605 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		13780E2722DFD6EB00689605 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		13780E2C22E0201700689605 /* postViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = postViewController.h; sourceTree = "<group>"; };
+		13780E2D22E0201700689605 /* postViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = postViewController.m; sourceTree = "<group>"; };
 		1ADF65D351FCE03F46CC99DD /* Pods-Fitness AppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fitness AppUITests.release.xcconfig"; path = "Target Support Files/Pods-Fitness AppUITests/Pods-Fitness AppUITests.release.xcconfig"; sourceTree = "<group>"; };
 		1E0D1C4AC5810F04B6AD9931 /* Pods-Fitness App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fitness App.debug.xcconfig"; path = "Target Support Files/Pods-Fitness App/Pods-Fitness App.debug.xcconfig"; sourceTree = "<group>"; };
 		1F2B17734B8D66B60D0B34E1 /* Pods-Fitness App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fitness App.release.xcconfig"; path = "Target Support Files/Pods-Fitness App/Pods-Fitness App.release.xcconfig"; sourceTree = "<group>"; };
@@ -114,6 +123,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		137077B222DFAA59003DEC12 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				137077B322DFAA91003DEC12 /* MapPin.h */,
+				137077B422DFAA91003DEC12 /* MapPin.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		1E79A403F57A8E3F367DD2B3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -149,6 +167,7 @@
 		7D416AE122D5054800B8A1D9 /* Fitness App */ = {
 			isa = PBXGroup;
 			children = (
+				137077B222DFAA59003DEC12 /* Models */,
 				7D416AE222D5054800B8A1D9 /* AppDelegate.h */,
 				7D416AE322D5054800B8A1D9 /* AppDelegate.m */,
 				7D416AE822D5054800B8A1D9 /* Main.storyboard */,
@@ -206,6 +225,10 @@
 				7D5755CA22DFDE5000C2823C /* PeopleViewController.m */,
 				7D5755CC22DFDE5900C2823C /* PlacesViewController.h */,
 				7D5755CD22DFDE5900C2823C /* PlacesViewController.m */,
+				13780E2622DFD6EB00689605 /* ViewController.h */,
+				13780E2722DFD6EB00689605 /* ViewController.m */,
+				13780E2C22E0201700689605 /* postViewController.h */,
+				13780E2D22E0201700689605 /* postViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -464,7 +487,11 @@
 				7D5755CE22DFDE5900C2823C /* PlacesViewController.m in Sources */,
 				7D416AF222D5054900B8A1D9 /* main.m in Sources */,
 				7D5755CB22DFDE5000C2823C /* PeopleViewController.m in Sources */,
+				137077B522DFAA91003DEC12 /* MapPin.m in Sources */,
+				7D416AF222D5054900B8A1D9 /* main.m in Sources */,
+				13780E2822DFD6EB00689605 /* ViewController.m in Sources */,
 				131E759122DE95C20044CC08 /* ProfileViewController.m in Sources */,
+				13780E2E22E0201700689605 /* postViewController.m in Sources */,
 				7D416AE422D5054800B8A1D9 /* AppDelegate.m in Sources */,
 				13780E2B22DFDDF900689605 /* MapViewController.m in Sources */,
 				7DA8AF8022DE911000BD4098 /* SignupViewController.m in Sources */,

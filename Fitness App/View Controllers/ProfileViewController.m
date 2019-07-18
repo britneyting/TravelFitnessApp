@@ -12,6 +12,8 @@
 #import "Parse/Parse.h"
 #import "AppDelegate.h"
 #import "LoginViewController.h"
+#import "MapPin.h"
+
 
 @import Parse;
 
@@ -21,6 +23,9 @@
 @property (strong, nonatomic) UIImage *originalImage;
 @property (strong, nonatomic) UIImage *editedImage;
 @property (strong, nonatomic) UIImage *propic;
+@property (weak, nonatomic) IBOutlet MKMapView *myMapView;
+@property CLLocationManager *locationManager;
+
 @end
 
 @implementation ProfileViewController
@@ -38,7 +43,23 @@
     self.descriptionField.text = currentUser[@"description"];
     self.profilePictureImage.file = currentUser[@"profilePicture"];
     [self.profilePictureImage loadInBackground];
+    
+    self.myMapView.showsUserLocation = YES;
+    self.myMapView.showsBuildings = YES;
+    self.myMapView.delegate = self;
+    self.locationManager = [CLLocationManager new];
+    if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)])
+        [self.locationManager requestWhenInUseAuthorization];
+    
+    [self.locationManager startUpdatingLocation];
 }
+
+-(void)mapView: (MKMapView *) mapView didUpdateUserLocation:(nonnull MKUserLocation *)userLocation{
+    MKMapCamera *camera = [MKMapCamera cameraLookingAtCenterCoordinate:userLocation.coordinate fromEyeCoordinate:CLLocationCoordinate2DMake(userLocation.coordinate.latitude, userLocation.coordinate.longitude) eyeAltitude:100];
+    [mapView setCamera:camera animated:YES];
+}
+
+
 - (IBAction)editProfilePic:(id)sender {
     [self choosePicture:@"Choose an image using your camera or photo library" withTitle:@"Change Your Profile Picture"];
 }
@@ -98,6 +119,11 @@
     
     // Dismiss UIImagePickerController to go back to your original view controller
     [self dismissViewControllerAnimated:YES completion:nil];
+
+    
+    
+    
+
 }
 - (UIImage *)resizeImage:(UIImage *)image withSize:(CGSize)size {
     UIImageView *resizeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
@@ -112,6 +138,7 @@
     
     return newImage;
 }
+
 - (IBAction)editDescription:(id)sender {
     [self.descriptionField setUserInteractionEnabled:YES];
     [self.descriptionField becomeFirstResponder];
@@ -148,6 +175,17 @@
         }
     }];
 }
+- (IBAction)didTapPinLocation:(id)sender {
+    MKMapPoint userLocationMapPoint =
+    MKMapPointForCoordinate(self.myMapView.userLocation.coordinate);
+    NSString *display_coordinates = [NSString stringWithFormat:@"my latitude is %f and longitude is %f", self.myMapView.userLocation.coordinate.longitude, self.myMapView.userLocation.coordinate.latitude];
+
+    MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
+    [annotation setCoordinate:self.myMapView.userLocation.coordinate];
+    [annotation setTitle:@"Test"];
+    [annotation setSubtitle:display_coordinates];
+    [self.myMapView addAnnotation:annotation];
+}
 
 
 /*
@@ -159,5 +197,9 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+
+
+
 
 @end

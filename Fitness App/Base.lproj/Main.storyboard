@@ -207,10 +207,10 @@
             </objects>
             <point key="canvasLocation" x="844" y="396"/>
         </scene>
-        <!--View Controller-->
+        <!--Post View Controller-->
         <scene sceneID="0p5-cd-C8D">
             <objects>
-                <viewController id="XOK-SA-Gjl" sceneMemberID="viewController">
+                <viewController id="XOK-SA-Gjl" customClass="postViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="P93-9J-I83">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -227,6 +227,9 @@
                     <navigationItem key="navigationItem" id="6dd-dL-dlt">
                         <barButtonItem key="rightBarButtonItem" title="Share" id="J2B-tO-q8q"/>
                     </navigationItem>
+                    <connections>
+                        <segue destination="1Vm-Iq-0cG" kind="show" identifier="backToProfile" id="aF9-xi-Jrq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MtE-2r-vak" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -499,6 +502,25 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Description" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LSc-ah-ihf">
+                                <rect key="frame" x="124" y="111" width="235" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="tp5-Wm-JxE" userLabel="mapView">
+                                <rect key="frame" x="0.0" y="178" width="375" height="489"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xIL-WP-4DX">
+                                <rect key="frame" x="275" y="252" width="84" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Pin Location"/>
+                                <connections>
+                                    <action selector="didTapPinLocation:" destination="1Vm-Iq-0cG" eventType="touchUpInside" id="cbs-SO-Eqx"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Mwe-8i-RNF"/>
@@ -506,7 +528,7 @@
                     <navigationItem key="navigationItem" title="Profile" id="NnF-go-3Hp">
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="UMr-XG-F4v">
                             <connections>
-                                <action selector="didTapLogout:" destination="1Vm-Iq-0cG" id="CpT-Mc-w4o"/>
+                                <action selector="didTapLogout:" destination="1Vm-Iq-0cG" id="fYB-9c-64Q"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -515,6 +537,7 @@
                         <outlet property="descriptionField" destination="Mb4-jw-v7c" id="ovH-jk-ccx"/>
                         <outlet property="editProfilePic" destination="2iV-hS-7vp" id="FUo-bz-L6B"/>
                         <outlet property="genderLabel" destination="gMG-5h-hWS" id="0zN-xp-8v1"/>
+                        <outlet property="myMapView" destination="tp5-Wm-JxE" id="vgQ-28-w2g"/>
                         <outlet property="nameLabel" destination="y8s-mc-Qnc" id="7D4-C5-kyo"/>
                         <outlet property="profilePictureImage" destination="OyE-EZ-4G6" id="BI0-dT-3oq"/>
                         <outlet property="saveButton" destination="96i-tb-ffq" id="PDC-w1-48B"/>
@@ -728,9 +751,10 @@
         <image name="profile_tab" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="aF9-xi-Jrq"/>
         <segue reference="owq-Gq-Jcp"/>
         <segue reference="Jqi-jK-XxA"/>
         <segue reference="Izl-Ce-9Fu"/>
-        <segue reference="FwR-YR-iEQ"/>
+        <segue reference="P2Q-rR-Rfd"/>
     </inferredMetricsTieBreakers>
 </document>
