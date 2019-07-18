@@ -245,6 +245,7 @@
                         <outlet property="captionTextView" destination="OaA-fS-GIk" id="anf-br-WDp"/>
                         <outlet property="imageView" destination="JdZ-IC-auU" id="bTO-7c-YmZ"/>
                         <segue destination="1Vm-Iq-0cG" kind="show" identifier="backToProfile" id="aF9-xi-Jrq"/>
+                        <segue destination="JZ9-UX-P6Y" kind="show" identifier="backToProfile" id="WQV-e0-FnK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MtE-2r-vak" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -264,7 +265,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <activityIndicatorView key="tableFooterView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="n0w-m8-ubF">
+                        <activityIndicatorView key="tableFooterView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" style="gray" id="n0w-m8-ubF">
                             <rect key="frame" x="0.0" y="157" width="375" height="20"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </activityIndicatorView>
@@ -483,7 +484,7 @@
         <!--Profile-->
         <scene sceneID="rBv-aG-Kp4">
             <objects>
-                <viewController id="1Vm-Iq-0cG" customClass="ProfileViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Profile" id="1Vm-Iq-0cG" customClass="ProfileViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="T9c-Xr-7me">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -748,8 +749,9 @@
         <image name="profile_tab" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="WQV-e0-FnK"/>
         <segue reference="aF9-xi-Jrq"/>
-        <segue reference="Izl-Ce-9Fu"/>
+        <segue reference="v0F-gj-8R5"/>
         <segue reference="P2Q-rR-Rfd"/>
     </inferredMetricsTieBreakers>
 </document>
