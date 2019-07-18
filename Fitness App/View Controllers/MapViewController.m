@@ -26,7 +26,7 @@
     [super viewDidLoad];
     self.myMapView.showsUserLocation = YES;
     self.myMapView.showsBuildings = YES;
-
+    self.myMapView.delegate = self;
     self.locationManager = [CLLocationManager new];
     if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)])
         [self.locationManager requestWhenInUseAuthorization];
@@ -35,7 +35,7 @@
 }
 
 -(void)mapView: (MKMapView *) mapView didUpdateUserLocation:(nonnull MKUserLocation *)userLocation{
-    MKMapCamera *camera = [MKMapCamera cameraLookingAtCenterCoordinate:userLocation.coordinate fromEyeCoordinate:CLLocationCoordinate2DMake(userLocation.coordinate.latitude, userLocation.coordinate.longitude) eyeAltitude:10000];
+    MKMapCamera *camera = [MKMapCamera cameraLookingAtCenterCoordinate:userLocation.coordinate fromEyeCoordinate:CLLocationCoordinate2DMake(userLocation.coordinate.latitude, userLocation.coordinate.longitude) eyeAltitude:100];
     [mapView setCamera:camera animated:YES];
 }
 
