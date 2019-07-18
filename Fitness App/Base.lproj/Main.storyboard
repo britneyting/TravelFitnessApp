@@ -215,23 +215,44 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JdZ-IC-auU">
-                                <rect key="frame" x="0.0" y="64" width="375" height="313"/>
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="profile_tab" translatesAutoresizingMaskIntoConstraints="NO" id="JdZ-IC-auU" userLabel="image view" customClass="PFImageView">
+                                <rect key="frame" x="16" y="93" width="119" height="106"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Vzk-LP-WQ9" appends="YES" id="Olg-xW-ncf"/>
+                                </connections>
                             </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="OaA-fS-GIk" userLabel="Caption Text View">
+                                <rect key="frame" x="133" y="82" width="226" height="129"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="4EO-wV-y6S"/>
                     </view>
                     <navigationItem key="navigationItem" id="6dd-dL-dlt">
-                        <barButtonItem key="rightBarButtonItem" title="Share" id="J2B-tO-q8q"/>
+                        <barButtonItem key="rightBarButtonItem" title="Share" id="J2B-tO-q8q">
+                            <connections>
+                                <action selector="didTapShare:" destination="XOK-SA-Gjl" id="6hl-01-cBs"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="captionTextView" destination="OaA-fS-GIk" id="anf-br-WDp"/>
+                        <outlet property="imageView" destination="JdZ-IC-auU" id="bTO-7c-YmZ"/>
                         <segue destination="1Vm-Iq-0cG" kind="show" identifier="backToProfile" id="aF9-xi-Jrq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MtE-2r-vak" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Vzk-LP-WQ9">
+                    <connections>
+                        <action selector="didTapPicture:" destination="XOK-SA-Gjl" id="jxv-yV-2ns"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2329" y="396"/>
         </scene>
@@ -240,7 +261,7 @@
             <objects>
                 <viewController id="54l-QG-jOD" customClass="PeopleViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="7s6-VV-ayu">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <activityIndicatorView key="tableFooterView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="n0w-m8-ubF">
@@ -318,7 +339,7 @@
             <objects>
                 <viewController id="mUy-Ue-bsC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DXr-8u-RrQ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kGh-Q9-yz8">
@@ -383,7 +404,7 @@
             <objects>
                 <viewController id="cTC-4g-PaH" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pSh-E3-UST">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xeA-5y-DfD">
@@ -416,7 +437,7 @@
             <objects>
                 <viewController id="mJ4-8e-puD" customClass="PlacesViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cXc-3V-vLY">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="a9u-Iz-uAM">
@@ -622,7 +643,6 @@
                     <tabBarItem key="tabBarItem" title="Profile" selectedImage="profile_tab" id="6dw-a5-c8V"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="F92-nQ-vef">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -641,7 +661,6 @@
                     <tabBarItem key="tabBarItem" title="Explore" id="nWc-Ds-ADH"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5vZ-6a-gM8">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -710,7 +729,6 @@
                     <tabBarItem key="tabBarItem" title="Camera" id="nEa-KW-P2U"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="O0H-Th-xEE">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
