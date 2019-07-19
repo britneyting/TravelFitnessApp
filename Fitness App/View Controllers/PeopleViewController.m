@@ -9,6 +9,7 @@
 #import "PeopleViewController.h"
 #import "PeopleCell.h"
 #import <MapKit/MapKit.h>
+#import "PeopleDetailsViewController.h"
 
 @interface PeopleViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
@@ -80,14 +81,21 @@
 
 }
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"segueToPeopleDetailsViewController"]){
+        UITableViewCell *tappedCell = sender;
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+        PFUser *nearbyPerson = self.nearbyPeople[indexPath.row];
+        PeopleDetailsViewController *peopleDetailsViewController = [segue destinationViewController];
+        peopleDetailsViewController.nearbyPerson = nearbyPerson;
+        [self addChildViewController:peopleDetailsViewController];
+        [tappedCell setSelected:NO];
 }
-*/
+}
 
 @end

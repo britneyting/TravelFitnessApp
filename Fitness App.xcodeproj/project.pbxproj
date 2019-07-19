@@ -24,6 +24,7 @@
 		7D5755CE22DFDE5900C2823C /* PlacesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5755CD22DFDE5900C2823C /* PlacesViewController.m */; };
 		7D5755D122DFDEB800C2823C /* PeopleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5755D022DFDEB800C2823C /* PeopleCell.m */; };
 		7D5C339022DFD46E00E667DD /* ExploreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5C338F22DFD46E00E667DD /* ExploreViewController.m */; };
+		7D752A7D22E28A5300FC6121 /* PeopleDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D752A7C22E28A5300FC6121 /* PeopleDetailsViewController.m */; };
 		7DA8AF8022DE911000BD4098 /* SignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DA8AF7F22DE911000BD4098 /* SignupViewController.m */; };
 		7DEF648222DE8B580028C1BB /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DEF648122DE8B580028C1BB /* LoginViewController.m */; };
 		82659799CFA19C69AE9F8E37 /* Pods_Fitness_AppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C2DF848574A271A742E4868 /* Pods_Fitness_AppTests.framework */; };
@@ -85,6 +86,8 @@
 		7D5755D022DFDEB800C2823C /* PeopleCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PeopleCell.m; sourceTree = "<group>"; };
 		7D5C338E22DFD46E00E667DD /* ExploreViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExploreViewController.h; sourceTree = "<group>"; };
 		7D5C338F22DFD46E00E667DD /* ExploreViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExploreViewController.m; sourceTree = "<group>"; };
+		7D752A7B22E28A5300FC6121 /* PeopleDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PeopleDetailsViewController.h; sourceTree = "<group>"; };
+		7D752A7C22E28A5300FC6121 /* PeopleDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PeopleDetailsViewController.m; sourceTree = "<group>"; };
 		7DA8AF7E22DE910F00BD4098 /* SignupViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SignupViewController.h; sourceTree = "<group>"; };
 		7DA8AF7F22DE911000BD4098 /* SignupViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SignupViewController.m; sourceTree = "<group>"; };
 		7DEF648022DE8B580028C1BB /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -220,6 +223,8 @@
 				7D5C338F22DFD46E00E667DD /* ExploreViewController.m */,
 				7D5755C922DFDE5000C2823C /* PeopleViewController.h */,
 				7D5755CA22DFDE5000C2823C /* PeopleViewController.m */,
+				7D752A7B22E28A5300FC6121 /* PeopleDetailsViewController.h */,
+				7D752A7C22E28A5300FC6121 /* PeopleDetailsViewController.m */,
 				7D5755CC22DFDE5900C2823C /* PlacesViewController.h */,
 				7D5755CD22DFDE5900C2823C /* PlacesViewController.m */,
 				13780E2C22E0201700689605 /* postViewController.h */,
@@ -479,6 +484,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D752A7D22E28A5300FC6121 /* PeopleDetailsViewController.m in Sources */,
 				7D5755CE22DFDE5900C2823C /* PlacesViewController.m in Sources */,
 				7D416AF222D5054900B8A1D9 /* main.m in Sources */,
 				7D5755CB22DFDE5000C2823C /* PeopleViewController.m in Sources */,

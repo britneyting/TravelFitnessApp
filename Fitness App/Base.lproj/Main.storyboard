@@ -331,7 +331,7 @@
                                     <outlet property="genderLabel" destination="RTU-Fs-ff4" id="GGy-s7-vPX"/>
                                     <outlet property="nameLabel" destination="4lN-kP-k4m" id="6A8-ea-7ck"/>
                                     <outlet property="profilePic" destination="IKW-VM-RBa" id="r8c-VH-8hA"/>
-                                    <segue destination="mUy-Ue-bsC" kind="show" identifier="segueToProfileDetails" id="WQf-BX-SOJ"/>
+                                    <segue destination="mUy-Ue-bsC" kind="show" identifier="segueToPeopleDetailsViewController" id="WQf-BX-SOJ"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -349,15 +349,15 @@
             </objects>
             <point key="canvasLocation" x="3413.5999999999999" y="991.304347826087"/>
         </scene>
-        <!--View Controller-->
+        <!--People Details View Controller-->
         <scene sceneID="Vbu-Sz-WuQ">
             <objects>
-                <viewController id="mUy-Ue-bsC" sceneMemberID="viewController">
+                <viewController id="mUy-Ue-bsC" customClass="PeopleDetailsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DXr-8u-RrQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kGh-Q9-yz8">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kGh-Q9-yz8" customClass="PFImageView">
                                 <rect key="frame" x="16" y="12" width="100" height="97"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -409,10 +409,18 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Zbn-Ju-hoI"/>
                     </view>
+                    <connections>
+                        <outlet property="ageLabel" destination="iqs-9k-Ae7" id="Ix6-hE-Sis"/>
+                        <outlet property="descriptionLabel" destination="pXV-71-UE5" id="dvA-yr-PFx"/>
+                        <outlet property="genderLabel" destination="9zP-1R-Jaj" id="MmR-km-Iu8"/>
+                        <outlet property="myMapView" destination="7EF-ee-2na" id="SWu-Tf-V7c"/>
+                        <outlet property="nameLabel" destination="VKL-ZP-ylY" id="ztA-PF-6CQ"/>
+                        <outlet property="profilePictureImage" destination="kGh-Q9-yz8" id="6ek-ej-pKP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MdN-YE-YL2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4161" y="992"/>
+            <point key="canvasLocation" x="4160.8000000000002" y="991.304347826087"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="vu4-Oj-wAm">
