@@ -14,6 +14,7 @@
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
+@property (strong, nonatomic) NSArray *nearbyPeople;
 
 @end
 
@@ -24,6 +25,8 @@
     // Do any additional setup after loading the view.
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    
+    [self fetchData];
         
     // code for activity indicator (refresh)
     self.refreshControl = [[UIRefreshControl alloc] init]; // do self refreshControl instead of UIRefreshControl *refreshControl since we already declared the variable refreshControl in properties
@@ -34,40 +37,48 @@
 - (void)fetchData {
     
     [self.activityIndicator startAnimating];
+    PFUser *currentUser = [PFUser currentUser];
+    NSLog(@"%@", currentUser[@"coordinates"]);
     
     // construct query
-//    PFQuery *query = [PFQuery queryWithClassName:@"Post"];
-//    [query orderByDescending:@"createdAt"];
-//    [query includeKey:@"author"];
-//    query.limit = 20;
+    PFQuery *query = [PFQuery queryWithClassName:@"_User"];
+    [query whereKey:@"coordinates" nearGeoPoint:currentUser[@"coordinates"] withinMiles:10];
     
     // fetch data asynchronously
-//    [query findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
-//        if (posts) {
-//            // do something with the array of object returned by the call
-//            self.posts = posts;
-//            [self.tableView reloadData]; // step 7: reload the table view
-//        } else {
-//            NSLog(@"%@", error.localizedDescription);
-//        }
-//    }];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *nearbyPeople, NSError *error) {
+        if (nearbyPeople) {
+            // do something with the array of object returned by the call
+            self.nearbyPeople = nearbyPeople;
+            [self.tableView reloadData]; // step 7: reload the table view
+        } else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
     
     [self.refreshControl endRefreshing];
     [self.activityIndicator stopAnimating];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 20;
+    return self.nearbyPeople.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     PeopleCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PeopleCell" forIndexPath:indexPath];
     
+    PFUser *nearbyPerson = self.nearbyPeople[indexPath.row];
+    cell.nearbyPerson = nearbyPerson;
+    cell.nameLabel.text = nearbyPerson[@"name"];
+    cell.ageLabel.text = [NSString stringWithFormat:@"Age: %@,", nearbyPerson[@"age"]];
+    cell.genderLabel.text = [NSString stringWithFormat:@"Gender: %@", nearbyPerson[@"gender"]];
+    cell.descriptionLabel.text = nearbyPerson[@"description"];
+    cell.profilePic.file = nearbyPerson[@"profilePicture"];
+    [cell.profilePic loadInBackground];
+    
     return cell;
 
 }
-
 
 /*
 #pragma mark - Navigation

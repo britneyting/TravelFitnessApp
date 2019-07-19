@@ -84,7 +84,6 @@
         NSLog(@"location %@",placemark.location);
         //Print the location to console
         NSLog(@"I am currently at %@",locatedAt);
-        [self getCurrentLocation];
         [self.locationManager stopUpdatingLocation];
     }];
 }
@@ -107,11 +106,11 @@
 }
 
 -(void)mapView: (MKMapView *) mapView didUpdateUserLocation:(nonnull MKUserLocation *)userLocation{
-    NSLog(@"%f , %f", self.myMapView.userLocation.coordinate.latitude, self.myMapView.userLocation.coordinate.longitude);    
+    NSLog(@"%f , %f", self.myMapView.userLocation.coordinate.latitude, self.myMapView.userLocation.coordinate.longitude);
+    [self getCurrentLocation];
     MKMapCamera *camera = [MKMapCamera cameraLookingAtCenterCoordinate:userLocation.coordinate fromEyeCoordinate:CLLocationCoordinate2DMake(userLocation.coordinate.latitude, userLocation.coordinate.longitude) eyeAltitude:10000];
     [mapView setCamera:camera animated:YES];
 }
-
 
 - (IBAction)editProfilePic:(id)sender {
     [self choosePicture:@"Choose an image using your camera or photo library" withTitle:@"Change Your Profile Picture"];
