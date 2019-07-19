@@ -13,23 +13,24 @@
 #import "AppDelegate.h"
 #import "LoginViewController.h"
 #import "MapPin.h"
-#import <CoreLocation/CoreLocation.h>
 
 @import Parse;
 
-@interface ProfileViewController () <MKMapViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, CLLocationManagerDelegate>
+@interface ProfileViewController () <MKMapViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @property (strong, nonatomic) UIImage *originalImage;
 @property (strong, nonatomic) UIImage *editedImage;
 @property (strong, nonatomic) UIImage *propic;
 @property (weak, nonatomic) IBOutlet MKMapView *myMapView;
 @property CLLocationManager *locationManager;
+@property CLGeocoder *loc;
+
 
 @end
 
 @implementation ProfileViewController
 
-- (void)viewDidLoad {
+-(void)viewDidLoad {
     [super viewDidLoad];
 
     self.saveButton.hidden = YES;
@@ -50,10 +51,63 @@
     if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]){
         [self.locationManager requestWhenInUseAuthorization];
     }
+        
     [self.locationManager startUpdatingLocation];
+    self.loc= [[CLGeocoder alloc]init];
+    [self.locationManager requestWhenInUseAuthorization];
+    if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+        [self.locationManager requestWhenInUseAuthorization];
+    }
+    CLLocationCoordinate2D coordinate;
+    coordinate.latitude=self.locationManager.location.coordinate.latitude;
+    coordinate.longitude=self.locationManager.location.coordinate.longitude;
+    MKPointAnnotation *marker = [MKPointAnnotation new];
+    marker.coordinate = coordinate;
+    CLLocation *loc = [[CLLocation alloc]initWithLatitude:coordinate.latitude longitude:coordinate.longitude];
+   
+    [self.loc reverseGeocodeLocation:loc completionHandler:^(NSArray *placemarks, NSError *error) {
+    CLPlacemark *placemark = [placemarks objectAtIndex:0];
+                  NSLog(@"placemark %@",placemark);
+        
+        //address starts here
+        NSString *locatedAt = [[placemark.addressDictionary valueForKey:@"FormattedAddressLines"] componentsJoinedByString:@", "];
+        NSLog(@"addressDictionary %@", placemark.addressDictionary);
+        
+        NSLog(@"placemark %@",placemark.region);
+        NSLog(@"placemark %@",placemark.country);
+        NSLog(@"placemark %@",placemark.locality);
+        NSLog(@"location %@",placemark.name);
+        NSLog(@"location %@",placemark.ocean);
+        NSLog(@"location %@",placemark.postalCode);
+        NSLog(@"location %@",placemark.subLocality);
+        
+        NSLog(@"location %@",placemark.location);
+        //Print the location to console
+        NSLog(@"I am currently at %@",locatedAt);
+        [self getCurrentLocation];
+        [self.locationManager stopUpdatingLocation];
+    }];
+}
+
+-(void)getCurrentLocation {
+    PFUser *currentUser = [PFUser currentUser];
+    CLLocationCoordinate2D coordinate;
+    coordinate.latitude=self.locationManager.location.coordinate.latitude;
+    coordinate.longitude=self.locationManager.location.coordinate.longitude;
+    PFGeoPoint *geoPoint = [PFGeoPoint geoPointWithLatitude:coordinate.latitude longitude:coordinate.longitude];
+    currentUser[@"coordinates"] = geoPoint;
+    [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (succeeded) {
+            NSLog(@"Successfully updated user's current location in backend");
+        }
+        else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
 }
 
 -(void)mapView: (MKMapView *) mapView didUpdateUserLocation:(nonnull MKUserLocation *)userLocation{
+    NSLog(@"%f , %f", self.myMapView.userLocation.coordinate.latitude, self.myMapView.userLocation.coordinate.longitude);    
     MKMapCamera *camera = [MKMapCamera cameraLookingAtCenterCoordinate:userLocation.coordinate fromEyeCoordinate:CLLocationCoordinate2DMake(userLocation.coordinate.latitude, userLocation.coordinate.longitude) eyeAltitude:10000];
     [mapView setCamera:camera animated:YES];
 }
@@ -62,6 +116,7 @@
 - (IBAction)editProfilePic:(id)sender {
     [self choosePicture:@"Choose an image using your camera or photo library" withTitle:@"Change Your Profile Picture"];
 }
+
 - (void)choosePicture:(NSString *)message withTitle:(NSString *)title {
     UIImagePickerController *imagePickerVC = [UIImagePickerController new];
     imagePickerVC.delegate = self;
@@ -119,6 +174,7 @@
     // Dismiss UIImagePickerController to go back to your original view controller
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
 - (UIImage *)resizeImage:(UIImage *)image withSize:(CGSize)size {
     UIImageView *resizeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
     
@@ -171,8 +227,7 @@
 }
 - (IBAction)didTapPinLocation:(id)sender {
     MKMapPoint userLocationMapPoint = MKMapPointForCoordinate(self.myMapView.userLocation.coordinate);
-    NSString *display_coordinates = [NSString stringWithFormat:@"my latitude is %f and longitude is %f", self.myMapView.userLocation.coordinate.latitude, self.myMapView.userLocation.coordinate.longitude];
-
+    NSString *display_coordinates = [NSString stringWithFormat:@"my latitude is %f and longitude is %f", self.myMapView.userLocation.coordinate.longitude, self.myMapView.userLocation.coordinate.latitude];
     MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
     [annotation setCoordinate:self.myMapView.userLocation.coordinate];
     [annotation setTitle:@"Test"];
@@ -190,9 +245,5 @@
     // Pass the selected object to the new view controller.
 }
 */
-
-
-
-
 
 @end

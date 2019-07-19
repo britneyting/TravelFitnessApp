@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		131E759122DE95C20044CC08 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 131E759022DE95C20044CC08 /* ProfileViewController.m */; };
+		1355E47E22E0D3D8003036E3 /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 1355E47D22E0D3D8003036E3 /* Post.m */; };
 		137077B522DFAA91003DEC12 /* MapPin.m in Sources */ = {isa = PBXBuildFile; fileRef = 137077B422DFAA91003DEC12 /* MapPin.m */; };
 		13780E2E22E0201700689605 /* postViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13780E2D22E0201700689605 /* postViewController.m */; };
 		6E412180A53D89CCAE50C4EA /* Pods_Fitness_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6B394742CCED85F0C4D91E7 /* Pods_Fitness_App.framework */; };
@@ -48,6 +49,8 @@
 /* Begin PBXFileReference section */
 		131E758F22DE95C20044CC08 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		131E759022DE95C20044CC08 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		1355E47C22E0D3D8003036E3 /* Post.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Post.h; sourceTree = "<group>"; };
+		1355E47D22E0D3D8003036E3 /* Post.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
 		137077B322DFAA91003DEC12 /* MapPin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapPin.h; sourceTree = "<group>"; };
 		137077B422DFAA91003DEC12 /* MapPin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapPin.m; sourceTree = "<group>"; };
 		13780E2C22E0201700689605 /* postViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = postViewController.h; sourceTree = "<group>"; };
@@ -122,6 +125,8 @@
 			children = (
 				137077B322DFAA91003DEC12 /* MapPin.h */,
 				137077B422DFAA91003DEC12 /* MapPin.m */,
+				1355E47C22E0D3D8003036E3 /* Post.h */,
+				1355E47D22E0D3D8003036E3 /* Post.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -486,6 +491,7 @@
 				7D5C339022DFD46E00E667DD /* ExploreViewController.m in Sources */,
 				7D5755D122DFDEB800C2823C /* PeopleCell.m in Sources */,
 				7DEF648222DE8B580028C1BB /* LoginViewController.m in Sources */,
+				1355E47E22E0D3D8003036E3 /* Post.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -664,7 +670,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.britneyting.Fitness-App";
+				PRODUCT_BUNDLE_IDENTIFIER = com.facebook.britneyting.FitnessApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -682,7 +688,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.britneyting.Fitness-App";
+				PRODUCT_BUNDLE_IDENTIFIER = com.facebook.britneyting.FitnessApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
