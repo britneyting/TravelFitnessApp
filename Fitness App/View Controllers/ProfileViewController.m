@@ -24,7 +24,7 @@
 @property (weak, nonatomic) IBOutlet MKMapView *myMapView;
 @property CLLocationManager *locationManager;
 @property CLGeocoder *loc;
-
+@property (strong, nonatomic) NSString *placeholderText;
 
 @end
 
@@ -34,6 +34,7 @@
     [super viewDidLoad];
 
     self.saveButton.hidden = YES;
+    self.placeholderText = @"Write description...";
     // Do any additional setup after loading the view.
     
     PFUser *currentUser = [PFUser currentUser];
@@ -41,6 +42,10 @@
     self.ageLabel.text = [NSString stringWithFormat:@"%@", currentUser[@"age"]];
     self.genderLabel.text = currentUser[@"gender"];
     self.descriptionField.text = currentUser[@"description"];
+    if ([self.descriptionField.text isEqualToString:@""]) {
+        self.descriptionField.text = self.placeholderText;
+        self.descriptionField.textColor = [UIColor lightGrayColor];
+    }
     self.profilePictureImage.file = currentUser[@"profilePicture"];
     [self.profilePictureImage loadInBackground];
     
@@ -190,6 +195,10 @@
 
 - (IBAction)editDescription:(id)sender {
     [self.descriptionField setUserInteractionEnabled:YES];
+    if ([self.descriptionField.text isEqualToString:self.placeholderText]) {
+        self.descriptionField.text = @"";
+        self.descriptionField.textColor = [UIColor blackColor];
+    }
     [self.descriptionField becomeFirstResponder];
     self.saveButton.hidden = NO;
 }
@@ -206,6 +215,10 @@
             NSLog(@"%@", error.localizedDescription);
         }
     }];
+    if ([self.descriptionField.text isEqualToString:@""]) {
+        self.descriptionField.text = self.placeholderText;
+        self.descriptionField.textColor = [UIColor lightGrayColor];
+    }
     self.saveButton.hidden = YES;
     [self.view endEditing:YES];
 }
