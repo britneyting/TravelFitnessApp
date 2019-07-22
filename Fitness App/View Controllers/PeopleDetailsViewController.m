@@ -17,12 +17,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.nameLabel.text = self.nearbyPerson[@"name"];
-    self.ageLabel.text = [NSString stringWithFormat:@"Age: %@,", self.nearbyPerson[@"age"]];
+    self.ageLabel.text = [NSString stringWithFormat:@"Age: %@", self.nearbyPerson[@"age"]];
     self.genderLabel.text = [NSString stringWithFormat:@"Gender: %@", self.nearbyPerson[@"gender"]];
     self.descriptionLabel.text = self.nearbyPerson[@"description"];
     self.profilePictureImage.file = self.nearbyPerson[@"profilePicture"];
     [self.profilePictureImage loadInBackground];
+    self.titleBar.title = self.nearbyPerson[@"name"];
+}
+
+- (void)fetchData:(MKMapView *)mapView {
+    // fetch posts from the user's Parse backend and then post it in the mapview here
+    // TO DO: get posts from Parse backend and filter by the key 'author'. Then post all their images onto the mapview and label it with the address.
 }
 
 /*

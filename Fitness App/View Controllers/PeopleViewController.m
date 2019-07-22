@@ -11,7 +11,7 @@
 #import <MapKit/MapKit.h>
 #import "PeopleDetailsViewController.h"
 
-@interface PeopleViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface PeopleViewController () <UITableViewDelegate, UITableViewDataSource, UIPopoverControllerDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
