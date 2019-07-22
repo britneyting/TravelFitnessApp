@@ -53,9 +53,6 @@
     self.myMapView.showsBuildings = YES;
     self.myMapView.delegate = self;
     self.locationManager = [[CLLocationManager alloc] init];
-    if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]){
-        [self.locationManager requestWhenInUseAuthorization];
-    }
         
     [self.locationManager startUpdatingLocation];
     self.loc= [[CLGeocoder alloc]init];
