@@ -26,6 +26,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *genderLabel;
 @property (strong, nonatomic) IBOutlet UITextView *descriptionField;
 @property (strong, nonatomic) IBOutlet UIButton *saveButton;
+@property (strong, nonatomic) IBOutlet UINavigationItem *navItem;
 
 @property (weak, nonatomic) id<ProfileViewControllerDelegate> delegate;
 

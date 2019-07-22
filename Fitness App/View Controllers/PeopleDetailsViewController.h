@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (strong, nonatomic) IBOutlet MKMapView *myMapView;
 @property (strong, nonatomic) IBOutlet UINavigationItem *titleBar;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *chatButton;
 
 @end
 

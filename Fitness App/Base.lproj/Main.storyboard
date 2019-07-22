@@ -398,10 +398,16 @@
                         <viewLayoutGuide key="safeArea" id="Zbn-Ju-hoI"/>
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="Oz1-lC-jn9">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="chatBubble" id="K9u-iq-YfV"/>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="chatBubble" id="K9u-iq-YfV">
+                            <connections>
+                                <action selector="chat:" destination="mUy-Ue-bsC" id="ZK1-Cy-eJd"/>
+                                <segue destination="1Xd-Ln-Dwb" kind="presentation" identifier="segueToChatViewController" id="ZFs-3s-gDv"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="ageLabel" destination="iqs-9k-Ae7" id="Ix6-hE-Sis"/>
+                        <outlet property="chatButton" destination="K9u-iq-YfV" id="eR1-Te-Eze"/>
                         <outlet property="descriptionLabel" destination="pXV-71-UE5" id="dvA-yr-PFx"/>
                         <outlet property="genderLabel" destination="9zP-1R-Jaj" id="MmR-km-Iu8"/>
                         <outlet property="myMapView" destination="7EF-ee-2na" id="SWu-Tf-V7c"/>
@@ -412,6 +418,57 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MdN-YE-YL2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4196" y="940.47976011994012"/>
+        </scene>
+        <!--ChatViewController-->
+        <scene sceneID="GFE-7w-AJM">
+            <objects>
+                <viewController title="ChatViewController" id="48G-16-w9M" customClass="ChatViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="YLo-dZ-1dv">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PiR-Up-KtG">
+                                <rect key="frame" x="16" y="617" width="274" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ar3-Yq-eub">
+                                <rect key="frame" x="325" y="617" width="36" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Send"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
+                        <viewLayoutGuide key="safeArea" id="JK3-ys-BF8"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="pKP-hi-hhP" appends="YES" id="No5-0k-0Wc"/>
+                        </connections>
+                    </view>
+                    <navigationItem key="navigationItem" title="Title" id="DMA-u5-T5x">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" image="close-icon" id="NJg-m3-yeI">
+                            <connections>
+                                <action selector="cancel:" destination="48G-16-w9M" id="7M3-rd-UZJ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="cancelButton" destination="NJg-m3-yeI" id="e1Q-nf-bln"/>
+                        <outlet property="messageField" destination="PiR-Up-KtG" id="HR8-o1-q3D"/>
+                        <outlet property="navItem" destination="DMA-u5-T5x" id="QCX-lg-fnm"/>
+                        <outlet property="sendButton" destination="Ar3-Yq-eub" id="brE-bA-D8Q"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WRg-Q1-ZxS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="pKP-hi-hhP">
+                    <connections>
+                        <action selector="finishedTyping:" destination="48G-16-w9M" id="fkM-Hf-yg2"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="5735" y="940"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="vu4-Oj-wAm">
@@ -601,6 +658,7 @@
                         <outlet property="genderLabel" destination="gMG-5h-hWS" id="0zN-xp-8v1"/>
                         <outlet property="myMapView" destination="tp5-Wm-JxE" id="vgQ-28-w2g"/>
                         <outlet property="nameLabel" destination="y8s-mc-Qnc" id="7D4-C5-kyo"/>
+                        <outlet property="navItem" destination="NnF-go-3Hp" id="DUR-O1-uAB"/>
                         <outlet property="profilePictureImage" destination="OyE-EZ-4G6" id="BI0-dT-3oq"/>
                         <outlet property="saveButton" destination="96i-tb-ffq" id="PDC-w1-48B"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="logoutSegue" id="P2Q-rR-Rfd"/>
@@ -757,9 +815,28 @@
             </objects>
             <point key="canvasLocation" x="1620" y="396.25187406296857"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="PaP-ry-f8A">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="1Xd-Ln-Dwb" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Pgr-vf-fta">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="48G-16-w9M" kind="relationship" relationship="rootViewController" id="VYJ-BK-lAO"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nFA-K2-xwr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4952.8000000000002" y="939.58020989505258"/>
+        </scene>
     </scenes>
     <resources>
         <image name="chatBubble" width="50" height="50"/>
+        <image name="close-icon" width="26" height="24"/>
         <image name="profile_tab" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>

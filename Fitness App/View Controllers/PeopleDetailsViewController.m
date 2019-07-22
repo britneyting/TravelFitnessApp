@@ -7,6 +7,7 @@
 //
 
 #import "PeopleDetailsViewController.h"
+#import "ChatViewController.h"
 
 @interface PeopleDetailsViewController ()
 
@@ -25,19 +26,24 @@
     self.titleBar.title = self.nearbyPerson[@"name"];
 }
 
+- (IBAction)chat:(id)sender {
+}
+
 - (void)fetchData:(MKMapView *)mapView {
     // fetch posts from the user's Parse backend and then post it in the mapview here
     // TO DO: get posts from Parse backend and filter by the key 'author'. Then post all their images onto the mapview and label it with the address.
 }
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"segueToPeopleDetailsViewController"]){
+        UINavigationController *navigationController = [segue destinationViewController];
+        ChatViewController *chatController = (ChatViewController*)navigationController.topViewController;
+    }
 }
-*/
 
 @end

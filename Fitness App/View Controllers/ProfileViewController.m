@@ -48,6 +48,7 @@
     }
     self.profilePictureImage.file = currentUser[@"profilePicture"];
     [self.profilePictureImage loadInBackground];
+    self.navItem.title = currentUser[@"name"];
     
     self.myMapView.showsUserLocation = YES;
     self.myMapView.showsBuildings = YES;
