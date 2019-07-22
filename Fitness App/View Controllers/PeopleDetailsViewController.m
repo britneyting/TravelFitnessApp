@@ -34,6 +34,15 @@
     // TO DO: get posts from Parse backend and filter by the key 'author'. Then post all their images onto the mapview and label it with the address.
 }
 
+<<<<<<< HEAD
+=======
+- (void)fetchData:(MKMapView *)mapView {
+    // fetch posts from the user's Parse backend and then post it in the mapview here
+    // TO DO: get posts from Parse backend and filter by the key 'author'. Then post all their images onto the mapview and label it with the address.
+}
+
+/*
+>>>>>>> 9d160e4ff6ea34d384d22dd365af224ab9e79568
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
