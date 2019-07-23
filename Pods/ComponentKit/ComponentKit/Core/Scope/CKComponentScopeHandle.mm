@@ -43,6 +43,10 @@
     return nil;
   }
 
+  // `handleForComponent` is being called for every non-render component from the base constructor of `CKComponent`.
+  // We can rely on this infomration to increase the `componentAllocations` counter.
+  currentScope->componentAllocations++;
+
   CKComponentScopeHandle *handle = currentScope->stack.top().frame.handle;
   if ([handle acquireFromComponent:component]) {
     [currentScope->newScopeRoot registerComponent:component];
@@ -60,7 +64,6 @@
                   rootIdentifier:(CKComponentScopeRootIdentifier)rootIdentifier
                   componentClass:(Class)componentClass
                     initialState:(id)initialState
-                          parent:(CKComponentScopeHandle *)parent
 {
   static int32_t nextGlobalIdentifier = 0;
   return [self initWithListener:listener
@@ -69,8 +72,7 @@
                  componentClass:componentClass
                           state:initialState
                      controller:nil  // Controllers are built on resolution of the handle.
-                scopedResponder:nil  // Scoped responders are created lazily. Once they exist, we use that reference for future handles.
-                         parent:parent];
+                scopedResponder:nil];  // Scoped responders are created lazily. Once they exist, we use that reference for future handles.
 }
 
 - (instancetype)initWithListener:(id<CKComponentStateListener>)listener
@@ -80,7 +82,6 @@
                            state:(id)state
                       controller:(id<CKComponentControllerProtocol>)controller
                  scopedResponder:(CKScopedResponder *)scopedResponder
-                          parent:(CKComponentScopeHandle *)parent
 {
   if (self = [super init]) {
     _listener = listener;
@@ -89,7 +90,6 @@
     _componentClass = componentClass;
     _state = state;
     _controller = controller;
-    _parent = parent;
 
     _scopedResponder = scopedResponder;
     [scopedResponder addHandleToChain:self];
@@ -99,7 +99,6 @@
 
 - (instancetype)newHandleWithStateUpdates:(const CKComponentStateUpdateMap &)stateUpdates
                        componentScopeRoot:(CKComponentScopeRoot *)componentScopeRoot
-                                   parent:(CKComponentScopeHandle *)parent
 {
   id updatedState = _state;
   const auto pendingUpdatesIt = stateUpdates.find(self);
@@ -118,20 +117,7 @@
                                            componentClass:_componentClass
                                                     state:updatedState
                                                controller:_controller
-                                          scopedResponder:_scopedResponder
-                                                   parent:parent];
-}
-
-- (instancetype)newHandleToBeReacquiredDueToScopeCollision
-{
-  return [[CKComponentScopeHandle alloc] initWithListener:_listener
-                                         globalIdentifier:_globalIdentifier
-                                           rootIdentifier:_rootIdentifier
-                                           componentClass:_componentClass
-                                                    state:_state
-                                               controller:_controller
-                                          scopedResponder:_scopedResponder
-                                                   parent:_parent];
+                                          scopedResponder:_scopedResponder];
 }
 
 - (id<CKComponentControllerProtocol>)controller
@@ -194,12 +180,13 @@
   _acquiredComponent = component;
 }
 
-- (void)setTreeNodeIdentifier:(CKTreeNodeIdentifier)treeNodeIdentifier
+- (void)setTreeNode:(id<CKTreeNodeProtocol>)treeNode
 {
   CKAssertWithCategory(_treeNodeIdentifier == 0,
                        NSStringFromClass([_acquiredComponent class]),
                        @"_treeNodeIdentifier cannot be set twice");
-  _treeNodeIdentifier = treeNodeIdentifier;
+  _treeNodeIdentifier = treeNode.nodeIdentifier;
+  _treeNode = treeNode;
 }
 
 - (void)resolve
@@ -208,15 +195,18 @@
   // _acquiredComponent may be nil if a component scope was declared before an early return. In that case, the scope
   // handle will not be acquired, and we should avoid creating a component controller for the nil component.
   if (!_controller && _acquiredComponent) {
-    CKThreadLocalComponentScope *currentScope = CKThreadLocalComponentScope::currentScope();
-    CKAssert(currentScope != nullptr, @"Current scope should never be null here. Thread-local stack is corrupted.");
-
     const Class<CKComponentControllerProtocol> controllerClass = [_acquiredComponent.class controllerClass];
     if (controllerClass) {
       // The compiler is not happy when I don't explicitly cast as (Class)
       // See: http://stackoverflow.com/questions/21699755/create-an-instance-from-a-class-that-conforms-to-a-protocol
       _controller = [[(Class)controllerClass alloc] initWithComponent:_acquiredComponent];
-      [currentScope->newScopeRoot registerComponentController:_controller];
+
+      CKThreadLocalComponentScope *const currentScope = CKThreadLocalComponentScope::currentScope();
+      if (currentScope) {
+        [currentScope->newScopeRoot registerComponentController:_controller];
+      } else {
+        CKFailAssert(@"Current scope should never be null here. Thread-local stack is corrupted.");
+      }
     }
   }
   _resolved = YES;
@@ -225,7 +215,6 @@
 - (CKScopedResponder *)scopedResponder
 {
   if (!_scopedResponder) {
-    CKAssertFalse(_resolved);
     _scopedResponder = [CKScopedResponder new];
     [_scopedResponder addHandleToChain:self];
   }

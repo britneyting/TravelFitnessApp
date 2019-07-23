@@ -1,4 +1,4 @@
-# [![ComponentKit](http://componentkit.org/static/componentkit-hero-logo.png)](http://componentkit.org/)
+# [![ComponentKit](http://componentkit.org/img/componentkit_hero_logo.png)](http://componentkit.org/)
 
 [![Build Status](https://travis-ci.org/facebook/componentkit.svg)](https://travis-ci.org/facebook/componentkit)
 
@@ -9,7 +9,7 @@ ComponentKit is a view framework for iOS that is heavily inspired by React. It t
 ComponentKit is available to install via [Carthage](https://github.com/Carthage/Carthage). To get started add the following to your [Cartfile](https://github.com/Carthage/Carthage/blob/master/Documentation/Artifacts.md#cartfile):
 
 ```
-github "facebook/ComponentKit" ~> 0.27
+github "facebook/ComponentKit" ~> 0.28
 ```
 
 ### Opening the Xcode projects
@@ -43,7 +43,7 @@ open ComponentKit.xcodeproj
 
 ### Learn more
 
-* Read the [Getting Started guide](http://www.componentkit.org/docs/getting-started.html)
+* Read the [Getting Started guide](http://www.componentkit.org/docs/getting-started)
 * Get the [sample projects](https://github.com/facebook/componentkit/tree/master/Examples/WildeGuess)
 * Read the [objc.io article](http://www.objc.io/issue-22/facebook.html) by Adam Ernst
 * Watch the [@Scale talk](https://youtu.be/mLSeEoC6GjU?t=24m18s) by Ari Grant

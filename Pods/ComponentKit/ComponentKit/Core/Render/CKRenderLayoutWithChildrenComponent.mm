@@ -12,7 +12,6 @@
 
 #import "CKBuildComponent.h"
 #import "CKRenderHelpers.h"
-#import "CKRenderTreeNodeWithChildren.h"
 #import "CKComponentInternal.h"
 
 @implementation CKRenderLayoutWithChildrenComponent
@@ -28,7 +27,7 @@
                     params:(const CKBuildComponentTreeParams &)params
       parentHasStateUpdate:(BOOL)parentHasStateUpdate
 {
-  CKRender::buildComponentTreeWithMultiChild(self, parent, previousParent, params, parentHasStateUpdate, YES);
+  CKRender::buildComponentTreeWithChildren(self, parent, previousParent, params, parentHasStateUpdate, YES);
 }
 
 #pragma mark - CKRenderComponentProtocol

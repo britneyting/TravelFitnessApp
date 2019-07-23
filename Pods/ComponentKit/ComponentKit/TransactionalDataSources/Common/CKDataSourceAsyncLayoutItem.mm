@@ -20,9 +20,9 @@
 
 @implementation CKDataSourceAsyncLayoutItem
 {
+  std::atomic<BOOL> _hasScheduledLayout;
   std::atomic<BOOL> _hasStartedLayout;
-  dispatch_queue_t _queue;
-  CKDataSourceQOS _qos;
+  NSOperationQueue *_queue;
 
   std::atomic<BOOL> _isFinished;
   std::mutex _waitOnLayoutMutex;
@@ -37,8 +37,7 @@
   id _context;
 }
 
-- (instancetype)initWithQueue:(dispatch_queue_t)queue
-                          qos:(CKDataSourceQOS)qos
+- (instancetype)initWithQueue:(NSOperationQueue *)queue
                  previousRoot:(CKComponentScopeRoot *)previousRoot
                  stateUpdates:(const CKComponentStateUpdateMap &)stateUpdates
                     sizeRange:(const CKSizeRange &)sizeRange
@@ -48,9 +47,9 @@
 {
   if(self = [self initWithModel:model scopeRoot:previousRoot]) {
     _isFinished = NO;
+    _hasScheduledLayout = NO;
     _hasStartedLayout = NO;
     _queue = queue;
-    _qos = qos;
     _previousRoot = previousRoot;
     _stateUpdateMap = stateUpdates;
     _sizeRange = sizeRange;
@@ -64,21 +63,13 @@
 
 - (void)beginLayout
 {
-  if (!_hasStartedLayout) {
-    _hasStartedLayout = YES;
-    dispatch_async(_queue, blockUsingDataSourceQOS(^{
-      /*
-       Ideally this would just use an os_unfair_lock on iOS 10+, but that would require us doing a dance
-       around verioning here, and that's a bit more complicated than we want to handle for an initial test of
-       parallel row rendering. If this is successful we potentially could follow up with that.
-       */
-      {
+  if (!_hasStartedLayout && !_hasScheduledLayout.exchange(YES)) {
+    [_queue addOperationWithBlock:^{
+      if(!_hasStartedLayout.exchange(YES)) {
         std::lock_guard<std::mutex> l(_waitOnLayoutMutex);
-        auto item = CKBuildDataSourceItem(_previousRoot, _stateUpdateMap, _sizeRange, _configuration, _model, _context);
-        _item = item;
+        [self _buildDataSourceItem];
       }
-      _isFinished = YES;
-    }, _qos));
+    }];
   }
 }
 
@@ -96,16 +87,22 @@
 {
   if (_isFinished == YES) {
     return _item;
+  } else if(!_hasStartedLayout.exchange(YES)) {
+    return [self _buildDataSourceItem];
   } else {
-    CKDataSourceItem *item;
-    {
-      [_systraceListener willBlockThreadOnGeneratingItemLayout];
-      std::lock_guard<std::mutex> l(_waitOnLayoutMutex);
-      [_systraceListener didBlockThreadOnGeneratingItemLayout];
-      item = _item;
-    }
-    return item;
+    [_systraceListener willBlockThreadOnGeneratingItemLayout];
+    std::lock_guard<std::mutex> l(_waitOnLayoutMutex);
+    [_systraceListener didBlockThreadOnGeneratingItemLayout];
+    return _item;
   }
+}
+
+- (CKDataSourceItem *)_buildDataSourceItem
+{
+  auto item = CKBuildDataSourceItem(_previousRoot, _stateUpdateMap, _sizeRange, _configuration, _model, _context);
+  _item = item;
+  _isFinished = YES;
+  return _item;
 }
 
 - (BOOL)hasFinishedComputingLayout

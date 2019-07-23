@@ -16,10 +16,9 @@
 
 @protocol CKComponentHostingViewDelegate;
 @protocol CKComponentSizeRangeProviding;
-@protocol CKAnalyticsListener;
 
 /** A view that renders a single component. */
-@interface CKComponentHostingView : UIView
+@interface CKComponentHostingView<__covariant ModelType: id<NSObject>, __covariant ContextType: id<NSObject>> : UIView
 
 /** Notified when the view's ideal size (measured by -sizeThatFits:) may have changed. */
 @property (nonatomic, weak) id<CKComponentHostingViewDelegate> delegate;
@@ -31,32 +30,20 @@
  @see CKComponentProvider
  @see CKComponentSizeRangeProviding
  */
-- (instancetype)initWithComponentProvider:(Class<CKComponentProvider>)componentProvider
-                        sizeRangeProvider:(id<CKComponentSizeRangeProviding>)sizeRangeProvider;
-
-- (instancetype)initWithComponentProviderFunc:(CKComponentProviderFunc)componentProvider
+- (instancetype)initWithComponentProviderFunc:(CKComponent *(*)(ModelType model, ContextType context))componentProvider
                             sizeRangeProvider:(id<CKComponentSizeRangeProviding>)sizeRangeProvider;
 
 /**
- @param componentProvider provider conforming to CKComponentProvider protocol.
- @param sizeRangeProvider sizing range provider conforming to CKComponentSizeRangeProviding.
- @param analyticsListener listener conforming to AnalyticsListener will be used to get component lifecycle callbacks for logging
- @see CKComponentProvider
- @see CKComponentSizeRangeProviding
+ This method is deprecated. Please use initWithComponentProviderFunc:sizeRangeProvider:
  */
 - (instancetype)initWithComponentProvider:(Class<CKComponentProvider>)componentProvider
-                        sizeRangeProvider:(id<CKComponentSizeRangeProviding>)sizeRangeProvider
-                        analyticsListener:(id<CKAnalyticsListener>)analyticsListener;
-
-- (instancetype)initWithComponentProviderFunc:(CKComponentProviderFunc)componentProvider
-                            sizeRangeProvider:(id<CKComponentSizeRangeProviding>)sizeRangeProvider
-                            analyticsListener:(id<CKAnalyticsListener>)analyticsListener;
+                        sizeRangeProvider:(id<CKComponentSizeRangeProviding>)sizeRangeProvider;
 
 /** Updates the model used to render the component. */
-- (void)updateModel:(id<NSObject>)model mode:(CKUpdateMode)mode;
+- (void)updateModel:(ModelType)model mode:(CKUpdateMode)mode;
 
 /** Updates the context used to render the component. */
-- (void)updateContext:(id<NSObject>)context mode:(CKUpdateMode)mode;
+- (void)updateContext:(ContextType)context mode:(CKUpdateMode)mode;
 
 /** Appearance events to be funneled to the component tree. */
 - (void)hostingViewWillAppear;
