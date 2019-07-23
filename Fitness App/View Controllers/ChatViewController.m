@@ -22,9 +22,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.tableView.dataSource = self;
-    self.tableView.delegate = self;
-    self.navItem.title = @"Message";
-    
+    self.tableView.delegate = self;    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -52,7 +50,7 @@
 
 - (IBAction)sendMessage:(id)sender {
     // creates a new PFObject to save message as
-    PFObject *chatMessage = [PFObject objectWithClassName:@"blank"];
+    PFObject *chatMessage = [PFObject objectWithClassName:@"Message"];
     
     // Use the name of your outlet to get the text the user typed
     // Store the text of the text field in a key called text.

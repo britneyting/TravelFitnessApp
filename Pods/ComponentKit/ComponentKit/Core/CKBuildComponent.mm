@@ -18,9 +18,11 @@
 #import "CKComponentScopeRoot.h"
 #import "CKComponentSubclass.h"
 #import "CKRenderHelpers.h"
-#import "CKRenderTreeNodeWithChildren.h"
 #import "CKThreadLocalComponentScope.h"
 #import "CKTreeNodeProtocol.h"
+#import "CKTreeNodeWithChildren.h"
+#import "CKGlobalConfig.h"
+#import "CKComponentCreationValidation.h"
 
 namespace CKBuildComponentHelpers {
   auto getBuildTrigger(CKComponentScopeRoot *scopeRoot, const CKComponentStateUpdateMap &stateUpdates) -> BuildTrigger
@@ -74,30 +76,32 @@ namespace CKBuildComponentHelpers {
 CKBuildComponentResult CKBuildComponent(CKComponentScopeRoot *previousRoot,
                                         const CKComponentStateUpdateMap &stateUpdates,
                                         CKComponent *(^componentFactory)(void),
-                                        CKBuildComponentConfig config,
                                         BOOL ignoreComponentReuseOptimizations)
 {
   CKCAssertNotNil(componentFactory, @"Must have component factory to build a component");
   auto const buildTrigger = CKBuildComponentHelpers::getBuildTrigger(previousRoot, stateUpdates);
-  CKThreadLocalComponentScope threadScope(previousRoot, stateUpdates, buildTrigger, config.enableFasterPropsUpdates);
+  CKThreadLocalComponentScope threadScope(previousRoot, stateUpdates, buildTrigger);
 
   auto const analyticsListener = [previousRoot analyticsListener];
   [analyticsListener willBuildComponentTreeWithScopeRoot:previousRoot
                                             buildTrigger:buildTrigger
                                             stateUpdates:stateUpdates];
+#if CK_ASSERTIONS_ENABLED
+  const CKComponentContext<CKComponentCreationValidationContext> validationContext([CKComponentCreationValidationContext new]);
+#endif
   auto const component = componentFactory();
 
   // Build the component tree if we have a render component in the hierarchy.
-  if (threadScope.newScopeRoot.hasRenderComponentInTree) {
+  if (threadScope.newScopeRoot.hasRenderComponentInTree || CKReadGlobalConfig().alwaysBuildRenderTree) {
     CKBuildComponentTreeParams params = {
       .scopeRoot = threadScope.newScopeRoot,
       .previousScopeRoot = previousRoot,
       .stateUpdates = stateUpdates,
       .treeNodeDirtyIds = CKRender::treeNodeDirtyIdsFor(previousRoot, stateUpdates, buildTrigger),
       .buildTrigger = buildTrigger,
-      .enableFasterPropsUpdates = config.enableFasterPropsUpdates,
       .ignoreComponentReuseOptimizations = ignoreComponentReuseOptimizations,
       .systraceListener = threadScope.systraceListener,
+      .enableLayoutCache = CKReadGlobalConfig().enableLayoutCacheInRender,
     };
 
     // Build the component tree from the render function.
@@ -113,24 +117,27 @@ CKBuildComponentResult CKBuildComponent(CKComponentScopeRoot *previousRoot,
 
   CKComponentScopeRoot *newScopeRoot = threadScope.newScopeRoot;
 
-  [analyticsListener didBuildComponentTreeWithScopeRoot:newScopeRoot component:component];
+  [analyticsListener didBuildComponentTreeWithScopeRoot:newScopeRoot
+                                           buildTrigger:buildTrigger
+                                           stateUpdates:stateUpdates
+                                              component:component];
   return {
     .component = component,
     .scopeRoot = newScopeRoot,
     .boundsAnimation = CKBuildComponentHelpers::boundsAnimationFromPreviousScopeRoot(newScopeRoot, previousRoot),
+    .buildTrigger = buildTrigger,
   };
 }
 
 #if DEBUG
 void CKDidBuildComponentTree(const CKBuildComponentTreeParams &params, id<CKComponentProtocol> component)
 {
-  // Save the new nodes on the root node.
-  params.scopeRoot.rootNode.canBeReusedNodes = params.canBeReusedNodes;
   // Notify the debug listener.
-  auto debugAnalyticsListener = [params.scopeRoot.analyticsListener debugAnalyticsListener];
-  [debugAnalyticsListener canReuseNodes:params.canBeReusedNodes
+  auto const newScopeRoot = params.scopeRoot;
+  auto debugAnalyticsListener = [newScopeRoot.analyticsListener debugAnalyticsListener];
+  [debugAnalyticsListener canReuseNodes:newScopeRoot.rootNode.canBeReusedNodes
                       previousScopeRoot:params.previousScopeRoot
-                           newScopeRoot:params.scopeRoot
+                           newScopeRoot:newScopeRoot
                               component:component];
 }
 #endif

@@ -18,7 +18,7 @@
 #import "CKDataSourceAppliedChanges.h"
 #import "CKDataSourceInternal.h"
 #import "CKCollectionViewDataSourceInternal.h"
-#import "CKComponentRootView.h"
+#import "CKComponentRootViewInternal.h"
 #import "CKComponentLayout.h"
 #import "CKComponentAttachController.h"
 #import "CKComponentBoundsAnimation+UICollectionView.h"
@@ -33,6 +33,7 @@
   CKComponentAttachController *_attachController;
   NSMapTable<UICollectionViewCell *, CKDataSourceItem *> *_cellToItemMap;
   CKCollectionViewDataSourceListenerAnnouncer *_announcer;
+  BOOL _allowTapPassthroughForCells;
 }
 @end
 
@@ -161,6 +162,8 @@ static void applyChangesToCollectionView(UICollectionView *collectionView,
       // Detach all the component layouts for items being deleted
       [self _detachComponentLayoutForRemovedItemsAtIndexPaths:[changes removedIndexPaths]
                                                       inState:previousState];
+      [self _detachComponentLayoutForRemovedSections:[changes removedSections]
+                                                      inState:previousState];
       // Update current state
       _currentState = state;
     } completion:^(BOOL finished){
@@ -179,6 +182,16 @@ static void applyChangesToCollectionView(UICollectionView *collectionView,
     CKComponentScopeRootIdentifier identifier = [[[state objectAtIndexPath:indexPath] scopeRoot] globalIdentifier];
     [_attachController detachComponentLayoutWithScopeIdentifier:identifier];
   }
+}
+
+- (void)_detachComponentLayoutForRemovedSections:(NSIndexSet *)removedSections inState:(CKDataSourceState *)state
+{
+  [removedSections enumerateIndexesUsingBlock:^(NSUInteger section, BOOL *stop) {
+    [state enumerateObjectsInSectionAtIndex:section
+                                 usingBlock:^(CKDataSourceItem *item, NSIndexPath *indexPath, BOOL *stop2) {
+      [_attachController detachComponentLayoutWithScopeIdentifier:[[item scopeRoot] globalIdentifier]];
+    }];
+  }];
 }
 
 #pragma mark - State
@@ -227,6 +240,7 @@ static NSString *const kReuseIdentifier = @"com.component_kit.collection_view_da
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
   CKCollectionViewDataSourceCell *cell = [_collectionView dequeueReusableCellWithReuseIdentifier:kReuseIdentifier forIndexPath:indexPath];
+  [cell.rootView setAllowTapPassthrough:_allowTapPassthroughForCells];
   attachToCell(cell, [_currentState objectAtIndexPath:indexPath], _attachController, _cellToItemMap);
   return cell;
 }
@@ -265,6 +279,12 @@ static void attachToCell(CKCollectionViewDataSourceCell *cell,
 
 #pragma mark - Internal
 
+- (void)setAllowTapPassthroughForCells:(BOOL)allowTapPassthroughForCells
+{
+  CKAssertMainThread();
+  _allowTapPassthroughForCells = allowTapPassthroughForCells;
+}
+
 - (void)setState:(CKDataSourceState *)state
 {
   CKAssertMainThread();
@@ -275,6 +295,8 @@ static void attachToCell(CKCollectionViewDataSourceCell *cell,
   auto const previousState = _currentState;
   [_announcer dataSource:self willChangeState:previousState];
   _currentState = state;
+
+  [_attachController detachAll];
   [_componentDataSource removeListener:self];
   _componentDataSource = [[CKDataSource alloc] initWithState:state];
   [_componentDataSource addListener:self];

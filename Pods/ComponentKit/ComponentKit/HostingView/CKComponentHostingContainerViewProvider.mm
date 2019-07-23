@@ -61,6 +61,7 @@ private:
 
   CKComponentHostingContainerView *_containerView;
   CKComponentAttachController *_attachController;
+  BOOL _needsMount;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -87,6 +88,7 @@ private:
   CKAssertMainThread();
   _previousLayoutProvider = _layoutProvider;
   _layoutProvider = [[CKComponentHostingContainerLayoutProvider alloc] initWithRootLayout:rootLayout];
+  _needsMount = YES;
 }
 
 - (void)setBoundsAnimation:(const CKComponentBoundsAnimation &)boundsAnimation
@@ -104,6 +106,10 @@ private:
 - (void)mount
 {
   CKAssertMainThread();
+  if (!_needsMount) {
+    return;
+  }
+  _needsMount = NO;
   if (!_layoutProvider) {
     [_attachController detachComponentLayoutWithScopeIdentifier:_scopeIdentifier];
     return;
@@ -155,9 +161,10 @@ private:
             sizeRangeProvider:(id<CKComponentSizeRangeProviding>)sizeRangeProvider
           allowTapPassthrough:(BOOL)allowTapPassthrough
 {
-  if (self = [super initWithFrame:frame allowTapPassthrough:allowTapPassthrough]) {
+  if (self = [super initWithFrame:frame]) {
     _analyticsListener = analyticsListener;
     _sizeRangeProvider = sizeRangeProvider;
+    [self setAllowTapPassthrough:allowTapPassthrough];
   }
   return self;
 }

@@ -28,8 +28,18 @@
 
 @implementation CKParallelRowLayoutChangesetModification
 {
-  dispatch_queue_t _workQueue;
-  CKDataSourceQOS _workQos;
+  NSOperationQueue *_queue;
+}
+
+static NSOperationQualityOfService _operationQosFromDataSourceQOS(CKDataSourceQOS qos) {
+  switch (qos) {
+    case CKDataSourceQOSUserInteractive:
+      return NSOperationQualityOfServiceUserInteractive;
+    case CKDataSourceQOSUserInitiated:
+      return NSOperationQualityOfServiceUserInitiated;
+    case CKDataSourceQOSDefault:
+      return NSOperationQualityOfServiceUtility;
+  }
 }
 
 - (instancetype)initWithChangeset:(CKDataSourceChangeset *)changeset
@@ -39,8 +49,11 @@
                         workQueue:(dispatch_queue_t)workQueue
 {
   if (self = [super initWithChangeset:changeset stateListener:stateListener userInfo:userInfo qos:qos]) {
-    _workQueue = workQueue;
-    _workQos = qos;
+    _queue = [NSOperationQueue new];
+    _queue.underlyingQueue = workQueue;
+    _queue.qualityOfService = _operationQosFromDataSourceQOS(qos);
+    NSUInteger maxConcurrentOperationCount = [NSProcessInfo processInfo].activeProcessorCount - 1;
+    _queue.maxConcurrentOperationCount = maxConcurrentOperationCount > 0 ?: 1;
     [self setItemGenerator:self];
   }
   return self;
@@ -54,8 +67,7 @@
                                                  context:(id)context
                                                 itemType:(CKDataSourceChangesetModificationItemType)itemType
 {
-  auto item = [[CKDataSourceAsyncLayoutItem alloc] initWithQueue:_workQueue
-                                                             qos:_workQos
+  auto item = [[CKDataSourceAsyncLayoutItem alloc] initWithQueue:_queue
                                                     previousRoot:previousRoot
                                                     stateUpdates:stateUpdates
                                                        sizeRange:sizeRange
@@ -64,6 +76,16 @@
                                                          context:context];
   [item beginLayout];
   return item;
+}
+
+- (BOOL)shouldSortInsertedItems
+{
+  return YES;
+}
+
+- (BOOL)shouldSortUpdatedItems
+{
+  return YES;
 }
 
 @end

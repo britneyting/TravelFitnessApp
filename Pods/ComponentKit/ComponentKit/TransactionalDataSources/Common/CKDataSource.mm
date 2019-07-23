@@ -19,6 +19,7 @@
 #import "CKComponentSubclass.h"
 #import "CKDataSourceAppliedChanges.h"
 #import "CKDataSourceChange.h"
+#import "CKDataSourceChangeset.h"
 #import "CKDataSourceChangesetModification.h"
 #import "CKDataSourceChangesetVerification.h"
 #import "CKDataSourceConfiguration.h"
@@ -79,7 +80,7 @@
 
     _workQueue = dispatch_queue_create("org.componentkit.CKDataSource", DISPATCH_QUEUE_SERIAL);
     _pendingAsynchronousModifications = [NSMutableArray array];
-    _changesetSplittingEnabled = configuration.splitChangesetOptions.enabled;
+    _changesetSplittingEnabled = configuration.options.splitChangesetOptions.enabled;
     [CKComponentDebugController registerReflowListener:self];
   }
   return self;
@@ -101,6 +102,12 @@
   } else {
     dispatch_async(dispatch_get_main_queue(), completion);
   }
+}
+
+- (CKDataSourceState *)state
+{
+  CKAssertMainThread();
+  return _state;
 }
 
 - (void)setChangesetModificationGenerator:(id<CKDataSourceChangesetModificationGenerator>)changesetModificationGenerator
@@ -198,7 +205,9 @@
 - (BOOL)verifyChange:(CKDataSourceChange *)change
 {
   CKAssertMainThread();
-  return change.previousState == _state && _pendingAsynchronousModifications.count == 0;
+  // We don't check `_pendingAsynchronousModifications` here because we want pre-computed `CKDataSourceChange`
+  // to have higher chance to be applied. Asynchronous modifications will be re-applied anyway if they fail.
+  return change.previousState == _state;
 }
 
 - (void)setViewport:(CKDataSourceViewport)viewport
@@ -250,6 +259,23 @@
 - (void)didReceiveReflowComponentsRequest
 {
   [self reloadWithMode:CKUpdateModeAsynchronous userInfo:nil];
+}
+
+- (void)didReceiveReflowComponentsRequestWithTreeNodeIdentifier:(CKTreeNodeIdentifier)treeNodeIdentifier
+{
+  __block NSIndexPath *ip = nil;
+  __block id model = nil;
+  [_state enumerateObjectsUsingBlock:^(CKDataSourceItem *item, NSIndexPath *indexPath, BOOL *stop) {
+    if (item.scopeRoot.rootNode.parentForNodeIdentifier(treeNodeIdentifier) != nil) {
+      ip = indexPath;
+      model = item.model;
+      *stop = YES;
+    }
+  }];
+  if (ip != nil) {
+    const auto changeset = [[[CKDataSourceChangesetBuilder dataSourceChangeset] withUpdatedItems:@{ip: model}] build];
+    [self applyChangeset:changeset mode:CKUpdateModeSynchronous userInfo:@{}];
+  }
 }
 
 #pragma mark - Internal
@@ -318,6 +344,9 @@
   for (NSIndexPath *removedIndex in [appliedChanges removedIndexPaths]) {
     CKDataSourceItem *removedItem = [previousState objectAtIndexPath:removedIndex];
     CKComponentScopeRootAnnounceControllerInvalidation([removedItem scopeRoot]);
+  }
+  if (newState.configuration.options.updateComponentInControllerAfterBuild) {
+    CKComponentUpdateComponentForComponentControllerWithIndexPaths(appliedChanges.finalUpdatedIndexPaths, newState);
   }
 
   [_announcer componentDataSource:self

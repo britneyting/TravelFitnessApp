@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
+ platform :ios, '9.0'
 
 target 'Fitness App' do
   # Comment the next line if you don't want to use dynamic frameworks
@@ -9,12 +9,9 @@ target 'Fitness App' do
   pod 'Parse'
   pod 'Parse/UI'
   pod 'GoogleMaps'
-  pod 'MaterialComponents'
   pod 'DateTools'
-  pod 'ComponentKit'
   pod 'YPImagePicker'
   pod 'AFNetworking'
-  pod 'ActivityBar'
-
+  pod 'SendBirdSDK'
 
 end

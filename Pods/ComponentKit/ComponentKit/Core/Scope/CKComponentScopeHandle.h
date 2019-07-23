@@ -37,16 +37,11 @@
 - (instancetype)initWithListener:(id<CKComponentStateListener>)listener
                   rootIdentifier:(CKComponentScopeRootIdentifier)rootIdentifier
                   componentClass:(Class<CKComponentProtocol>)componentClass
-                    initialState:(id)initialState
-                          parent:(CKComponentScopeHandle *)parent;
+                    initialState:(id)initialState;
 
 /** Creates a new instance of the scope handle that incorporates the given state updates. */
 - (instancetype)newHandleWithStateUpdates:(const CKComponentStateUpdateMap &)stateUpdates
-                       componentScopeRoot:(CKComponentScopeRoot *)componentScopeRoot
-                                   parent:(CKComponentScopeHandle *)parent;
-
-/** Creates a new, but identical, instance of the scope handle that will be reacquired due to a scope collision. */
-- (instancetype)newHandleToBeReacquiredDueToScopeCollision;
+                       componentScopeRoot:(CKComponentScopeRoot *)componentScopeRoot;
 
 /** Enqueues a state update to be applied to the scope with the given mode. */
 - (void)updateState:(id (^)(id))updateBlock
@@ -62,8 +57,8 @@
 /** Acquire component, assert if the scope handle is wrong */
 - (void)forceAcquireFromComponent:(id<CKComponentProtocol>)component;
 
-/** Set the tree node identifier of the acquired component. May only be called *before* resolution. */
-- (void)setTreeNodeIdentifier:(CKTreeNodeIdentifier)treeNodeIdentifier;
+/** Set the tree node of the acquired component. May only be called *before* resolution. */
+- (void)setTreeNode:(id<CKTreeNodeProtocol>)treeNode;
 
 /**
  Should not be called until after handleForComponent:. The controller will assert (if assertions are compiled), and
@@ -76,8 +71,8 @@
 @property (nonatomic, strong, readonly) id state;
 @property (nonatomic, readonly) CKComponentScopeHandleIdentifier globalIdentifier;
 @property (nonatomic, readonly, weak) id<CKComponentProtocol> acquiredComponent;
-@property (nonatomic, weak, readonly) CKComponentScopeHandle *parent;
 @property (nonatomic, assign, readonly) CKTreeNodeIdentifier treeNodeIdentifier;
+@property (nonatomic, weak, readonly) id<CKTreeNodeProtocol> treeNode;
 
 /**
  Provides a responder corresponding with this scope handle. The controller will assert if called before resolution.

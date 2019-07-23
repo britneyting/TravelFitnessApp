@@ -19,6 +19,7 @@
 #import "CKComponentSubclass.h"
 #import "CKDataSourceAppliedChanges.h"
 #import "CKDataSourceChange.h"
+#import "CKDataSourceChangeset.h"
 #import "CKDataSourceChangesetModification.h"
 #import "CKDataSourceChangesetVerification.h"
 #import "CKDataSourceConfigurationInternal.h"
@@ -62,7 +63,7 @@ static void *kWorkQueueKey = &kWorkQueueKey;
 {
   CKAssertNotNil(state, @"Initial state is required");
   CKAssertNotNil(state.configuration, @"Configuration is required");
-  CKAssert(!state.configuration.splitChangesetOptions.enabled, @"CKThreadSafeDataSource doesn't support `splitChangesetOptions`");
+  CKAssert(!state.configuration.options.splitChangesetOptions.enabled, @"CKThreadSafeDataSource doesn't support `splitChangesetOptions`");
   if (self = [super init]) {
     _state = state;
     _announcer = [[CKDataSourceListenerAnnouncer alloc] init];
@@ -216,6 +217,25 @@ static void *kWorkQueueKey = &kWorkQueueKey;
   [self reloadWithMode:CKUpdateModeAsynchronous userInfo:nil];
 }
 
+- (void)didReceiveReflowComponentsRequestWithTreeNodeIdentifier:(CKTreeNodeIdentifier)treeNodeIdentifier
+{
+  __block NSIndexPath *ip = nil;
+  __block id model = nil;
+  dispatch_sync(_workQueue, ^{
+    [_state enumerateObjectsUsingBlock:^(CKDataSourceItem *item, NSIndexPath *indexPath, BOOL *stop) {
+      if (item.scopeRoot.rootNode.parentForNodeIdentifier(treeNodeIdentifier) != nil) {
+        ip = indexPath;
+        model = item.model;
+        *stop = YES;
+      }
+    }];
+  });
+  if (ip != nil) {
+    const auto changeset = [[[CKDataSourceChangesetBuilder dataSourceChangeset] withUpdatedItems:@{ip: model}] build];
+    [self applyChangeset:changeset mode:CKUpdateModeSynchronous userInfo:@{}];
+  }
+}
+
 #pragma mark - Internal
 
 - (void)_applyModificationAsync:(id<CKDataSourceStateModifying>)modification
@@ -272,6 +292,9 @@ static void *kWorkQueueKey = &kWorkQueueKey;
     for (NSIndexPath *const removedIndex in appliedChanges.removedIndexPaths) {
       CKDataSourceItem *removedItem = [previousState objectAtIndexPath:removedIndex];
       CKComponentScopeRootAnnounceControllerInvalidation([removedItem scopeRoot]);
+    }
+    if (newState.configuration.options.updateComponentInControllerAfterBuild) {
+      CKComponentUpdateComponentForComponentControllerWithIndexPaths(appliedChanges.finalUpdatedIndexPaths, newState);
     }
 
     [_announcer componentDataSource:self
