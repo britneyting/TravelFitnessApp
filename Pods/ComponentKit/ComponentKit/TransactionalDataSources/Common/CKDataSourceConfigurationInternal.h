@@ -13,6 +13,7 @@
 #import <ComponentKit/CKComponentScopeTypes.h>
 #import <ComponentKit/CKDataSourceQOS.h>
 #import <ComponentKit/CKBuildComponent.h>
+#import <ComponentKit/CKGlobalConfig.h>
 
 #import <unordered_set>
 
@@ -51,6 +52,15 @@ struct CKDataSourceSplitChangesetOptions {
   CKDataSourceLayoutAxis layoutAxis = CKDataSourceLayoutAxisVertical;
 };
 
+struct CKDataSourceOptions {
+  CKDataSourceSplitChangesetOptions splitChangesetOptions;
+  /**
+   `componentController.component` will be updated right after commponent build if this is enabled.
+   This is only for running expeirment in ComponentKit. Please DO NOT USE.
+   */
+  BOOL updateComponentInControllerAfterBuild = CKReadGlobalConfig().updateComponentInControllerAfterBuild;
+};
+
 @interface CKDataSourceConfiguration ()
 
 /**
@@ -65,8 +75,7 @@ struct CKDataSourceSplitChangesetOptions {
 - (instancetype)initWithComponentProvider:(Class<CKComponentProvider>)componentProvider
                                   context:(id<NSObject>)context
                                 sizeRange:(const CKSizeRange &)sizeRange
-                     buildComponentConfig:(const CKBuildComponentConfig &)buildComponentConfig
-                    splitChangesetOptions:(const CKDataSourceSplitChangesetOptions &)splitChangesetOptions
+                                  options:(const CKDataSourceOptions &)options
                       componentPredicates:(const std::unordered_set<CKComponentPredicate> &)componentPredicates
             componentControllerPredicates:(const std::unordered_set<CKComponentControllerPredicate> &)componentControllerPredicates
                         analyticsListener:(id<CKAnalyticsListener>)analyticsListener;
@@ -74,44 +83,18 @@ struct CKDataSourceSplitChangesetOptions {
 - (instancetype)initWithComponentProviderFunc:(CKComponentProviderFunc)componentProvider
                                       context:(id<NSObject>)context
                                     sizeRange:(const CKSizeRange &)sizeRange
-                         buildComponentConfig:(const CKBuildComponentConfig &)buildComponentConfig
-                        splitChangesetOptions:(const CKDataSourceSplitChangesetOptions &)splitChangesetOptions
+                                      options:(const CKDataSourceOptions &)options
                           componentPredicates:(const std::unordered_set<CKComponentPredicate> &)componentPredicates
                 componentControllerPredicates:(const std::unordered_set<CKComponentControllerPredicate> &)componentControllerPredicates
                             analyticsListener:(id<CKAnalyticsListener>)analyticsListener;
 
-/**
- These initializers are used in tests for passing values are not depending on global config.
- */
-- (instancetype)initWithComponentProvider:(Class<CKComponentProvider>)componentProvider
-                                  context:(id<NSObject>)context
-                                sizeRange:(const CKSizeRange &)sizeRange
-                     buildComponentConfig:(const CKBuildComponentConfig &)buildComponentConfig
-                    splitChangesetOptions:(const CKDataSourceSplitChangesetOptions &)splitChangesetOptions
-                      componentPredicates:(const std::unordered_set<CKComponentPredicate> &)componentPredicates
-            componentControllerPredicates:(const std::unordered_set<CKComponentControllerPredicate> &)componentControllerPredicates
-                        analyticsListener:(id<CKAnalyticsListener>)analyticsListener
-shouldInvalidateControllerBetweenComponentGenerations:(BOOL)shouldInvalidateControllerBetweenComponentGenerations;
-
-- (instancetype)initWithComponentProviderFunc:(CKComponentProviderFunc)componentProvider
-                                      context:(id<NSObject>)context
-                                    sizeRange:(const CKSizeRange &)sizeRange
-                         buildComponentConfig:(const CKBuildComponentConfig &)buildComponentConfig
-                        splitChangesetOptions:(const CKDataSourceSplitChangesetOptions &)splitChangesetOptions
-                          componentPredicates:(const std::unordered_set<CKComponentPredicate> &)componentPredicates
-                componentControllerPredicates:(const std::unordered_set<CKComponentControllerPredicate> &)componentControllerPredicates
-                            analyticsListener:(id<CKAnalyticsListener>)analyticsListener
-shouldInvalidateControllerBetweenComponentGenerations:(BOOL)shouldInvalidateControllerBetweenComponentGenerations;
-
 - (instancetype)copyWithContext:(id<NSObject>)context sizeRange:(const CKSizeRange &)sizeRange;
 
 @property (nonatomic, readonly, strong) id<CKAnalyticsListener> analyticsListener;
-@property (nonatomic, readonly, assign) BOOL shouldInvalidateControllerBetweenComponentGenerations;
 
 - (const std::unordered_set<CKComponentPredicate> &)componentPredicates;
 - (const std::unordered_set<CKComponentControllerPredicate> &)componentControllerPredicates;
 
-- (const CKBuildComponentConfig &)buildComponentConfig;
-- (const CKDataSourceSplitChangesetOptions &)splitChangesetOptions;
+- (const CKDataSourceOptions &)options;
 
 @end

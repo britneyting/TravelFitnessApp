@@ -66,6 +66,16 @@ using namespace CKComponentControllerHelper;
   return self;
 }
 
+- (BOOL)shouldSortInsertedItems
+{
+  return NO;
+}
+
+- (BOOL)shouldSortUpdatedItems
+{
+  return NO;
+}
+
 - (void)setItemGenerator:(id<CKDataSourceChangesetModificationItemGenerator>)itemGenerator
 {
   _itemGenerator = itemGenerator;
@@ -86,16 +96,15 @@ using namespace CKComponentControllerHelper;
 
   // Update items
   NSDictionary<NSIndexPath *, id> *const updatedItems = [_changeset updatedItems];
-  [updatedItems enumerateKeysAndObjectsUsingBlock:^(NSIndexPath *indexPath, id model, BOOL *stop) {
-    if (indexPath.section >= newSections.count) {
-      CKCFatalWithCategory(CKHumanReadableInvalidChangesetOperationType(CKInvalidChangesetOperationTypeUpdate),
-                           @"Invalid section: %lu (>= %lu). Changeset: %@, user info: %@, state: %@",
-                           (unsigned long)indexPath.section,
-                           (unsigned long)newSections.count,
-                           _changeset,
-                           _userInfo,
-                           oldState);
-    }
+  void(^processUpdatedItem)(NSIndexPath *indexPath, id model) = ^(NSIndexPath *indexPath, id model) {if (indexPath.section >= newSections.count) {
+    CKCFatalWithCategory(CKHumanReadableInvalidChangesetOperationType(CKInvalidChangesetOperationTypeUpdate),
+                         @"Invalid section: %lu (>= %lu). Changeset: %@, user info: %@, state: %@",
+                         (unsigned long)indexPath.section,
+                         (unsigned long)newSections.count,
+                         _changeset,
+                         _userInfo,
+                         oldState);
+  }
     NSMutableArray *const section = newSections[indexPath.section];
     if (indexPath.item >= section.count) {
       CKCFatalWithCategory(CKHumanReadableInvalidChangesetOperationType(CKInvalidChangesetOperationTypeUpdate),
@@ -115,14 +124,23 @@ using namespace CKComponentControllerHelper;
                                                                      context:context
                                                                     itemType:CKDataSourceChangesetModificationItemTypeUpdate];
     [section replaceObjectAtIndex:indexPath.item withObject:item];
-    if (configuration.shouldInvalidateControllerBetweenComponentGenerations) {
-      for (const auto componentController : removedControllersFromPreviousScopeRootMatchingPredicate(item.scopeRoot,
-                                                                                                     oldItem.scopeRoot,
-                                                                                                     &CKComponentControllerInvalidateEventPredicate)) {
-        [invalidComponentControllers addObject:componentController];
-      }
+    for (const auto componentController : removedControllersFromPreviousScopeRootMatchingPredicate(item.scopeRoot,
+                                                                                                   oldItem.scopeRoot,
+                                                                                                   &CKComponentControllerInvalidateEventPredicate)) {
+      [invalidComponentControllers addObject:componentController];
     }
-  }];
+  };
+  if ([self shouldSortUpdatedItems]) {
+    NSArray *sortedKeys = [[updatedItems allKeys] sortedArrayUsingSelector:@selector(compare:)];
+    for (NSIndexPath *indexPath in sortedKeys) {
+      id model = updatedItems[indexPath];
+      processUpdatedItem(indexPath, model);
+    }
+  } else {
+    [updatedItems enumerateKeysAndObjectsUsingBlock:^(NSIndexPath *indexPath, id model, BOOL *stop) {
+      processUpdatedItem(indexPath, model);
+    }];
+  }
 
   __block std::unordered_map<NSUInteger, std::map<NSUInteger, CKDataSourceItem *>> insertedItemsBySection;
   __block std::unordered_map<NSUInteger, NSMutableIndexSet *> removedItemsBySection;
@@ -180,7 +198,7 @@ using namespace CKComponentControllerHelper;
                            oldState);
     }
     const auto section = static_cast<NSMutableArray *>(newSections[it.first]);
-#ifdef CK_ASSERTIONS_ENABLED
+#if CK_ASSERTIONS_ENABLED
     const auto invalidIndexes = CK::invalidIndexesForRemovalFromArray(section, it.second);
     if (invalidIndexes.count > 0) {
       CKCFatalWithCategory(CKHumanReadableInvalidChangesetOperationType(CKInvalidChangesetOperationTypeRemoveRow),
@@ -215,7 +233,7 @@ using namespace CKComponentControllerHelper;
                          _userInfo,
                          oldState);
   }
-#ifdef CK_ASSERTIONS_ENABLED
+#if CK_ASSERTIONS_ENABLED
     // Deep validation of the indexes we are going to insert for better logging.
   auto const invalidInsertedSectionsIndexes = CK::invalidIndexesForInsertionInArray(newSections, [_changeset insertedSections]);
   if (invalidInsertedSectionsIndexes.count) {
@@ -247,9 +265,17 @@ using namespace CKComponentControllerHelper;
   };
 
   NSDictionary<NSIndexPath *, id> *const insertedItems = [_changeset insertedItems];
-  [insertedItems enumerateKeysAndObjectsUsingBlock:^(NSIndexPath *indexPath, id model, BOOL *stop) {
-    insertedItemsBySection[indexPath.section][indexPath.item] = buildItem(model);
-  }];
+  if ([self shouldSortInsertedItems]) {
+    NSArray *sortedKeys = [[insertedItems allKeys] sortedArrayUsingSelector:@selector(compare:)];
+    for (NSIndexPath *indexPath in sortedKeys) {
+      id model = insertedItems[indexPath];
+      insertedItemsBySection[indexPath.section][indexPath.item] = buildItem(model);
+    }
+  } else {
+    [insertedItems enumerateKeysAndObjectsUsingBlock:^(NSIndexPath *indexPath, id model, BOOL *stop) {
+      insertedItemsBySection[indexPath.section][indexPath.item] = buildItem(model);
+    }];
+  }
 
   for (const auto &sectionIt : insertedItemsBySection) {
     NSMutableIndexSet *indexes = [NSMutableIndexSet indexSet];
@@ -269,7 +295,7 @@ using namespace CKComponentControllerHelper;
                            _userInfo,
                            oldState);
     }
-#ifdef CK_ASSERTIONS_ENABLED
+#if CK_ASSERTIONS_ENABLED
     const auto sectionItems = static_cast<NSArray *>([newSections objectAtIndex:sectionIt.first]);
     const auto invalidIndexes = CK::invalidIndexesForInsertionInArray(sectionItems, indexes);
     if (invalidIndexes.count > 0) {
@@ -353,7 +379,6 @@ static NSArray *emptyMutableArrays(NSUInteger count)
 
 @end
 
-#ifdef CK_ASSERTIONS_ENABLED
 namespace CK {
   auto invalidIndexesForInsertionInArray(NSArray *const a, NSIndexSet *const is) -> NSIndexSet *
   {
@@ -379,4 +404,3 @@ namespace CK {
     return r;
   }
 }
-#endif

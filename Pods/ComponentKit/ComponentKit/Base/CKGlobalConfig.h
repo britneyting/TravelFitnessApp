@@ -15,12 +15,19 @@
 struct CKGlobalConfig {
   /** Default analytics listener which will be used in cased that no other listener is provided */
   id<CKAnalyticsListener> defaultAnalyticsListener = nil;
-  /** Can be used to trigger asserts for Render components even if there is no Render component in the tree */
-  BOOL forceBuildRenderTreeInDebug = NO;
-  /** Used for testing performance implication of calling `invalidateController` between component generations on data source */
-  BOOL shouldInvalidateControllerBetweenComponentGenerationsInDataSource = NO;
-  /** Used for testing performance implication of calling `invalidateController` between component generations on hosting view */
-  BOOL shouldInvalidateControllerBetweenComponentGenerationsInHostingView = NO;
+  /** If enabled, CKBuildComponent will always build the component tree (CKTreeNode), even if there is no Render component in the tree*/
+  BOOL alwaysBuildRenderTree = NO;
+  /** Same as above, but only in DEBUG configuration */
+  BOOL alwaysBuildRenderTreeInDebug = NO;
+  /** If enabled, we will cache the layout in render components and reuse it during a component reuse. */
+  BOOL enableLayoutCacheInRender = NO;
+  /**
+   `componentController.component` will be updated right after commponent build if this is enabled.
+   This is only for running expeirment in ComponentKit. Please DO NOT USE.
+   */
+  BOOL updateComponentInControllerAfterBuild = NO;
+  /** If enabled CKComponentViewClass will use CKComponentViewClassIdentifier instead of strings for the cache key */
+  BOOL enableComponentViewClassIdentifier = NO;
 };
 
 CKGlobalConfig CKReadGlobalConfig();

@@ -21,12 +21,14 @@
 @protocol CKTreeNodeComponentProtocol;
 @protocol CKTreeNodeProtocol;
 
+@protocol CKComponentScopeFrameProtocol;
+
 struct CKComponentScopeFramePair {
-  CKComponentScopeFrame *frame;
-  CKComponentScopeFrame *equivalentPreviousFrame;
+  id<CKComponentScopeFrameProtocol> frame;
+  id<CKComponentScopeFrameProtocol> previousFrame;
 };
 
-@interface CKComponentScopeFrame : NSObject
+@protocol CKComponentScopeFrameProtocol
 
 + (CKComponentScopeFramePair)childPairForPair:(const CKComponentScopeFramePair &)pair
                                       newRoot:(CKComponentScopeRoot *)newRoot
@@ -36,8 +38,6 @@ struct CKComponentScopeFramePair {
                           initialStateCreator:(id (^)(void))initialStateCreator
                                  stateUpdates:(const CKComponentStateUpdateMap &)stateUpdates;
 
-- (instancetype)initWithHandle:(CKComponentScopeHandle *)handle;
-
 @property (nonatomic, strong, readonly) CKComponentScopeHandle *handle;
 
 - (size_t)childrenSize;
@@ -46,5 +46,17 @@ struct CKComponentScopeFramePair {
 + (void)willBuildComponentTreeWithTreeNode:(id<CKTreeNodeProtocol>)node;
 + (void)didBuildComponentTreeWithNode:(id<CKTreeNodeProtocol>)node;
 + (void)didReuseRenderWithTreeNode:(id<CKTreeNodeProtocol>)node;
+
+#if DEBUG
+- (NSArray<NSString *> *)debugDescriptionComponents;
+#endif
+
+@end
+
+@interface CKComponentScopeFrame : NSObject <CKComponentScopeFrameProtocol>
+
+@property (nonatomic, strong, readonly) CKComponentScopeHandle *handle;
+
+- (instancetype)initWithHandle:(CKComponentScopeHandle *)handle;
 
 @end

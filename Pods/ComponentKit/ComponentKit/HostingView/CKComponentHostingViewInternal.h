@@ -18,13 +18,18 @@
 #import <ComponentKit/CKComponentScopeTypes.h>
 #import <ComponentKit/CKGlobalConfig.h>
 #import <ComponentKit/CKInspectableView.h>
+#import <ComponentKit/CKOptional.h>
 
 #import <unordered_set>
+
+@protocol CKAnalyticsListener;
 
 struct CKComponentHostingViewOptions {
   /// If set to YES, allows taps to pass though this hosting view to views behind it. Default NO.
   BOOL allowTapPassthrough;
-  BOOL shouldInvalidateControllerBetweenComponentGenerations = CKReadGlobalConfig().shouldInvalidateControllerBetweenComponentGenerationsInHostingView;
+  /// A initial size that will be used for hosting view before first generation of component is created.
+  /// Specifying a initial size enables the ability to handle the first model/context update asynchronously.
+  CK::Optional<CGSize> initialSize;
 };
 
 @interface CKComponentHostingView () <CKComponentHostingViewProtocol, CKComponentStateListener>
@@ -59,5 +64,11 @@ struct CKComponentHostingViewOptions {
 
 /** Applies a result from a component built outside the hosting view. Main thread only. */
 - (void)applyResult:(const CKBuildComponentResult &)result;
+
+/**
+ Calling this method will re-generate the underlying component hierarchy without component reuse.
+ Use case could be reloading a hosting view when `CKComponentContext` should be updated.
+ */
+- (void)reloadWithMode:(CKUpdateMode)mode;
 
 @end

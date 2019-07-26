@@ -1,5 +1,21 @@
 PODS:
+  - AFNetworking (3.2.1):
+    - AFNetworking/NSURLSession (= 3.2.1)
+    - AFNetworking/Reachability (= 3.2.1)
+    - AFNetworking/Security (= 3.2.1)
+    - AFNetworking/Serialization (= 3.2.1)
+    - AFNetworking/UIKit (= 3.2.1)
+  - AFNetworking/NSURLSession (3.2.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (3.2.1)
+  - AFNetworking/Security (3.2.1)
+  - AFNetworking/Serialization (3.2.1)
+  - AFNetworking/UIKit (3.2.1):
+    - AFNetworking/NSURLSession
   - Bolts/Tasks (1.9.0)
+  - DateTools (2.0.0)
   - GoogleMaps (3.1.0):
     - GoogleMaps/Maps (= 3.1.0)
   - GoogleMaps/Base (3.1.0)
@@ -11,23 +27,33 @@ PODS:
     - Bolts/Tasks (~> 1.9)
   - Parse/UI (1.17.2):
     - Parse/Core
+  - SendBirdSDK (3.0.146)
 
 DEPENDENCIES:
+  - AFNetworking
+  - DateTools
   - GoogleMaps
   - Parse
   - Parse/UI
+  - SendBirdSDK
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - AFNetworking
     - Bolts
+    - DateTools
     - GoogleMaps
     - Parse
+    - SendBirdSDK
 
 SPEC CHECKSUMS:
+  AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
+  DateTools: 933ac9c490f21f92127cf690ccd8c397e0126caf
   GoogleMaps: 5c13302e6fe6bb6e686b267196586b91cd594225
   Parse: 3b31a3dd1777b07ee7f0caee32fafbff544483a5
+  SendBirdSDK: 1a28092e753b8181f81f42fe96337d8d15e30dc9
 
-PODFILE CHECKSUM: 036891db03ebb02160075fe5b371dd20dda0a5bb
+PODFILE CHECKSUM: c42acac9368c9404631fd8d98c90b7118a76f8a9
 
 COCOAPODS: 1.7.2
