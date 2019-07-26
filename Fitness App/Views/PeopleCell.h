@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@import Parse;
+#import "Parse/Parse.h"
 
 NS_ASSUME_NONNULL_BEGIN
+
+@import Parse;
 
 @interface PeopleCell : UITableViewCell
 

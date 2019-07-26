@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Parse/Parse.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -16,7 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) IBOutlet UITextField *messageField;
 @property (strong, nonatomic) IBOutlet UIButton *sendButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
-@property (strong, nonatomic) NSArray *chatsArray;
+@property (strong, nonatomic) PFUser *currentUser;
+@property (strong, nonatomic) PFUser *nearbyPerson;
 
 @end
 
