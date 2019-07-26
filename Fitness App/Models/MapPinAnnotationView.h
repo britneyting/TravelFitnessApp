@@ -7,10 +7,13 @@
 //
 
 #import <MapKit/MapKit.h>
+@import Parse;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MapPinAnnotationView : MKAnnotationView
+@property (nonatomic, copy) PFImageView *imageFile;
+
 
 @end
 

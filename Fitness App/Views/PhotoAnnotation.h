@@ -7,11 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+@import MapKit;
 
-NS_ASSUME_NONNULL_BEGIN
+@interface PhotoAnnotation : NSObject <MKAnnotation>
 
-@interface PhotoAnnotation : NSObject
+@property (strong, nonatomic) UIImage *photo;
 
 @end
-
-NS_ASSUME_NONNULL_END

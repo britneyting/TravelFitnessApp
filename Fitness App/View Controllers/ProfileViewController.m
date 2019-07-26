@@ -13,6 +13,10 @@
 #import "AppDelegate.h"
 #import "LoginViewController.h"
 #import "MapPin.h"
+#import "MapPinAnnotationView.h"
+#import "postViewController.h"
+#import "Post.h"
+#import "FullPostViewController.h"
 
 @import Parse;
 
@@ -20,6 +24,8 @@
 
 @property (strong, nonatomic) UIImage *originalImage;
 @property (strong, nonatomic) UIImage *editedImage;
+@property (strong, nonatomic) UIImage *originalPinImage;
+@property (strong, nonatomic) UIImage *editedPinImage;
 @property (strong, nonatomic) UIImage *propic;
 @property (weak, nonatomic) IBOutlet MKMapView *myMapView;
 @property CLLocationManager *locationManager;
@@ -67,15 +73,15 @@
     MKPointAnnotation *marker = [MKPointAnnotation new];
     marker.coordinate = coordinate;
     CLLocation *loc = [[CLLocation alloc]initWithLatitude:coordinate.latitude longitude:coordinate.longitude];
-   
+    
     [self.loc reverseGeocodeLocation:loc completionHandler:^(NSArray *placemarks, NSError *error) {
     CLPlacemark *placemark = [placemarks objectAtIndex:0];
-                  NSLog(@"placemark %@",placemark);
-        
+    NSLog(@"placemark %@",placemark);
+
         //address starts here
         NSString *locatedAt = [[placemark.addressDictionary valueForKey:@"FormattedAddressLines"] componentsJoinedByString:@", "];
         NSLog(@"addressDictionary %@", placemark.addressDictionary);
-        
+
         NSLog(@"placemark %@",placemark.region);
         NSLog(@"placemark %@",placemark.country);
         NSLog(@"placemark %@",placemark.locality);
@@ -83,11 +89,24 @@
         NSLog(@"location %@",placemark.ocean);
         NSLog(@"location %@",placemark.postalCode);
         NSLog(@"location %@",placemark.subLocality);
-        
+
         NSLog(@"location %@",placemark.location);
         //Print the location to console
         NSLog(@"I am currently at %@",locatedAt);
         [self.locationManager stopUpdatingLocation];
+    }];
+    
+    PFQuery *postsPerUser = [Post query];
+    [postsPerUser whereKey:@"username" equalTo:[PFUser currentUser].username];
+    
+    [postsPerUser findObjectsInBackgroundWithBlock:^(NSArray * _Nullable posts, NSError * _Nullable error) {
+        if (posts) {
+            for (Post *post in posts) {
+                [self postPin:(post)];
+            }
+        } else {
+            NSLog(@"Error");
+        }
     }];
 }
 
@@ -98,6 +117,7 @@
     coordinate.longitude=self.locationManager.location.coordinate.longitude;
     PFGeoPoint *geoPoint = [PFGeoPoint geoPointWithLatitude:coordinate.latitude longitude:coordinate.longitude];
     currentUser[@"coordinates"] = geoPoint;
+
     [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {
             NSLog(@"Successfully updated user's current location in backend");
@@ -109,10 +129,24 @@
 }
 
 -(void)mapView: (MKMapView *) mapView didUpdateUserLocation:(nonnull MKUserLocation *)userLocation{
-    NSLog(@"%f , %f", self.myMapView.userLocation.coordinate.latitude, self.myMapView.userLocation.coordinate.longitude);
+    NSLog(@"%f , %f !!", self.myMapView.userLocation.coordinate.latitude, self.myMapView.userLocation.coordinate.longitude);
     [self getCurrentLocation];
     MKMapCamera *camera = [MKMapCamera cameraLookingAtCenterCoordinate:userLocation.coordinate fromEyeCoordinate:CLLocationCoordinate2DMake(userLocation.coordinate.latitude, userLocation.coordinate.longitude) eyeAltitude:10000];
     [mapView setCamera:camera animated:YES];
+}
+
+-(MKAnnotationView *) mapView: (MKMapView *) mapView viewForAnnotation:(id<MKAnnotation>) annotation {
+    if([annotation isKindOfClass: [MapPin class]]){
+        MapPin *myLocation = (MapPin *) annotation;
+        MKAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:@"MapPin"];
+        if(annotationView == nil)
+            annotationView = [myLocation annotationView];
+        else
+            annotationView.annotation = annotation;
+        
+        return annotationView;
+    }
+    return nil;
 }
 
 - (IBAction)editProfilePic:(id)sender {
@@ -203,6 +237,7 @@
 - (IBAction)finishEditing:(id)sender {
     [self.view endEditing:YES];
 }
+
 - (IBAction)saveDescription:(id)sender {
     PFUser *currentUser = [PFUser currentUser];
     currentUser[@"description"] = self.descriptionField.text;
@@ -235,25 +270,41 @@
         }
     }];
 }
-- (IBAction)didTapPinLocation:(id)sender {
-    MKMapPoint userLocationMapPoint = MKMapPointForCoordinate(self.myMapView.userLocation.coordinate);
-    NSString *display_coordinates = [NSString stringWithFormat:@"my latitude is %f and longitude is %f", self.myMapView.userLocation.coordinate.longitude, self.myMapView.userLocation.coordinate.latitude];
-    MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
-    [annotation setCoordinate:self.myMapView.userLocation.coordinate];
-    [annotation setTitle:@"Test"];
-    [annotation setSubtitle:display_coordinates];
+
+- (void)postPin:(Post *)post{
+    MapPin *annotation = [MapPin new];
+    PFFileObject *imageFile = post[@"image"];
+    
+    NSURL *profilePhotoURL = [NSURL URLWithString:imageFile.url];
+    NSData *data = [NSData dataWithContentsOfURL:profilePhotoURL];
+    self.editedPinImage = [self resizeImage:[[UIImage alloc] initWithData:data] withSize:CGSizeMake(30,30)];
+
+    annotation.coordinate = CLLocationCoordinate2DMake(post.coordinates.latitude, post.coordinates.longitude);
+    annotation.title = post.caption;
+    annotation.image = self.editedPinImage;
+    
     [self.myMapView addAnnotation:annotation];
 }
 
+- (void)mapView:(MKMapView *)mapViewannotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control{
+    [self performSegueWithIdentifier:@"fullScreen" sender:nil];
+    NSLog(@"Probando segue");
+}
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if([[segue identifier] isEqualToString:@"backToProfile"]) {
+        UINavigationController *navigationController = [segue destinationViewController];
+        postViewController *postController = (postViewController*)navigationController.topViewController;
+        postController.delegate = self;
+    }
+    else if ([segue.identifier isEqualToString:@"fullScreen"]) {
+        FullPostViewController *fullScreen = segue.destinationViewController;
+        fullScreen.photo = self.originalPinImage;
+    }
 }
-*/
 
 @end

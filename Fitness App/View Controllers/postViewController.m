@@ -10,6 +10,10 @@
 #import "ProfileViewController.h"
 #import "post.h"
 #import "AppDelegate.h"
+#import "MapPin.h"
+#import <MapKit/MapKit.h>
+
+
 
 @interface postViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
@@ -20,6 +24,7 @@
 
 @property (weak, nonatomic) IBOutlet UITextView *captionTextView;
 @property (strong, nonatomic) NSString *placeholderText;
+
 
 @end
 
@@ -121,18 +126,19 @@
     [Post postUserImage:resizedImage withCaption:self.captionTextView.text withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if(succeeded) {
             NSLog(@"Did post");
-            [self.delegate didPostImage:self.photo withCaption:self.captionTextView.text];
+            [self performSegueWithIdentifier:@"backToProfile" sender:self];
         } else {
             NSLog(@"Error: %@", error);
         }
-        [self dismissViewControllerAnimated:true completion:nil];
     }];
-    
-    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    ProfileViewController *profileViewController = [storyboard instantiateViewControllerWithIdentifier:@"Profile"];
-    appDelegate.window.rootViewController = profileViewController;
+}
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if([[segue identifier] isEqualToString:@"backToProfile"]) {
+        UINavigationController *navigationController = [segue destinationViewController];
+        ProfileViewController *profileController = (ProfileViewController*)navigationController.topViewController;
+        [profileController didPostImage:self.photo withCaption:self.captionTextView.text];
+    }
 }
 
 @end

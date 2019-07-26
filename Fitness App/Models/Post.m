@@ -13,8 +13,14 @@
 @dynamic postID;
 @dynamic userID;
 @dynamic author;
+PFUser *author;
 @dynamic caption;
 @dynamic image;
+@dynamic username;
+@dynamic country;
+@dynamic locality;
+@dynamic name;
+@dynamic postalCode;
 
 
 + (nonnull NSString *)parseClassName {
@@ -26,8 +32,11 @@
     Post *newPost = [Post new];
     newPost.image = [self getPFFileFromImage:image];
     newPost.author = [PFUser currentUser];
+    NSLog(@"username: %@", newPost.author.username);
     newPost.caption = caption;
-    
+    newPost.username = newPost.author.username;
+    PFGeoPoint *coordinates = newPost.author[@"coordinates"];
+    newPost[@"coordinates"] = coordinates;
     [newPost saveInBackgroundWithBlock: completion];
 }
 

@@ -215,21 +215,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="OaA-fS-GIk" userLabel="Caption Text View">
+                                <rect key="frame" x="16" y="401" width="343" height="196"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                             <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="profile_tab" translatesAutoresizingMaskIntoConstraints="NO" id="JdZ-IC-auU" userLabel="image view" customClass="PFImageView">
-                                <rect key="frame" x="16" y="93" width="119" height="106"/>
+                                <rect key="frame" x="43" y="92" width="283" height="285"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="Vzk-LP-WQ9" appends="YES" id="Olg-xW-ncf"/>
                                 </connections>
                             </imageView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="OaA-fS-GIk" userLabel="Caption Text View">
-                                <rect key="frame" x="133" y="82" width="226" height="129"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="4EO-wV-y6S"/>
@@ -244,8 +244,7 @@
                     <connections>
                         <outlet property="captionTextView" destination="OaA-fS-GIk" id="anf-br-WDp"/>
                         <outlet property="imageView" destination="JdZ-IC-auU" id="bTO-7c-YmZ"/>
-                        <segue destination="1Vm-Iq-0cG" kind="show" identifier="backToProfile" id="aF9-xi-Jrq"/>
-                        <segue destination="JZ9-UX-P6Y" kind="show" identifier="backToProfile" id="WQV-e0-FnK"/>
+                        <segue destination="JZ9-UX-P6Y" kind="presentation" identifier="backToProfile" id="wEp-TM-qV6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MtE-2r-vak" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -255,7 +254,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2329" y="396"/>
+            <point key="canvasLocation" x="2329" y="395"/>
         </scene>
         <!--People View Controller-->
         <scene sceneID="lBX-nx-B3C">
@@ -587,6 +586,30 @@
             </objects>
             <point key="canvasLocation" x="3449" y="1606"/>
         </scene>
+        <!--Full Post View Controller-->
+        <scene sceneID="LPn-jh-vmq">
+            <objects>
+                <viewController id="K36-1Q-k8p" customClass="FullPostViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="oT9-Ce-cx1">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pPt-xH-Nza">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="nEq-J8-rlC"/>
+                    </view>
+                    <connections>
+                        <outlet property="fullScreenImage" destination="pPt-xH-Nza" id="l8O-DQ-qrM"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="p0B-Hb-1fN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2316" y="-1036.7316341829087"/>
+        </scene>
         <!--Profile-->
         <scene sceneID="rBv-aG-Kp4">
             <objects>
@@ -668,14 +691,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xIL-WP-4DX">
-                                <rect key="frame" x="275" y="252" width="84" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Pin Location"/>
-                                <connections>
-                                    <action selector="didTapPinLocation:" destination="1Vm-Iq-0cG" eventType="touchUpInside" id="cbs-SO-Eqx"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Mwe-8i-RNF"/>
@@ -698,6 +713,7 @@
                         <outlet property="profilePictureImage" destination="OyE-EZ-4G6" id="BI0-dT-3oq"/>
                         <outlet property="saveButton" destination="96i-tb-ffq" id="PDC-w1-48B"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="logoutSegue" id="P2Q-rR-Rfd"/>
+                        <segue destination="K36-1Q-k8p" kind="show" identifier="fullScreen" id="pAr-if-jvx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Te6-on-frM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -873,9 +889,8 @@
         <image name="profile_tab" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="iNY-39-27c"/>
-        <segue reference="aF9-xi-Jrq"/>
-        <segue reference="Izl-Ce-9Fu"/>
+        <segue reference="wEp-TM-qV6"/>
+        <segue reference="v0F-gj-8R5"/>
         <segue reference="P2Q-rR-Rfd"/>
     </inferredMetricsTieBreakers>
 </document>
