@@ -3,15 +3,16 @@
 
 target 'Fitness App' do
   # Comment the next line if you don't want to use dynamic frameworks
-  use_frameworks!
+   use_frameworks!
 
   # Pods for Fitness App
   pod 'Parse'
   pod 'Parse/UI'
   pod 'GoogleMaps'
   pod 'DateTools'
-  pod 'YPImagePicker'
+  #pod 'YPImagePicker'
   pod 'AFNetworking'
   pod 'SendBirdSDK'
+  pod "PubNub", "~> 4"
 
 end
