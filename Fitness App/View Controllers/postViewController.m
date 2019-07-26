@@ -33,7 +33,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    PFUser *currentUser = [PFUser currentUser];
+//    PFUser *currentUser = [PFUser currentUser];
     
     self.captionTextView.delegate = self;
     self.placeholderText = @"Write caption...";
@@ -132,13 +132,13 @@
         }
     }];
 }
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    if([[segue identifier] isEqualToString:@"backToProfile"]) {
-        UINavigationController *navigationController = [segue destinationViewController];
-        ProfileViewController *profileController = (ProfileViewController*)navigationController.topViewController;
-        [profileController didPostImage:self.photo withCaption:self.captionTextView.text];
-    }
-}
+//
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+////    if([[segue identifier] isEqualToString:@"backToProfile"]) {
+////        UINavigationController *navigationController = [segue destinationViewController];
+////        ProfileViewController *profileController = (ProfileViewController*)navigationController.topViewController;
+//////        [profileController didPostImage:self.photo withCaption:self.captionTextView.text];
+////    }
+//}
 
 @end

@@ -33,7 +33,7 @@
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error;
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation;
-- (void)didPostImage:(UIImage *)photo withCaption:(NSString *)caption;
+//- (void)didPostImage:(UIImage *)photo withCaption:(NSString *)caption;
 - (void)mapView:(MKMapView *)mapViewannotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control;
 
 @end

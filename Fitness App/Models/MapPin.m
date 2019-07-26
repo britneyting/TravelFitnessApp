@@ -19,18 +19,18 @@
 @synthesize subtitle;
 @synthesize coordinate;
 
--(MKAnnotationView *) annotationView{
-    MKAnnotationView *annotationView = [[MKAnnotationView alloc] initWithAnnotation:self reuseIdentifier:@"MyCustomAnnotation"];
-    annotationView.enabled = YES;
-    annotationView.canShowCallout = YES;
-    annotationView.image = self.image;
-    UIButton *infoButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-    annotationView.rightCalloutAccessoryView = infoButton;
-
-    [infoButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    
-    return annotationView;
-}
+//-(MKAnnotationView *) annotationView{
+////    MKAnnotationView *annotationView = [[MKAnnotationView alloc] initWithAnnotation:self reuseIdentifier:@"MyCustomAnnotation"];
+////    annotationView.enabled = YES;
+////    annotationView.canShowCallout = YES;
+////    annotationView.image = self.image;
+////    UIButton *infoButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+////    annotationView.rightCalloutAccessoryView = infoButton;
+////
+////    [infoButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
+////
+////    return annotationView;
+//}
 
 - (void)buttonPressed:(UIButton *)button {
     NSLog (@"Si se imprimio cuando lo tocaste");
