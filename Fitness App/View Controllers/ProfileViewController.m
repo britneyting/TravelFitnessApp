@@ -12,7 +12,6 @@
 #import "Parse/Parse.h"
 #import "AppDelegate.h"
 #import "LoginViewController.h"
-#import "MapPinAnnotationView.h"
 #import "postViewController.h"
 #import "Post.h"
 #import "FullPostViewController.h"
