@@ -294,12 +294,7 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-//    if([[segue identifier] isEqualToString:@"backToProfile"]) {
-//        UINavigationController *navigationController = [segue destinationViewController];
-////        postViewController *postController = (postViewController*)navigationController.topViewController;
-//    }
-//    else
-        if ([segue.identifier isEqualToString:@"fullScreen"]) {
+    if ([segue.identifier isEqualToString:@"fullScreen"]) {
         FullPostViewController *fullScreen = [segue destinationViewController];
         MKPinAnnotationView *pin = sender;
         PhotoAnnotation *annotation = (PhotoAnnotation*)pin.annotation;
