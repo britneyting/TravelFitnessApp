@@ -133,23 +133,10 @@
     NSLog(@"%f , %f !!", self.myMapView.userLocation.coordinate.latitude, self.myMapView.userLocation.coordinate.longitude);
     [self getCurrentLocation];
     MKMapCamera *camera = [MKMapCamera cameraLookingAtCenterCoordinate:userLocation.coordinate fromEyeCoordinate:CLLocationCoordinate2DMake(userLocation.coordinate.latitude, userLocation.coordinate.longitude) eyeAltitude:10000];
-    [mapView setCamera:camera animated:YES];
+    [mapView setCamera:camera animated:NO];
 }
 
-//emerson
-//-(MKAnnotationView *) mapView: (MKMapView *) mapView viewForAnnotation:(id<MKAnnotation>) annotation {
-//    if([annotation isKindOfClass: [MapPin class]]){
-//        MapPin *myLocation = (MapPin *) annotation;
-//        MKAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:@"MapPin"];
-//        if(annotationView == nil)
-//            annotationView = [myLocation annotationView];
-//        else
-//            annotationView.annotation = annotation;
-//
-//        return annotationView;
-//    }
-//    return nil;
-//}
+
 
 - (IBAction)editProfilePic:(id)sender {
     [self choosePicture:@"Choose an image using your camera or photo library" withTitle:@"Change Your Profile Picture"];
@@ -274,26 +261,26 @@
 }
 
 - (void)postPin:(Post *)post{
-//    lo quite por emerson
-//    MapPin *annotation = [MapPin new];
     PFFileObject *imageFile = post[@"image"];
+    NSURL *postPic = [NSURL URLWithString:imageFile.url];
+    NSData *data = [NSData dataWithContentsOfURL:postPic];
+    self.originalPinImage = [UIImage imageWithData:data];
+    self.editedPinImage = [self resizeImage:[[UIImage alloc] initWithData:data] withSize:CGSizeMake(50,50)];
 
-    NSURL *profilePhotoURL = [NSURL URLWithString:imageFile.url];
-    NSData *data = [NSData dataWithContentsOfURL:profilePhotoURL];
-    self.editedPinImage = [self resizeImage:[[UIImage alloc] initWithData:data] withSize:CGSizeMake(30,30)];
-
+    
     // Add a pin to the map
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(post.coordinates.latitude, post.coordinates.longitude);
     PhotoAnnotation *point = [[PhotoAnnotation alloc] init];
     point.coordinate = coordinate;
     point.photo = self.editedPinImage;
+    point.fullPhoto = self.originalPinImage;
+
     [self.myMapView addAnnotation:point];
     
     // Pop back
     [self.navigationController popViewControllerAnimated:true];
 }
 
-//emerson
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
     MKAnnotationView *annotationView = (MKPinAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:@"MapPin"];
     if (annotationView == nil) {
@@ -302,25 +289,24 @@
         annotationView.leftCalloutAccessoryView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, 0.0, 50.0, 50.0)];
         annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
     }
+    if([annotation isKindOfClass:[PhotoAnnotation class]]) {
+        PhotoAnnotation *point = (PhotoAnnotation *)annotation;
+        UIImage *thumbnail = point.photo;
+        UIImageView *imageView = (UIImageView*)annotationView.leftCalloutAccessoryView;
+        imageView.image = thumbnail;
+        annotationView.image = thumbnail;
+    }
     
-//    UIImage *thumbnail = [self resizeImage:((PhotoAnnotation*)annotation).photo withSize:CGSizeMake(50.0, 50.0)];
-    UIImage *thumbnail = self.editedPinImage;
-    UIImageView *imageView = (UIImageView*)annotationView.leftCalloutAccessoryView;
-    imageView.image = thumbnail;
-    annotationView.image = thumbnail;
     
     return annotationView;
 }
 
-//emerson
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
     [self performSegueWithIdentifier:@"fullScreen" sender:view];
 }
 
 
 #pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([[segue identifier] isEqualToString:@"backToProfile"]) {
         UINavigationController *navigationController = [segue destinationViewController];
@@ -331,7 +317,9 @@
         FullPostViewController *fullScreen = [segue destinationViewController];
         MKPinAnnotationView *pin = sender;
         PhotoAnnotation *annotation = (PhotoAnnotation*)pin.annotation;
-        fullScreen.photo = self.editedPinImage;
+//        fullScreen.photo = annotation.photo;
+        fullScreen.photo = annotation.fullPhoto;
+
     }
 }
 
