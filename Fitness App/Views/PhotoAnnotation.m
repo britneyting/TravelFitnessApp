@@ -17,8 +17,7 @@
 @implementation PhotoAnnotation
 
 - (NSString *)title {
-//    return [NSString stringWithFormat:@"%f", self.coordinate.latitude];
-    return [NSString stringWithFormat:@"%f", self.coordinate.latitude];
+    return [NSString stringWithFormat:@"%@", self.subtitletitle];
 }
 
 @end

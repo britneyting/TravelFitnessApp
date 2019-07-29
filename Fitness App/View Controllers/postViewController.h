@@ -11,16 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-//@protocol postViewControllerDelegate
-//
-//- (void)didPostImage:(UIImage *)photo withCaption:(NSString *)caption;
-//
-//@end
-
 @interface postViewController : UIViewController
-//@property (weak, nonatomic) IBOutlet PFImageView *postImage;
-
-//@property (nonatomic, weak) id<postViewControllerDelegate> delegate;
 
 @end
 

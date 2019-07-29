@@ -10,7 +10,6 @@
 #import "Post.h"
 @import MapKit;
 
-
 @interface PhotoAnnotation : NSObject <MKAnnotation>
 
 @property (strong, nonatomic) UIImage *photo;
@@ -18,7 +17,5 @@
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *subtitletitle;
 @property (strong, nonatomic) Post *post;
-
-
 
 @end

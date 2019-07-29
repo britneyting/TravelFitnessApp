@@ -39,7 +39,7 @@
 
 -(void)viewDidLoad {
     [super viewDidLoad];
-
+    
     self.saveButton.hidden = YES;
     self.placeholderText = @"Write description...";
     // Do any additional setup after loading the view.
@@ -61,7 +61,7 @@
     self.myMapView.showsBuildings = YES;
     self.myMapView.delegate = self;
     self.locationManager = [[CLLocationManager alloc] init];
-        
+    
     [self.locationManager startUpdatingLocation];
     self.loc= [[CLGeocoder alloc]init];
     [self.locationManager requestWhenInUseAuthorization];
@@ -76,13 +76,13 @@
     CLLocation *loc = [[CLLocation alloc]initWithLatitude:coordinate.latitude longitude:coordinate.longitude];
     
     [self.loc reverseGeocodeLocation:loc completionHandler:^(NSArray *placemarks, NSError *error) {
-    CLPlacemark *placemark = [placemarks objectAtIndex:0];
-    NSLog(@"placemark %@",placemark);
-
+        CLPlacemark *placemark = [placemarks objectAtIndex:0];
+        NSLog(@"placemark %@",placemark);
+        
         //address starts here
         NSString *locatedAt = [[placemark.addressDictionary valueForKey:@"FormattedAddressLines"] componentsJoinedByString:@", "];
         NSLog(@"addressDictionary %@", placemark.addressDictionary);
-
+        
         NSLog(@"placemark %@",placemark.region);
         NSLog(@"placemark %@",placemark.country);
         NSLog(@"placemark %@",placemark.locality);
@@ -90,7 +90,7 @@
         NSLog(@"location %@",placemark.ocean);
         NSLog(@"location %@",placemark.postalCode);
         NSLog(@"location %@",placemark.subLocality);
-
+        
         NSLog(@"location %@",placemark.location);
         //Print the location to console
         NSLog(@"I am currently at %@",locatedAt);
@@ -118,7 +118,7 @@
     coordinate.longitude=self.locationManager.location.coordinate.longitude;
     PFGeoPoint *geoPoint = [PFGeoPoint geoPointWithLatitude:coordinate.latitude longitude:coordinate.longitude];
     currentUser[@"coordinates"] = geoPoint;
-
+    
     [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {
             NSLog(@"Successfully updated user's current location in backend");
@@ -136,8 +136,6 @@
     [mapView setCamera:camera animated:NO];
 }
 
-
-
 - (IBAction)editProfilePic:(id)sender {
     [self choosePicture:@"Choose an image using your camera or photo library" withTitle:@"Change Your Profile Picture"];
 }
@@ -148,39 +146,27 @@
     imagePickerVC.allowsEditing = YES;
     
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:(UIAlertControllerStyleAlert)];
-    
-    // create an photo library action
-    UIAlertAction *pickPhoto = [UIAlertAction actionWithTitle:@"Photos" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) { // handle response here.
+    UIAlertAction *pickPhoto = [UIAlertAction actionWithTitle:@"Photos" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         [self presentViewController:imagePickerVC animated:YES completion:nil];
     }];
     
-    // add the photo library action to the alert controller
     [alert addAction:pickPhoto];
     
-    // create a camera action
     UIAlertAction *pickCamera = [UIAlertAction actionWithTitle:@"Camera" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        // handle camera response here. Doing nothing will dismiss the view.
-        // calls camera if camera is available
         imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
         [self presentViewController:imagePickerVC animated:YES completion:nil];
     }];
     
-    // add the camera action to the alertController
     [alert addAction:pickCamera];
     
     [self presentViewController:alert animated:YES completion:^{
-        // optional code for what happens after the alert controller has finished presenting
     }];
 }
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
-    
-    // Get the image captured by the UIImagePickerController
     self.originalImage = info[UIImagePickerControllerOriginalImage];
     self.editedImage = info[UIImagePickerControllerEditedImage];
     self.editedImage = [self resizeImage:self.originalImage withSize:CGSizeMake(400, 400)];
-    
-    // Do something with the images (based on your use case)
     
     self.profilePictureImage.image = self.editedImage;
     self.propic = self.editedImage;
@@ -266,15 +252,19 @@
     NSData *data = [NSData dataWithContentsOfURL:postPic];
     self.originalPinImage = [UIImage imageWithData:data];
     self.editedPinImage = [self resizeImage:[[UIImage alloc] initWithData:data] withSize:CGSizeMake(50,50)];
-
     
     // Add a pin to the map
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(post.coordinates.latitude, post.coordinates.longitude);
     PhotoAnnotation *point = [[PhotoAnnotation alloc] init];
     point.coordinate = coordinate;
-    point.photo = self.editedPinImage;
-    point.fullPhoto = self.originalPinImage;
+//    NSLog(@"individual caption is: %@", post[@"caption"]);
+    point.subtitletitle = post[@"caption"];
+    NSLog(@"individual caption is: %@", point.subtitletitle);
 
+//    point.photo = self.editedPinImage;
+    point.photo = [self circularScaleAndCropImage:self.editedPinImage frame:CGRectMake(0, 0, 40, 40)];
+    point.fullPhoto = self.originalPinImage;
+    
     [self.myMapView addAnnotation:point];
     
     // Pop back
@@ -296,8 +286,6 @@
         imageView.image = thumbnail;
         annotationView.image = thumbnail;
     }
-    
-    
     return annotationView;
 }
 
@@ -305,22 +293,56 @@
     [self performSegueWithIdentifier:@"fullScreen" sender:view];
 }
 
-
-#pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([[segue identifier] isEqualToString:@"backToProfile"]) {
         UINavigationController *navigationController = [segue destinationViewController];
         postViewController *postController = (postViewController*)navigationController.topViewController;
-//        postController.delegate = self;
     }
     else if ([segue.identifier isEqualToString:@"fullScreen"]) {
         FullPostViewController *fullScreen = [segue destinationViewController];
         MKPinAnnotationView *pin = sender;
         PhotoAnnotation *annotation = (PhotoAnnotation*)pin.annotation;
-//        fullScreen.photo = annotation.photo;
         fullScreen.photo = annotation.fullPhoto;
-
     }
 }
 
+- (UIImage*)circularScaleAndCropImage:(UIImage*)image frame:(CGRect)frame {
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(frame.size.width, frame.size.height), NO, 0.0);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    //Get the width and heights
+    CGFloat imageWidth = image.size.width;
+    CGFloat imageHeight = image.size.height;
+    CGFloat rectWidth = frame.size.width;
+    CGFloat rectHeight = frame.size.height;
+    
+    //Calculate the scale factor
+    CGFloat scaleFactorX = rectWidth/imageWidth;
+    CGFloat scaleFactorY = rectHeight/imageHeight;
+    
+    //Calculate the centre of the circle
+    CGFloat imageCentreX = rectWidth/2;
+    CGFloat imageCentreY = rectHeight/2;
+    
+    // Create and CLIP to a CIRCULAR Path
+    // (This could be replaced with any closed path if you want a different shaped clip)
+    CGFloat radius = rectWidth/2;
+    CGContextBeginPath (context);
+    CGContextAddArc (context, imageCentreX, imageCentreY, radius, 0, 2*M_PI, 0);
+    CGContextClosePath (context);
+    CGContextClip (context);
+    
+    //Set the SCALE factor for the graphics context
+    //All future draw calls will be scaled by this factor
+    CGContextScaleCTM (context, scaleFactorX, scaleFactorY);
+    
+    // Draw the IMAGE
+    CGRect myRect = CGRectMake(0, 0, imageWidth, imageHeight);
+    [image drawInRect:myRect];
+    
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
+}
 @end

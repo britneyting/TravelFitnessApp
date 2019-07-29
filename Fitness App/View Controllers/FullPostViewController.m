@@ -18,14 +18,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     self.scrollView.delegate = self;
     self.imageView.image = self.photo;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
