@@ -257,11 +257,8 @@
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(post.coordinates.latitude, post.coordinates.longitude);
     PhotoAnnotation *point = [[PhotoAnnotation alloc] init];
     point.coordinate = coordinate;
-//    NSLog(@"individual caption is: %@", post[@"caption"]);
     point.subtitletitle = post[@"caption"];
     NSLog(@"individual caption is: %@", point.subtitletitle);
-
-//    point.photo = self.editedPinImage;
     point.photo = [self circularScaleAndCropImage:self.editedPinImage frame:CGRectMake(0, 0, 40, 40)];
     point.fullPhoto = self.originalPinImage;
     
@@ -272,6 +269,9 @@
 }
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
+    if ([annotation isKindOfClass:[MKUserLocation class]]) {
+        return nil;
+    }
     MKAnnotationView *annotationView = (MKPinAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:@"MapPin"];
     if (annotationView == nil) {
         annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"MapPin"];
@@ -294,15 +294,17 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if([[segue identifier] isEqualToString:@"backToProfile"]) {
-        UINavigationController *navigationController = [segue destinationViewController];
-        postViewController *postController = (postViewController*)navigationController.topViewController;
-    }
-    else if ([segue.identifier isEqualToString:@"fullScreen"]) {
+//    if([[segue identifier] isEqualToString:@"backToProfile"]) {
+//        UINavigationController *navigationController = [segue destinationViewController];
+////        postViewController *postController = (postViewController*)navigationController.topViewController;
+//    }
+//    else
+        if ([segue.identifier isEqualToString:@"fullScreen"]) {
         FullPostViewController *fullScreen = [segue destinationViewController];
         MKPinAnnotationView *pin = sender;
         PhotoAnnotation *annotation = (PhotoAnnotation*)pin.annotation;
         fullScreen.photo = annotation.fullPhoto;
+        fullScreen.annotation = annotation;
     }
 }
 

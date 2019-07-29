@@ -7,12 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PhotoAnnotation.h"
 @import Parse;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface FullPostViewController : UIViewController
 @property (strong, nonatomic) UIImage *photo;
+@property (weak, nonatomic) IBOutlet UILabel *caption;
+@property (strong, nonatomic) PhotoAnnotation *annotation;
 
 @end
 
