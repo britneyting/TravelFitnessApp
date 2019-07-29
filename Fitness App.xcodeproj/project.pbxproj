@@ -12,7 +12,6 @@
 		131EDD0D22EA4E4400AF58AB /* FullPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 131EDD0C22EA4E4400AF58AB /* FullPostViewController.m */; };
 		131EDD1022EB5A9700AF58AB /* PhotoAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 131EDD0F22EB5A9700AF58AB /* PhotoAnnotation.m */; };
 		1355E47E22E0D3D8003036E3 /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 1355E47D22E0D3D8003036E3 /* Post.m */; };
-		137077B522DFAA91003DEC12 /* MapPin.m in Sources */ = {isa = PBXBuildFile; fileRef = 137077B422DFAA91003DEC12 /* MapPin.m */; };
 		13780E2E22E0201700689605 /* postViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13780E2D22E0201700689605 /* postViewController.m */; };
 		6E412180A53D89CCAE50C4EA /* Pods_Fitness_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6B394742CCED85F0C4D91E7 /* Pods_Fitness_App.framework */; };
 		720A29A8FC73191863A7F122 /* Pods_Fitness_AppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 579D80D3CC27417F7D2716D4 /* Pods_Fitness_AppUITests.framework */; };
@@ -63,8 +62,6 @@
 		131EDD0F22EB5A9700AF58AB /* PhotoAnnotation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotoAnnotation.m; sourceTree = "<group>"; };
 		1355E47C22E0D3D8003036E3 /* Post.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Post.h; sourceTree = "<group>"; };
 		1355E47D22E0D3D8003036E3 /* Post.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
-		137077B322DFAA91003DEC12 /* MapPin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapPin.h; sourceTree = "<group>"; };
-		137077B422DFAA91003DEC12 /* MapPin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapPin.m; sourceTree = "<group>"; };
 		13780E2C22E0201700689605 /* postViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = postViewController.h; sourceTree = "<group>"; };
 		13780E2D22E0201700689605 /* postViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = postViewController.m; sourceTree = "<group>"; };
 		1ADF65D351FCE03F46CC99DD /* Pods-Fitness AppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fitness AppUITests.release.xcconfig"; path = "Target Support Files/Pods-Fitness AppUITests/Pods-Fitness AppUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -141,8 +138,6 @@
 		137077B222DFAA59003DEC12 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				137077B322DFAA91003DEC12 /* MapPin.h */,
-				137077B422DFAA91003DEC12 /* MapPin.m */,
 				1355E47C22E0D3D8003036E3 /* Post.h */,
 				1355E47D22E0D3D8003036E3 /* Post.m */,
 				131EDD0822EA30F200AF58AB /* MapPinAnnotationView.h */,
@@ -516,7 +511,6 @@
 				7D416AF222D5054900B8A1D9 /* main.m in Sources */,
 				7D5755CB22DFDE5000C2823C /* PeopleViewController.m in Sources */,
 				7D990ED822E67C09005676AC /* ChatCell.m in Sources */,
-				137077B522DFAA91003DEC12 /* MapPin.m in Sources */,
 				7D416AF222D5054900B8A1D9 /* main.m in Sources */,
 				131E759122DE95C20044CC08 /* ProfileViewController.m in Sources */,
 				13780E2E22E0201700689605 /* postViewController.m in Sources */,

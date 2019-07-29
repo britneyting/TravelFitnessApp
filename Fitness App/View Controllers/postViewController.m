@@ -10,7 +10,6 @@
 #import "ProfileViewController.h"
 #import "post.h"
 #import "AppDelegate.h"
-#import "MapPin.h"
 #import <MapKit/MapKit.h>
 
 
