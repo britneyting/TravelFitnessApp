@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MapPin.h"
+#import <MapKit/MapKit.h>
 
 @import Parse;
 

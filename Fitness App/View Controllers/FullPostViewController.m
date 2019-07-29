@@ -18,14 +18,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     self.scrollView.delegate = self;
     self.imageView.image = self.photo;
+    self.caption.text = self.annotation.subtitletitle;
+    NSLog (@"subtitle third time %@", self.caption.text);
+
+//    self.caption.text = caption.text;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
