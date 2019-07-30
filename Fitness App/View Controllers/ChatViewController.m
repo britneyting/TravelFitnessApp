@@ -34,12 +34,13 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-//    self.tableView.backgroundColor = [UIColor clearColor];
+    self.tableView.rowHeight = 55; // temporary, non-dynamic row height
     self.messageField.layer.borderWidth = 1.0f;
     self.messageField.layer.borderColor = [[UIColor lightGrayColor] CGColor];
     self.messageField.layer.backgroundColor = [[UIColor whiteColor] CGColor];
     self.messageField.layer.cornerRadius = 8;
     
+    // set up keyboard notifications
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
@@ -229,6 +230,10 @@
         [cell.messageLabel setBackgroundColor:[UIColor clearColor]];
         cell.profilePicture.file = self.currentUser[@"profilePicture"];
         [cell.profilePicture loadInBackground];
+        CGRect chatBoxFrame = CGRectMake(0, 0, 100, 70);
+        UIView *backgroundView = [[UIView alloc] initWithFrame:chatBoxFrame];
+        [backgroundView setBackgroundColor:[[UIColor alloc] initWithRed:204./255 green:213./255 blue:216./255 alpha:0.5]];
+        [cell addSubview:backgroundView];
         
     }
     else if (message[@"publisher"] == self.nearbyPerson.username) {
