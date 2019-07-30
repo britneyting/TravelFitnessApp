@@ -222,8 +222,11 @@
                                 <gestureRecognizers/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="leQ-i0-CZc" appends="YES" id="jHc-nP-NTy"/>
+                                </connections>
                             </textView>
-                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="profile_tab" translatesAutoresizingMaskIntoConstraints="NO" id="JdZ-IC-auU" userLabel="image view" customClass="PFImageView">
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="imagePlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="JdZ-IC-auU" userLabel="image view" customClass="PFImageView">
                                 <rect key="frame" x="43" y="92" width="283" height="285"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <gestureRecognizers/>
@@ -256,7 +259,7 @@
                         <action selector="didTapPicture:" destination="XOK-SA-Gjl" id="jxv-yV-2ns"/>
                     </connections>
                 </tapGestureRecognizer>
-                <tapGestureRecognizer id="Tf5-9b-moL" userLabel="Tap Gesture Recognizer Caption"/>
+                <tapGestureRecognizer id="leQ-i0-CZc" userLabel="Tap Gesture Recognizer Caption"/>
             </objects>
             <point key="canvasLocation" x="2329" y="395"/>
         </scene>
@@ -905,6 +908,7 @@
     <resources>
         <image name="chatBubble" width="50" height="50"/>
         <image name="close-icon" width="26" height="24"/>
+        <image name="imagePlaceholder" width="750" height="750"/>
         <image name="profile_tab" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
