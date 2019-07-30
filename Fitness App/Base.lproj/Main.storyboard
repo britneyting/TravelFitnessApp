@@ -219,6 +219,7 @@
                                 <rect key="frame" x="16" y="401" width="343" height="196"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -245,14 +246,17 @@
                         <outlet property="captionTextView" destination="OaA-fS-GIk" id="anf-br-WDp"/>
                         <outlet property="imageView" destination="JdZ-IC-auU" id="bTO-7c-YmZ"/>
                         <segue destination="JZ9-UX-P6Y" kind="presentation" identifier="backToProfile" id="wEp-TM-qV6"/>
+                        <segue destination="teb-nR-WDL" kind="unwind" identifier="unwindToContainerVC" unwindAction="unwindFromViewController2:" id="0gv-NS-Cwc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MtE-2r-vak" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="teb-nR-WDL" userLabel="Exit" sceneMemberID="exit"/>
                 <tapGestureRecognizer id="Vzk-LP-WQ9">
                     <connections>
                         <action selector="didTapPicture:" destination="XOK-SA-Gjl" id="jxv-yV-2ns"/>
                     </connections>
                 </tapGestureRecognizer>
+                <tapGestureRecognizer id="Tf5-9b-moL" userLabel="Tap Gesture Recognizer Caption"/>
             </objects>
             <point key="canvasLocation" x="2329" y="395"/>
         </scene>
