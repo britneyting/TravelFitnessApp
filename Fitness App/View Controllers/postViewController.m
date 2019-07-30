@@ -29,15 +29,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    //    PFUser *currentUser = [PFUser currentUser];
+    
+    self.photo = [UIImage imageNamed:@"imagePlaceholder"];
+    self.imageView.image = self.photo;
     
     self.captionTextView.delegate = self;
     self.placeholderText = @"Write caption...";
-    
     self.captionTextView.text = self.placeholderText;
     self.captionTextView.textColor = [UIColor lightGrayColor];
-    [self.captionTextView setDelegate:self];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+    [self.view addGestureRecognizer:tap];
 }
 
 - (IBAction)didTapPicture:(id)sender {
@@ -108,17 +110,20 @@
     [textView becomeFirstResponder];
 }
 
-- (void)textViewDidEndEditing:(UITextView *)textView {
-    if ([textView.text isEqualToString:@""]) {
-        textView.text = self.placeholderText;
-        textView.textColor = [UIColor lightGrayColor];
-    }
-    [textView resignFirstResponder];
+//- (void)textViewDidEndEditing:(UITextView *)textView {
+//    if ([textView.text isEqualToString:@""]) {
+//        textView.text = self.placeholderText;
+//        textView.textColor = [UIColor lightGrayColor];
+//    }
+//    [textView resignFirstResponder];
+//}
+
+-(void)dismissKeyboard{
+    [self.captionTextView resignFirstResponder];
 }
 
 - (IBAction)didTapShare:(id)sender {
     UIImage *resizedImage = [self resizeImage:self.photo withSize:CGSizeMake(350, 350)];
-    
     [Post postUserImage:resizedImage withCaption:self.captionTextView.text withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if(succeeded) {
             NSLog(@"Did post");
@@ -130,4 +135,34 @@
     }];
 }
 
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+}
+
+#pragma mark - keyboard movements
+- (void)keyboardWillShow:(NSNotification *)notification{
+    CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    [UIView animateWithDuration:0.3 animations:^{
+        CGRect f = self.view.frame;
+        f.origin.y = -(keyboardSize.height/4);
+        self.view.frame = f;
+    }];
+}
+
+-(void)keyboardWillHide:(NSNotification *)notification{
+    [UIView animateWithDuration:0.3 animations:^{
+        CGRect f = self.view.frame;
+        f.origin.y = 0.0f;
+        self.view.frame = f;
+    }];
+}
 @end
