@@ -5,13 +5,11 @@
 //  Created by danyguajiba on 7/17/19.
 //  Copyright © 2019 britneyting. All rights reserved.
 //
-
 #import "postViewController.h"
 #import "ProfileViewController.h"
 #import "post.h"
 #import "AppDelegate.h"
 #import <MapKit/MapKit.h>
-
 
 
 @interface postViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate>
@@ -32,18 +30,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-//    PFUser *currentUser = [PFUser currentUser];
+    //    PFUser *currentUser = [PFUser currentUser];
     
     self.captionTextView.delegate = self;
     self.placeholderText = @"Write caption...";
     
     self.captionTextView.text = self.placeholderText;
     self.captionTextView.textColor = [UIColor lightGrayColor];
+    [self.captionTextView setDelegate:self];
 }
 
 - (IBAction)didTapPicture:(id)sender {
     [self choosePicture:@"Choose an image using your camera or photo library" withTitle:@"Upload a Picture"];
-
 }
 
 - (void)choosePicture:(NSString *)message withTitle:(NSString *)title {
@@ -83,7 +81,6 @@
     // Do something with the images (based on your use case)
     self.photo = editedImage;
     self.imageView.image = self.photo;
-
     
     // Dismiss UIImagePickerController to go back to your original view controller
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -125,19 +122,12 @@
     [Post postUserImage:resizedImage withCaption:self.captionTextView.text withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if(succeeded) {
             NSLog(@"Did post");
-            [self performSegueWithIdentifier:@"backToProfile" sender:self];
-        } else {
+            [self performSegueWithIdentifier:@"unwindToContainerVC" sender:self];
+        }
+        else {
             NSLog(@"Error: %@", error);
         }
     }];
 }
-//
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-////    if([[segue identifier] isEqualToString:@"backToProfile"]) {
-////        UINavigationController *navigationController = [segue destinationViewController];
-////        ProfileViewController *profileController = (ProfileViewController*)navigationController.topViewController;
-//////        [profileController didPostImage:self.photo withCaption:self.captionTextView.text];
-////    }
-//}
 
 @end

@@ -261,7 +261,6 @@
     point.fullPhoto = self.originalPinImage;
     
     [self.myMapView addAnnotation:point];
-    
     // Pop back
     [self.navigationController popViewControllerAnimated:true];
 }
@@ -299,6 +298,10 @@
         fullScreen.photo = annotation.fullPhoto;
         fullScreen.annotation = annotation;
     }
+}
+
+- (IBAction)unwindFromViewController2:(UIStoryboardSegue *)segue{
+    NSLog(@"and we are back");
 }
 
 - (UIImage*)circularScaleAndCropImage:(UIImage*)image frame:(CGRect)frame {
