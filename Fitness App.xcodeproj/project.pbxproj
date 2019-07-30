@@ -11,6 +11,7 @@
 		1355E47E22E0D3D8003036E3 /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 1355E47D22E0D3D8003036E3 /* Post.m */; };
 		137077B522DFAA91003DEC12 /* MapPin.m in Sources */ = {isa = PBXBuildFile; fileRef = 137077B422DFAA91003DEC12 /* MapPin.m */; };
 		13780E2E22E0201700689605 /* postViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13780E2D22E0201700689605 /* postViewController.m */; };
+		7D1130BA22EFAB9A00FB39AD /* CustomTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1130B922EFAB9A00FB39AD /* CustomTextField.m */; };
 		7D416AE422D5054800B8A1D9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D416AE322D5054800B8A1D9 /* AppDelegate.m */; };
 		7D416AEA22D5054800B8A1D9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D416AE822D5054800B8A1D9 /* Main.storyboard */; };
 		7D416AEC22D5054900B8A1D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D416AEB22D5054900B8A1D9 /* Assets.xcassets */; };
@@ -59,6 +60,8 @@
 		1E0D1C4AC5810F04B6AD9931 /* Pods-Fitness App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fitness App.debug.xcconfig"; path = "Target Support Files/Pods-Fitness App/Pods-Fitness App.debug.xcconfig"; sourceTree = "<group>"; };
 		1F2B17734B8D66B60D0B34E1 /* Pods-Fitness App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fitness App.release.xcconfig"; path = "Target Support Files/Pods-Fitness App/Pods-Fitness App.release.xcconfig"; sourceTree = "<group>"; };
 		656E3A80F765012921E2FAF4 /* Pods_Fitness_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fitness_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7D1130B822EFAB9A00FB39AD /* CustomTextField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomTextField.h; sourceTree = "<group>"; };
+		7D1130B922EFAB9A00FB39AD /* CustomTextField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomTextField.m; sourceTree = "<group>"; };
 		7D416ADF22D5054800B8A1D9 /* Fitness App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fitness App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D416AE222D5054800B8A1D9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7D416AE322D5054800B8A1D9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -138,6 +141,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		7D1130B722EFAB8000FB39AD /* Custom Views */ = {
+			isa = PBXGroup;
+			children = (
+				7D1130B822EFAB9A00FB39AD /* CustomTextField.h */,
+				7D1130B922EFAB9A00FB39AD /* CustomTextField.m */,
+			);
+			path = "Custom Views";
+			sourceTree = "<group>";
+		};
 		7D416AD622D5054800B8A1D9 = {
 			isa = PBXGroup;
 			children = (
@@ -163,6 +175,7 @@
 		7D416AE122D5054800B8A1D9 /* Fitness App */ = {
 			isa = PBXGroup;
 			children = (
+				7D1130B722EFAB8000FB39AD /* Custom Views */,
 				137077B222DFAA59003DEC12 /* Models */,
 				7D416AE222D5054800B8A1D9 /* AppDelegate.h */,
 				7D416AE322D5054800B8A1D9 /* AppDelegate.m */,
@@ -435,6 +448,7 @@
 				7D752A7D22E28A5300FC6121 /* PeopleDetailsViewController.m in Sources */,
 				7D5755CE22DFDE5900C2823C /* PlacesViewController.m in Sources */,
 				7D990ED522E64CDB005676AC /* ChatViewController.m in Sources */,
+				7D1130BA22EFAB9A00FB39AD /* CustomTextField.m in Sources */,
 				7D416AF222D5054900B8A1D9 /* main.m in Sources */,
 				7D5755CB22DFDE5000C2823C /* PeopleViewController.m in Sources */,
 				7D990ED822E67C09005676AC /* ChatCell.m in Sources */,
