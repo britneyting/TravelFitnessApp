@@ -33,8 +33,8 @@
     // Do any additional setup after loading the view.
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.rowHeight = 55; // temporary, non-dynamic row height
+//    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.rowHeight = UITableViewAutomaticDimension; // temporary, non-dynamic row height
     self.messageField.layer.borderWidth = 1.0f;
     self.messageField.layer.borderColor = [[UIColor lightGrayColor] CGColor];
     self.messageField.layer.backgroundColor = [[UIColor whiteColor] CGColor];
@@ -224,26 +224,67 @@
     [cell.usernameLabel setFont: [UIFont fontWithName:@"Arial" size:13.0f]];
     cell.messageLabel.text = message[@"message"];
     [cell.messageLabel setFont: [UIFont fontWithName:@"Arial" size:15.0f]];
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:cell.messageLabel.text];
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    [paragraphStyle setLineSpacing:4];
+    [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, cell.messageLabel.text.length)];
+    cell.messageLabel.attributedText = attributedString;
+
     if (message[@"publisher"] == self.currentUser.username) {
+        cell.usernameLabel.text = @"me";
         cell.messageLabel.textAlignment = NSTextAlignmentRight;
         cell.usernameLabel.textAlignment = NSTextAlignmentRight;
-        [cell.messageLabel setBackgroundColor:[UIColor clearColor]];
-        cell.profilePicture.file = self.currentUser[@"profilePicture"];
-        [cell.profilePicture loadInBackground];
-        CGRect chatBoxFrame = CGRectMake(0, 0, 100, 70);
-        UIView *backgroundView = [[UIView alloc] initWithFrame:chatBoxFrame];
-        [backgroundView setBackgroundColor:[[UIColor alloc] initWithRed:204./255 green:213./255 blue:216./255 alpha:0.5]];
-        [cell addSubview:backgroundView];
-        
+//        cell.profilePicture.file = self.currentUser[@"profilePicture"];
+//        [cell.profilePicture loadInBackground];
     }
     else if (message[@"publisher"] == self.nearbyPerson.username) {
         cell.messageLabel.textAlignment = NSTextAlignmentLeft;
         cell.usernameLabel.textAlignment = NSTextAlignmentLeft;
-        cell.profilePicture.file = self.nearbyPerson[@"profilePicture"];
-        [cell.profilePicture loadInBackground];
+//        cell.profilePicture.file = self.nearbyPerson[@"profilePicture"];
+//        [cell.profilePicture loadInBackground];
     }
     
     return cell;
+}
+
+- (UIImage*)circularScaleAndCropImage:(UIImage*)image frame:(CGRect)frame {
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(frame.size.width, frame.size.height), NO, 0.0);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    //Get the width and heights
+    CGFloat imageWidth = image.size.width;
+    CGFloat imageHeight = image.size.height;
+    CGFloat rectWidth = frame.size.width;
+    CGFloat rectHeight = frame.size.height;
+    
+    //Calculate the scale factor
+    CGFloat scaleFactorX = rectWidth/imageWidth;
+    CGFloat scaleFactorY = rectHeight/imageHeight;
+    
+    //Calculate the centre of the circle
+    CGFloat imageCentreX = rectWidth/2;
+    CGFloat imageCentreY = rectHeight/2;
+    
+    // Create and CLIP to a CIRCULAR Path
+    // (This could be replaced with any closed path if you want a different shaped clip)
+    CGFloat radius = rectWidth/2;
+    CGContextBeginPath (context);
+    CGContextAddArc (context, imageCentreX, imageCentreY, radius, 0, 2*M_PI, 0);
+    CGContextClosePath (context);
+    CGContextClip (context);
+    
+    //Set the SCALE factor for the graphics context
+    //All future draw calls will be scaled by this factor
+    CGContextScaleCTM (context, scaleFactorX, scaleFactorY);
+    
+    // Draw the IMAGE
+    CGRect myRect = CGRectMake(0, 0, imageWidth, imageHeight);
+    [image drawInRect:myRect];
+    
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
 }
 
 
