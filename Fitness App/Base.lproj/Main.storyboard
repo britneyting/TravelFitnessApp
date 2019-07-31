@@ -954,11 +954,5 @@
         <image name="profile_tab" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="wEp-TM-qV6"/>
-        <segue reference="v0F-gj-8R5"/>
-        <segue reference="WQV-e0-FnK"/>
-        <segue reference="aF9-xi-Jrq"/>
-        <segue reference="Izl-Ce-9Fu"/>
-        <segue reference="FwR-YR-iEQ"/>
     </inferredMetricsTieBreakers>
 </document>
