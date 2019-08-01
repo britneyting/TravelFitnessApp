@@ -20,6 +20,7 @@
 		7D416AF222D5054900B8A1D9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D416AF122D5054900B8A1D9 /* main.m */; };
 		7D416AFC22D5054900B8A1D9 /* Fitness_AppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D416AFB22D5054900B8A1D9 /* Fitness_AppTests.m */; };
 		7D416B0722D5054900B8A1D9 /* Fitness_AppUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D416B0622D5054900B8A1D9 /* Fitness_AppUITests.m */; };
+		7D4E1F5322F357BC00F81F21 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D4E1F5222F357BC00F81F21 /* Event.m */; };
 		7D5755CB22DFDE5000C2823C /* PeopleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5755CA22DFDE5000C2823C /* PeopleViewController.m */; };
 		7D5755CE22DFDE5900C2823C /* PlacesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5755CD22DFDE5900C2823C /* PlacesViewController.m */; };
 		7D5755D122DFDEB800C2823C /* PeopleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5755D022DFDEB800C2823C /* PeopleCell.m */; };
@@ -81,6 +82,8 @@
 		7D416B0222D5054900B8A1D9 /* Fitness AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Fitness AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D416B0622D5054900B8A1D9 /* Fitness_AppUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Fitness_AppUITests.m; sourceTree = "<group>"; };
 		7D416B0822D5054900B8A1D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7D4E1F5122F357BC00F81F21 /* Event.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
+		7D4E1F5222F357BC00F81F21 /* Event.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
 		7D5755C922DFDE5000C2823C /* PeopleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PeopleViewController.h; sourceTree = "<group>"; };
 		7D5755CA22DFDE5000C2823C /* PeopleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PeopleViewController.m; sourceTree = "<group>"; };
 		7D5755CC22DFDE5900C2823C /* PlacesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlacesViewController.h; sourceTree = "<group>"; };
@@ -136,6 +139,8 @@
 			children = (
 				1355E47C22E0D3D8003036E3 /* Post.h */,
 				1355E47D22E0D3D8003036E3 /* Post.m */,
+				7D4E1F5122F357BC00F81F21 /* Event.h */,
+				7D4E1F5222F357BC00F81F21 /* Event.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -466,6 +471,7 @@
 				7D990ED522E64CDB005676AC /* ChatViewController.m in Sources */,
 				7D1130BA22EFAB9A00FB39AD /* CustomTextField.m in Sources */,
 				7D416AF222D5054900B8A1D9 /* main.m in Sources */,
+				7D4E1F5322F357BC00F81F21 /* Event.m in Sources */,
 				7D5755CB22DFDE5000C2823C /* PeopleViewController.m in Sources */,
 				7D990ED822E67C09005676AC /* ChatCell.m in Sources */,
 				7DBFB31022F2191C00EBBE74 /* EventsViewController.m in Sources */,

@@ -585,9 +585,6 @@
                                 <rect key="frame" x="89" y="443" width="196" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Create an event at this place"/>
-                                <connections>
-                                    <segue destination="Ila-KQ-bje" kind="presentation" identifier="segueToEvents" id="rgM-Mz-bYK"/>
-                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -607,19 +604,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zwQ-O3-9fy">
-                                <rect key="frame" x="0.0" y="86" width="375" height="149"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CreateEventCell1" rowHeight="73" id="vtZ-qf-1je" customClass="CreateEventCell">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="73"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CreateEventCell" rowHeight="71" id="vtZ-qf-1je" customClass="CreateEventCell">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="71"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vtZ-qf-1je" id="1LG-Y3-242">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="72.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="70.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0bM-br-TiY">
-                                                    <rect key="frame" x="15" y="11" width="345" height="30"/>
+                                                    <rect key="frame" x="15" y="13" width="345" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -633,36 +630,13 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ule-HU-NX2">
-                                <rect key="frame" x="0.0" y="269" width="375" height="305"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CreateEventCell2" rowHeight="81" id="4ct-Xi-1vs" customClass="CreateEventCell">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="81"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4ct-Xi-1vs" id="FqM-At-jYC">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="80.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EAE-AE-2gG">
-                                                    <rect key="frame" x="15" y="25" width="345" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <nil key="textColor"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                </textField>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="infoField2" destination="EAE-AE-2gG" id="9Wh-01-Inu"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
                         <viewLayoutGuide key="safeArea" id="auU-i0-kcN"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="6GN-Ix-uIt" appends="YES" id="esA-dg-vJ5"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="2wB-TY-s3S">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="gDE-T9-TOQ">
@@ -679,11 +653,15 @@
                     <connections>
                         <outlet property="cancelBarButton" destination="gDE-T9-TOQ" id="m0U-Th-uk9"/>
                         <outlet property="createBarButton" destination="xQ2-Hl-w6S" id="r1b-ed-g4o"/>
-                        <outlet property="tableView1" destination="zwQ-O3-9fy" id="eyv-Rp-PSd"/>
-                        <outlet property="tableView2" destination="ule-HU-NX2" id="hIG-bd-QuF"/>
+                        <outlet property="tableView" destination="zwQ-O3-9fy" id="rhR-V6-TuG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PAA-T9-YQw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="6GN-Ix-uIt">
+                    <connections>
+                        <action selector="endEditing:" destination="eeL-GC-Tfk" id="6pC-cz-giD"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="5733.6000000000004" y="1604.3478260869567"/>
         </scene>
@@ -1065,7 +1043,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W55-Oh-PB4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4953" y="1605"/>
+            <point key="canvasLocation" x="5017" y="1631"/>
         </scene>
     </scenes>
     <resources>
@@ -1077,7 +1055,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="wEp-TM-qV6"/>
-        <segue reference="Izl-Ce-9Fu"/>
-        <segue reference="FwR-YR-iEQ"/>
+        <segue reference="v0F-gj-8R5"/>
+        <segue reference="P2Q-rR-Rfd"/>
     </inferredMetricsTieBreakers>
 </document>

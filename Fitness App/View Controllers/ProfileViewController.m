@@ -109,6 +109,21 @@
     }];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    PFQuery *postsPerUser = [Post query];
+    [postsPerUser whereKey:@"username" equalTo:[PFUser currentUser].username];
+    
+    [postsPerUser findObjectsInBackgroundWithBlock:^(NSArray * _Nullable posts, NSError * _Nullable error) {
+        if (posts) {
+            for (Post *post in posts) {
+                [self postPin:(post)];
+            }
+        } else {
+            NSLog(@"Error");
+        }
+    }];
+}
+
 -(void)getCurrentLocation {
     PFUser *currentUser = [PFUser currentUser];
     CLLocationCoordinate2D coordinate;

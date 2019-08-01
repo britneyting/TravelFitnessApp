@@ -12,7 +12,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CreateEventCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UITextField *infoField1;
-@property (strong, nonatomic) IBOutlet UITextField *infoField2;
 
 @end
 
