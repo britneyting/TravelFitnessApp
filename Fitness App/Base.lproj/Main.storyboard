@@ -239,6 +239,7 @@
                         <viewLayoutGuide key="safeArea" id="4EO-wV-y6S"/>
                     </view>
                     <navigationItem key="navigationItem" id="6dd-dL-dlt">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="UiR-Ns-QP3" userLabel="Cancel"/>
                         <barButtonItem key="rightBarButtonItem" title="Share" id="J2B-tO-q8q">
                             <connections>
                                 <action selector="didTapShare:" destination="XOK-SA-Gjl" id="6hl-01-cBs"/>

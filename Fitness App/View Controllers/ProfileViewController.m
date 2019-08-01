@@ -34,7 +34,6 @@
 @end
 
 @implementation ProfileViewController
-
 -(void)viewDidLoad {
     [super viewDidLoad];
     
@@ -94,7 +93,9 @@
         NSLog(@"I am currently at %@",locatedAt);
         [self.locationManager stopUpdatingLocation];
     }];
-    
+}
+
+-(void) viewDidAppear:(BOOL)animated{
     PFQuery *postsPerUser = [Post query];
     [postsPerUser whereKey:@"username" equalTo:[PFUser currentUser].username];
     
