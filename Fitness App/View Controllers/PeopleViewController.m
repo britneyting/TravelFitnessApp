@@ -43,6 +43,7 @@
     
     // construct query
     PFQuery *query = [PFQuery queryWithClassName:@"_User"];
+    [query whereKey:@"username" notEqualTo:currentUser.username];
     [query whereKey:@"coordinates" nearGeoPoint:currentUser[@"coordinates"] withinMiles:10];
     
     // fetch data asynchronously

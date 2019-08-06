@@ -26,9 +26,6 @@
     self.titleBar.title = self.nearbyPerson[@"name"];
 }
 
-- (IBAction)chat:(id)sender {
-}
-
 - (void)fetchData:(MKMapView *)mapView {
     // fetch posts from the user's Parse backend and then post it in the mapview here
     // TO DO: get posts from Parse backend and filter by the key 'author'. Then post all their images onto the mapview and label it with the address.
@@ -40,9 +37,12 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    if ([segue.identifier isEqualToString:@"segueToPeopleDetailsViewController"]){
+    if ([segue.identifier isEqualToString:@"segueToChatViewController"]){
         UINavigationController *navigationController = [segue destinationViewController];
         ChatViewController *chatController = (ChatViewController*)navigationController.topViewController;
+        chatController.navItem.title = self.nearbyPerson[@"name"];
+        chatController.currentUser = [PFUser currentUser];
+        chatController.nearbyPerson = self.nearbyPerson;
     }
 }
 

@@ -64,7 +64,7 @@ using namespace CKComponentControllerHelper;
   CKDataSourceConfiguration *configuration = [oldState configuration];
   id<NSObject> context = [configuration context];
   const CKSizeRange sizeRange = [configuration sizeRange];
-  const auto splitChangesetOptions = [configuration splitChangesetOptions];
+  const auto splitChangesetOptions = [configuration options].splitChangesetOptions;
   const BOOL enableChangesetSplitting = splitChangesetOptions.enabled;
   const CGSize viewportSize = (_viewport.size.width == 0.0 || _viewport.size.height == 0.0)
   ? splitChangesetOptions.viewportBoundingSize
@@ -127,12 +127,10 @@ using namespace CKComponentControllerHelper;
       CKDataSourceItem *const oldItem = section[indexPath.item];
       CKDataSourceItem *const item = CKBuildDataSourceItem([oldItem scopeRoot], {}, sizeRange, configuration, model, context);
       [section replaceObjectAtIndex:indexPath.item withObject:item];
-      if (configuration.shouldInvalidateControllerBetweenComponentGenerations) {
-        for (const auto componentController : removedControllersFromPreviousScopeRootMatchingPredicate(item.scopeRoot,
-                                                                                                       oldItem.scopeRoot,
-                                                                                                       &CKComponentControllerInvalidateEventPredicate)) {
-          [invalidComponentControllers addObject:componentController];
-        }
+      for (const auto componentController : removedControllersFromPreviousScopeRootMatchingPredicate(item.scopeRoot,
+                                                                                                     oldItem.scopeRoot,
+                                                                                                     &CKComponentControllerInvalidateEventPredicate)) {
+        [invalidComponentControllers addObject:componentController];
       }
     }];
   }
@@ -205,7 +203,7 @@ using namespace CKComponentControllerHelper;
                            oldState);
     }
     const auto section = static_cast<NSMutableArray *>(newSections[it.first]);
-#ifdef CK_ASSERTIONS_ENABLED
+#if CK_ASSERTIONS_ENABLED
     const auto invalidIndexes = CK::invalidIndexesForRemovalFromArray(section, it.second);
     if (invalidIndexes.count > 0) {
       CKCFatalWithCategory(CKHumanReadableInvalidChangesetOperationType(CKInvalidChangesetOperationTypeRemoveRow),
@@ -242,7 +240,7 @@ using namespace CKComponentControllerHelper;
                          _userInfo,
                          oldState);
   }
-#ifdef CK_ASSERTIONS_ENABLED
+#if CK_ASSERTIONS_ENABLED
     // Deep validation of the indexes we are going to insert for better logging.
   auto const invalidInsertedSectionsIndexes = CK::invalidIndexesForInsertionInArray(newSections, [_changeset insertedSections]);
   if (invalidInsertedSectionsIndexes.count) {
@@ -327,7 +325,7 @@ using namespace CKComponentControllerHelper;
                            _userInfo,
                            oldState);
     }
-#ifdef CK_ASSERTIONS_ENABLED
+#if CK_ASSERTIONS_ENABLED
     const auto sectionItems = static_cast<NSArray *>([newSections objectAtIndex:sectionIt.first]);
     const auto invalidIndexes = CK::invalidIndexesForInsertionInArray(sectionItems, indexes);
     if (invalidIndexes.count > 0) {
@@ -479,12 +477,10 @@ static CKDataSourceSplitUpdateResult splitUpdatedItems(NSArray<NSArray<CKDataSou
         computedItems[indexPath] = newItem;
         initialUpdatedItems[indexPath] = updatedModel;
         contentSize = addSizeToSize(contentSize, [newItem rootLayout].size());
-        if (configuration.shouldInvalidateControllerBetweenComponentGenerations) {
-          for (const auto componentController : removedControllersFromPreviousScopeRootMatchingPredicate(newItem.scopeRoot,
-                                                                                                         item.scopeRoot,
-                                                                                                         &CKComponentControllerInvalidateEventPredicate)) {
-            [invalidComponentControllers addObject:componentController];
-          }
+        for (const auto componentController : removedControllersFromPreviousScopeRootMatchingPredicate(newItem.scopeRoot,
+                                                                                                       item.scopeRoot,
+                                                                                                       &CKComponentControllerInvalidateEventPredicate)) {
+          [invalidComponentControllers addObject:componentController];
         }
       }
     }];
@@ -549,7 +545,7 @@ static CKDataSourceChangeset *createDeferredChangeset(NSDictionary<NSIndexPath *
   if (insertedItems.count == 0 && updatedItems.count == 0) {
     return nil;
   }
-  return [[[[CKDataSourceChangesetBuilder transactionalComponentDataSourceChangeset]
+  return [[[[CKDataSourceChangesetBuilder dataSourceChangeset]
             withUpdatedItems:updatedItems]
            withInsertedItems:insertedItems]
           build];

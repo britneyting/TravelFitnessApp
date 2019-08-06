@@ -137,9 +137,10 @@ CKMountComponentLayoutResult CKMountComponentLayout(const CKComponentLayout &lay
 CKComponentRootLayout CKComputeRootComponentLayout(CKComponent *rootComponent,
                                                    const CKSizeRange &sizeRange,
                                                    id<CKAnalyticsListener> analyticsListener,
+                                                   CK::Optional<BuildTrigger> buildTrigger,
                                                    std::unordered_set<CKComponentPredicate> predicates)
 {
-  [analyticsListener willLayoutComponentTreeWithRootComponent:rootComponent];
+  [analyticsListener willLayoutComponentTreeWithRootComponent:rootComponent buildTrigger:buildTrigger];
   LayoutSystraceContext systraceContext([analyticsListener systraceListener]);
   CKComponentLayout layout = CKComputeComponentLayout(rootComponent, sizeRange, sizeRange.max);
   CKDetectDuplicateComponent(layout);
@@ -179,5 +180,13 @@ void CKComponentLayout::enumerateLayouts(const std::function<void(const CKCompon
   if (children == nil) { return; }
   for (const auto &child : *children) {
     child.layout.enumerateLayouts(f);
+  }
+}
+
+void CKComponentRootLayout::enumerateComponentControllers(void(^block)(CKComponentController *, CKComponent *)) const
+{
+  for (const auto &it : _layoutCache) {
+    const auto &component = it.first;
+    block(component.controller, component);
   }
 }

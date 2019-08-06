@@ -47,7 +47,6 @@ static NSString *componentStateName(CKComponentControllerState state)
 {
   CKComponentControllerState _state;
   BOOL _updatingComponent;
-  CKComponent *_previousComponent;
 }
 
 - (instancetype)initWithComponent:(CKComponent *)component
@@ -56,6 +55,15 @@ static NSString *componentStateName(CKComponentControllerState state)
     _component = component;
   }
   return self;
+}
+
+- (void)setComponent:(CKComponent *)component
+{
+  if (component != _component) {
+    [self willUpdateComponent];
+    _component = component;
+    _updatingComponent = YES;
+  }
 }
 
 - (void)willMount {}
@@ -79,7 +87,6 @@ static NSString *componentStateName(CKComponentControllerState state)
 {
   if (component != _component) {
     [self willUpdateComponent];
-    _previousComponent = _component;
     _component = component;
     _updatingComponent = YES;
   }
@@ -89,7 +96,6 @@ static NSString *componentStateName(CKComponentControllerState state)
 {
   if (_updatingComponent) {
     [self didUpdateComponent];
-    _previousComponent = nil;
     _updatingComponent = NO;
   }
 }
@@ -186,7 +192,7 @@ static NSString *componentStateName(CKComponentControllerState state)
   if (component == _component) {
     if (view != _view) {
       if (_view) {
-        CKAssertNotNil(_previousComponent, @"Only expect to acquire a new view before relinquishing old if updating");
+        CKAssert(_updatingComponent, @"Only expect to acquire a new view before relinquishing old if updating");
         [self _relinquishView];
       }
       _view = view;

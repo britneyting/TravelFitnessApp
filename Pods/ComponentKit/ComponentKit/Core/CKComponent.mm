@@ -39,6 +39,7 @@
 #import "CKThreadLocalComponentScope.h"
 #import "CKComponentScopeRoot.h"
 #import "CKRenderHelpers.h"
+#import "CKComponentCreationValidation.h"
 
 CGFloat const kCKComponentParentDimensionUndefined = NAN;
 CGSize const kCKComponentParentSizeUndefined = {kCKComponentParentDimensionUndefined, kCKComponentParentDimensionUndefined};
@@ -70,7 +71,7 @@ struct CKComponentMountInfo {
 + (void)initialize
 {
   if (self != [CKComponent class]) {
-    CKAssert(!CKSubclassOverridesSelector([CKComponent class], self, @selector(layoutThatFits:parentSize:)),
+    CKAssert(!CKSubclassOverridesInstanceMethod([CKComponent class], self, @selector(layoutThatFits:parentSize:)),
              @"%@ overrides -layoutThatFits:parentSize: which is not allowed. Override -computeLayoutThatFits: "
              "or -computeLayoutThatFits:restrictedToSize:relativeToParentSize: instead.",
              self);
@@ -103,6 +104,7 @@ struct CKComponentMountInfo {
                         size:(const CKComponentSize &)size
 {
   if (self = [super init]) {
+    CKValidateComponentCreation();
     _scopeHandle = [CKComponentScopeHandle handleForComponent:self];
     _viewConfiguration = view;
     _size = size;
@@ -114,6 +116,7 @@ struct CKComponentMountInfo {
                                        size:(const CKComponentSize &)size
 {
   if (self = [super init]) {
+    CKValidateComponentCreation();
     // Mark render component in the scope root.
     CKThreadLocalComponentScope::markCurrentScopeWithRenderComponentInTree();
     CKComponentContextHelper::didCreateRenderComponent(self);
@@ -247,6 +250,11 @@ struct CKComponentMountInfo {
 
     return {.mountChildren = YES, .contextForChildren = effectiveContext};
   }
+}
+
+- (NSString *)backtraceStackDescription
+{
+  return CKComponentBacktraceStackDescription(generateComponentBacktrace(self));
 }
 
 - (void)unmount
@@ -437,9 +445,9 @@ static void *kRootComponentMountedViewKey = &kRootComponentMountedViewKey;
   const auto &it = cache->find(componentClass);
   if (it == cache->end()) {
     BOOL hasAnimations = NO;
-    if (CKSubclassOverridesSelector([CKComponent class], componentClass, @selector(animationsFromPreviousComponent:)) ||
-        CKSubclassOverridesSelector([CKComponent class], componentClass, @selector(animationsOnInitialMount)) ||
-        CKSubclassOverridesSelector([CKComponent class], componentClass, @selector(animationsOnFinalUnmount))) {
+    if (CKSubclassOverridesInstanceMethod([CKComponent class], componentClass, @selector(animationsFromPreviousComponent:)) ||
+        CKSubclassOverridesInstanceMethod([CKComponent class], componentClass, @selector(animationsOnInitialMount)) ||
+        CKSubclassOverridesInstanceMethod([CKComponent class], componentClass, @selector(animationsOnFinalUnmount))) {
       hasAnimations = YES;
     }
     cache->insert({componentClass, hasAnimations});

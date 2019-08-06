@@ -46,9 +46,6 @@ struct CKBuildComponentTreeParams {
   // @discussion "Dirty nodes" are used to implement optimizations as faster state updates and faster props updates.
   const CKTreeNodeDirtyIds &treeNodeDirtyIds;
 
-  //  Enable faster props updates optimization for render components.
-  BOOL enableFasterPropsUpdates = NO;
-
   // The trigger for initiating a new generation
   BuildTrigger buildTrigger;
 
@@ -57,11 +54,9 @@ struct CKBuildComponentTreeParams {
 
   // When enabled, all the comopnents will be regenerated (no component reuse optimiztions).
   BOOL ignoreComponentReuseOptimizations = NO;
-
-#if DEBUG
-  // Will be used to gather information reagrding reused components during debug only.
-  std::shared_ptr<CKTreeNodeReuseMap> canBeReusedNodes = std::make_shared<CKTreeNodeReuseMap>();
-#endif
+  
+  // When enabled, we will cache the layout in render components and reuse it during a component reuse. */
+  BOOL enableLayoutCache = NO;
 };
 
 @protocol CKTreeNodeWithChildrenProtocol;
@@ -122,19 +117,8 @@ struct CKBuildComponentTreeParams {
 /** Returns the componeny key according to its current owner */
 - (const CKTreeNodeComponentKey &)componentKey;
 
-/** Returns the initial state of the component */
-- (id)initialStateWithComponent:(id<CKTreeNodeComponentProtocol>)component;
-
-/** Returns whether component requires a scope handle */
-- (BOOL)componentRequiresScopeHandle:(Class<CKTreeNodeComponentProtocol>)component;
-
 /** This method should be called after a node has been reused */
 - (void)didReuseInScopeRoot:(CKComponentScopeRoot *)scopeRoot fromPreviousScopeRoot:(CKComponentScopeRoot *)previousScopeRoot;
-
-/** This method will called during the tree node creation in order to provide the component key based on the parent */
-- (CKTreeNodeComponentKey)createComponentKeyForComponent:(id<CKTreeNodeComponentProtocol>)component
-                                                  parent:(id<CKTreeNodeWithChildrenProtocol>)parent
-                                          componentClass:(Class<CKTreeNodeComponentProtocol>)componentClass;
 
 #if DEBUG
 /** Returns a multi-line string describing this node and its children nodes */
