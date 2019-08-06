@@ -17,10 +17,11 @@
 
 @interface EventsHereViewController () <UITableViewDelegate, UITableViewDataSource, EventsViewControllerDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) IBOutlet PFImageView *coverPhoto;
+@property (strong, nonatomic) IBOutlet UIImageView *coverPhoto;
 @property (strong, nonatomic) NSArray *eventsHere;
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
 
 @end
 
@@ -31,6 +32,7 @@
     // Do any additional setup after loading the view.
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    [self.coverPhoto setImage:self.coverPhotoImage];
     [self.tableView setTableHeaderView:self.coverPhoto];
     [self fetchData];
     self.tableView.rowHeight = 350;
@@ -62,7 +64,6 @@
     PFQuery *query = [PFQuery queryWithClassName:@"Event"];
     [query includeKey:@"poster"];
     [query whereKey:@"eventLocation" equalTo:self.locationHere];
-//    [query whereKey:@"eventLocation" equalTo:@"1 Hacker Way, La Jolla, San Diego, CA 91823"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *eventsHere, NSError *error) {
         if (eventsHere) {
             self.eventsHere = eventsHere;
@@ -111,6 +112,11 @@
     [self fetchData];
     [self.tableView reloadData];
 }
+
+- (IBAction)cancel:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
      /*
       #pragma mark - Navigation
       

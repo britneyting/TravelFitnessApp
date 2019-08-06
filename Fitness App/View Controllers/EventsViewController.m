@@ -36,6 +36,7 @@
     
     self.cell1Info = [[NSArray alloc] initWithObjects:@"Title", @"Location", @"Date", nil];
     self.cell2Info = [[NSArray alloc] initWithObjects:@"Activity Type", @"RSVPs Limit", @"Equipment", @"More info", nil];
+    NSLog(@"Location here is: %@", self.locationHere);
 }
 
 - (IBAction)cancel:(id)sender {

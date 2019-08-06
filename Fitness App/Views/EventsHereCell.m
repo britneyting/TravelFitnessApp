@@ -10,6 +10,10 @@
 #import "UILabel+FormattedText.h"
 #import "Parse/Parse.h"
 
+@interface EventsHereCell ()
+@property (strong, nonatomic) NSMutableArray *mutableEventsArray;
+@end
+
 @implementation EventsHereCell
 
 - (void)awakeFromNib {
@@ -26,17 +30,23 @@
 - (IBAction)didTapRSVP:(id)sender {
     
     PFUser *currentUser = [PFUser currentUser];
+    
+    // Parse's arrays are immutable, so need to initialize a mutable array to change backend
+    self.mutableEventsArray = [[NSMutableArray alloc] initWithArray:currentUser[@"eventsRSVPed"]];
 
     // updates color and count of RSVP when pressed/unpressed
-    if ([currentUser[@"eventsRSVPed"] containsObject:self.event.objectId]) {
+    if ([self.mutableEventsArray containsObject:self.event.objectId]) {
         self.event.RSVPed -= 1;
-        [currentUser[@"eventsRSVPed"] removeObject:self.event.objectId];
+        [self.mutableEventsArray removeObject:self.event.objectId];
+        currentUser[@"eventsRSVPed"] = self.mutableEventsArray;
         [self saveEventInBackground:self.event withAction:@"unRSVPed"];
         [self saveUserInBackground:currentUser withAction:@"removed"];
     }
-    else if (![currentUser[@"eventsRSVPed"] containsObject:self.event.objectId]) {
+    else if (![self.mutableEventsArray containsObject:self.event.objectId]) {
         self.event.RSVPed += 1;
-        [currentUser[@"eventsRSVPed"] addObject:self.event.objectId];
+        [self.mutableEventsArray addObject:self.event.objectId];
+        currentUser[@"eventsRSVPed"] = self.mutableEventsArray;
+        
         [self saveEventInBackground:self.event withAction:@"RSVPed"];
         [self saveUserInBackground:currentUser withAction:@"added"];
     }
