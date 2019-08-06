@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *cancelBarButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *createBarButton;
+@property (strong, nonatomic) NSString *locationHere;
 
 @end
 

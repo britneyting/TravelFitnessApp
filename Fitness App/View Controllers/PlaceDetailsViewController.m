@@ -8,7 +8,8 @@
 
 #import "PlaceDetailsViewController.h"
 #import <MapKit/MapKit.h>
-
+#import "EventsViewController.h"
+#import "EventsHereViewController.h"
 
 @interface PlaceDetailsViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *backdrop;
@@ -54,5 +55,20 @@
     
     NSLog(@"I am currently at bueno %@",self.address.text);
     return address;
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"seguetoEventsVC"]){
+        UINavigationController *navigationController = [segue destinationViewController];
+        EventsViewController *eventController = (EventsViewController*)navigationController.topViewController;
+        eventController.locationHere = self.locatedAt;
+    }
+    if ([segue.identifier isEqualToString:@"seguetoEventsHereVC"]){
+        UINavigationController *navigationController = [segue destinationViewController];
+        EventsHereViewController *eventHereController = (EventsHereViewController*)navigationController.topViewController;
+        eventHereController.locationHere = self.locatedAt;
+    }
 }
 @end

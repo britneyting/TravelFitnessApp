@@ -60,8 +60,8 @@
     // construct query
     PFQuery *query = [PFQuery queryWithClassName:@"Event"];
     [query includeKey:@"poster"];
-//    [query whereKey:@"eventLocation" equalTo:self.locationHere];
-    [query whereKey:@"eventLocation" equalTo:@"1 Hacker Way, La Jolla, San Diego, CA 91823"];
+    [query whereKey:@"eventLocation" equalTo:self.locationHere];
+//    [query whereKey:@"eventLocation" equalTo:@"1 Hacker Way, La Jolla, San Diego, CA 91823"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *eventsHere, NSError *error) {
         if (eventsHere) {
             self.eventsHere = eventsHere;

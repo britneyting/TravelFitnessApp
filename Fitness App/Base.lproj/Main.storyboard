@@ -586,13 +586,16 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Create an event at this place"/>
                                 <connections>
-                                    <segue destination="Ila-KQ-bje" kind="presentation" id="BEl-JV-13v"/>
+                                    <segue destination="Ila-KQ-bje" kind="presentation" identifier="segueToEventsVC" id="BEl-JV-13v"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ffM-XG-yRh">
                                 <rect key="frame" x="108" y="509" width="159" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Upcoming events here!"/>
+                                <connections>
+                                    <segue destination="KO4-Kf-72b" kind="presentation" identifier="segueToEventsHereVC" id="bbY-UU-yQT"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z7N-u2-xyH">
                                 <rect key="frame" x="16" y="216" width="359" height="54"/>
@@ -882,22 +885,6 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8If-sh-aKs">
-                                <rect key="frame" x="175" y="471" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <segue destination="KO4-Kf-72b" kind="presentation" id="DNe-AH-36b"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1TL-99-cFU">
-                                <rect key="frame" x="127" y="401" width="143" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Create an event here"/>
-                                <connections>
-                                    <segue destination="Ila-KQ-bje" kind="presentation" id="C3G-13-jea"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="VCt-d5-Wwq"/>
@@ -1263,8 +1250,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Eagle Peak" width="274" height="184"/>
         <image name="Activity Type" width="64" height="64"/>
+        <image name="Eagle Peak" width="274" height="184"/>
         <image name="Equipment" width="64" height="64"/>
         <image name="More Info" width="24" height="24"/>
         <image name="Organizer" width="50" height="50"/>
@@ -1276,7 +1263,6 @@
         <image name="profile_tab" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="C3G-13-jea"/>
         <segue reference="wEp-TM-qV6"/>
         <segue reference="v0F-gj-8R5"/>
         <segue reference="P2Q-rR-Rfd"/>

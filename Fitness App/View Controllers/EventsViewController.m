@@ -114,6 +114,10 @@
             [toolBar setItems:[NSArray arrayWithObjects:space,doneBtn, nil]];
             [cell.infoField1 setInputAccessoryView:toolBar];
         }
+        if ([placeholderText isEqualToString:@"Location"]) {
+            cell.infoField1.text = self.locationHere;
+            [cell.infoField1 setUserInteractionEnabled:NO];
+        }
     }
     if (indexPath.section == 1) {
         NSString *placeholderText = self.cell2Info[indexPath.row];
