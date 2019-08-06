@@ -69,15 +69,18 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"seguetoEventsVC"]){
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"segueToEventsVC"]){
         UINavigationController *navigationController = [segue destinationViewController];
         EventsViewController *eventController = (EventsViewController*)navigationController.topViewController;
         eventController.locationHere = self.locatedAt;
     }
-    if ([segue.identifier isEqualToString:@"seguetoEventsHereVC"]){
+    if ([segue.identifier isEqualToString:@"segueToEventsHereVC"]){
         UINavigationController *navigationController = [segue destinationViewController];
         EventsHereViewController *eventHereController = (EventsHereViewController*)navigationController.topViewController;
         eventHereController.locationHere = self.locatedAt;
+        eventHereController.coverPhotoImage = [UIImage imageNamed:self.location.placeName];
     }
 }
 @end

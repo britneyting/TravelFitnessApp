@@ -14,5 +14,6 @@ target 'Fitness App' do
   pod 'AFNetworking'
   pod 'SendBirdSDK'
   pod "PubNub", "~> 4"
+  pod 'ProgressHUD'
 
 end

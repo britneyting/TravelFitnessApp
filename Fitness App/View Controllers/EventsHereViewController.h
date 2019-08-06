@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface EventsHereViewController : UIViewController
 
 @property (strong, nonatomic) NSString *locationHere;
+@property (strong, nonatomic) UIImage *coverPhotoImage;
 
 @end
 

@@ -570,7 +570,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xeA-5y-DfD">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xeA-5y-DfD">
                                 <rect key="frame" x="0.0" y="20" width="375" height="161"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -708,7 +708,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <imageView key="tableHeaderView" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="ymi-R3-cVT" customClass="PFImageView">
+                                <imageView key="tableHeaderView" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="ymi-R3-cVT">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="157"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </imageView>
@@ -835,10 +835,17 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="IgQ-W8-xV3"/>
                     </view>
-                    <navigationItem key="navigationItem" id="OlW-yG-3Y2"/>
+                    <navigationItem key="navigationItem" id="OlW-yG-3Y2">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="eeX-8e-PMJ">
+                            <connections>
+                                <action selector="cancel:" destination="gf0-WP-xGD" id="u4p-sv-opR"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="activityIndicator" destination="nPj-0C-YV2" id="6Ec-1b-BvR"/>
-                        <outlet property="coverPhoto" destination="ymi-R3-cVT" id="T4l-Mc-pDr"/>
+                        <outlet property="cancelButton" destination="eeX-8e-PMJ" id="P4A-20-XT3"/>
+                        <outlet property="coverPhoto" destination="ymi-R3-cVT" id="oVR-v4-cUM"/>
                         <outlet property="tableView" destination="1Ao-Cd-9GM" id="fuD-1j-BnV"/>
                     </connections>
                 </viewController>
