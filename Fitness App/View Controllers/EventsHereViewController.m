@@ -11,10 +11,11 @@
 #import "Parse/Parse.h"
 #import "Event.h"
 #import "UILabel+FormattedText.h"
+#import "EventsViewController.h"
 
 @import Parse;
 
-@interface EventsHereViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface EventsHereViewController () <UITableViewDelegate, UITableViewDataSource, EventsViewControllerDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet PFImageView *coverPhoto;
 @property (strong, nonatomic) NSArray *eventsHere;
@@ -80,6 +81,8 @@
      }
      
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    PFUser *currentUser = [PFUser currentUser];
     EventsHereCell *cell = [tableView dequeueReusableCellWithIdentifier:@"EventsHereCell" forIndexPath:indexPath];
     Event *event = self.eventsHere[indexPath.row];
     cell.event = event;
@@ -96,8 +99,18 @@
     [cell.descriptionLabel setTextColor:[UIColor lightGrayColor] String:@"Description:"];
     cell.equipmentLabel.text = [NSString stringWithFormat:@"Equipment: %@", event.equipment];
     [cell.equipmentLabel setTextColor:[UIColor lightGrayColor] String:@"Equipment:"];
+    
+    if ([currentUser[@"eventsRSVPed"] containsObject:event.objectId]) {
+        [cell.rsvpButton setSelected:YES];
+    }
+    
     return cell;
      }
+
+- (void)didCreate {
+    [self fetchData];
+    [self.tableView reloadData];
+}
      /*
       #pragma mark - Navigation
       

@@ -9,6 +9,7 @@
 #import "EventsViewController.h"
 #import "CreateEventCell.h"
 #import "Event.h"
+#import "ProgressHUD.h"
 
 @interface EventsViewController () <UITableViewDelegate, UITableViewDataSource, UIPickerViewDataSource, UIPickerViewDelegate>
 
@@ -43,7 +44,6 @@
 - (IBAction)createEvent:(id)sender {
     // store the info in the text fields to backend in an 'Event' class to post later on
     [self createEventforPlace];
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)createEventforPlace {
@@ -53,15 +53,20 @@
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
     formatter.numberStyle = NSNumberFormatterDecimalStyle;
     
+    [ProgressHUD show:@"Please wait..."];
+    
     for (CreateEventCell *cell in self.tableView.visibleCells) {
         [info addObject:cell.infoField1.text];
     }
     [Event createEvent:info[0] withLocation:info[1] withEventDate:info[2] withActivityType:info[3] withRSVPsLimit:[formatter numberFromString:info[4]] withEquipment:info[5] withMoreInfo:info[6] withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {
             NSLog(@"Successfully created event and uploaded to backend!");
+            [self.delegate didCreate];
+            [ProgressHUD dismiss];
+            [self dismissViewControllerAnimated:YES completion:nil];
         }
         else {
-            NSLog(@"Failed to create event :^(");
+            NSLog(@"Failed to create event :^(: %@", error.localizedDescription);
         }
     }];
 }
@@ -122,17 +127,17 @@
             [cell.infoField1 setKeyboardType:UIKeyboardTypeNumberPad];
         }
         else if ([placeholderText isEqualToString:@"Activity Type"]) {
-            self.choicePicker = [[UIPickerView alloc] init];
-            self.choicePicker.backgroundColor = [UIColor whiteColor];
-            self.choicePicker.contentMode = UIViewContentModeCenter;
-            [self.choicePicker setValue:[UIColor blackColor] forKey:@"textColor"];
-            [cell.infoField1 setInputView:self.choicePicker];
-            UIToolbar *toolBar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
-            [toolBar setTintColor:[UIColor darkGrayColor]];
-            UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action: @selector(ShowSelectedActivity:)];
-            UIBarButtonItem *space = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-            [toolBar setItems:[NSArray arrayWithObjects:space,doneBtn, nil]];
-            [cell.infoField1 setInputAccessoryView:toolBar];
+//            self.choicePicker = [[UIPickerView alloc] init];
+//            self.choicePicker.backgroundColor = [UIColor whiteColor];
+//            self.choicePicker.contentMode = UIViewContentModeCenter;
+//            [self.choicePicker setValue:[UIColor blackColor] forKey:@"textColor"];
+//            [cell.infoField1 setInputView:self.choicePicker];
+//            UIToolbar *toolBar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
+//            [toolBar setTintColor:[UIColor darkGrayColor]];
+//            UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action: @selector(ShowSelectedActivity:)];
+//            UIBarButtonItem *space = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+//            [toolBar setItems:[NSArray arrayWithObjects:space,doneBtn, nil]];
+//            [cell.infoField1 setInputAccessoryView:toolBar];
         }
     }
     return cell;

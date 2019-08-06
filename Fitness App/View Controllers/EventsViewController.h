@@ -10,10 +10,17 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol EventsViewControllerDelegate
+
+- (void)didCreate; // automatically reloads data so event appears without having to manually refresh the page
+
+@end
+
 @interface EventsViewController : UIViewController
 
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *cancelBarButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *createBarButton;
+@property (nonatomic, weak) id<EventsViewControllerDelegate> delegate;
 
 @end
 

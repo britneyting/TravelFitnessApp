@@ -27,6 +27,7 @@ PODS:
     - Bolts/Tasks (~> 1.9)
   - Parse/UI (1.17.2):
     - Parse/Core
+  - ProgressHUD (2.51)
   - PubNub (4.8.11):
     - PubNub/Core (= 4.8.11)
   - PubNub/Core (4.8.11)
@@ -38,6 +39,7 @@ DEPENDENCIES:
   - GoogleMaps
   - Parse
   - Parse/UI
+  - ProgressHUD
   - PubNub (~> 4)
   - SendBirdSDK
 
@@ -48,6 +50,7 @@ SPEC REPOS:
     - DateTools
     - GoogleMaps
     - Parse
+    - ProgressHUD
     - PubNub
     - SendBirdSDK
 
@@ -57,9 +60,10 @@ SPEC CHECKSUMS:
   DateTools: 933ac9c490f21f92127cf690ccd8c397e0126caf
   GoogleMaps: 5046d7edfe381c1a0b20fdaf293915a375c3122b
   Parse: 3b31a3dd1777b07ee7f0caee32fafbff544483a5
+  ProgressHUD: 54b4c2fa202bf3da7dddc1c698ae4e6376333bd9
   PubNub: 0e00678cf094c4e5e3849f14dd3139bc569cc1e9
   SendBirdSDK: 1a28092e753b8181f81f42fe96337d8d15e30dc9
 
-PODFILE CHECKSUM: 7f8225d31b0a441a8edfb56efde752921d58598d
+PODFILE CHECKSUM: 556841b2c8c8b386f4283414b35ba6eafd4618c2
 
 COCOAPODS: 1.7.2
