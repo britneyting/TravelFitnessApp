@@ -110,14 +110,6 @@
     [textView becomeFirstResponder];
 }
 
-//- (void)textViewDidEndEditing:(UITextView *)textView {
-//    if ([textView.text isEqualToString:@""]) {
-//        textView.text = self.placeholderText;
-//        textView.textColor = [UIColor lightGrayColor];
-//    }
-//    [textView resignFirstResponder];
-//}
-
 -(void)dismissKeyboard{
     [self.captionTextView resignFirstResponder];
 }
