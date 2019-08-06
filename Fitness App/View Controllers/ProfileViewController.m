@@ -59,41 +59,13 @@
     self.myMapView.showsBuildings = YES;
     self.myMapView.delegate = self;
     self.locationManager = [[CLLocationManager alloc] init];
-    
+
     [self.locationManager startUpdatingLocation];
     self.loc= [[CLGeocoder alloc]init];
     [self.locationManager requestWhenInUseAuthorization];
     if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
         [self.locationManager requestWhenInUseAuthorization];
     }
-    CLLocationCoordinate2D coordinate;
-    coordinate.latitude=self.locationManager.location.coordinate.latitude;
-    coordinate.longitude=self.locationManager.location.coordinate.longitude;
-    MKPointAnnotation *marker = [MKPointAnnotation new];
-    marker.coordinate = coordinate;
-    CLLocation *loc = [[CLLocation alloc]initWithLatitude:coordinate.latitude longitude:coordinate.longitude];
-    
-    [self.loc reverseGeocodeLocation:loc completionHandler:^(NSArray *placemarks, NSError *error) {
-        CLPlacemark *placemark = [placemarks objectAtIndex:0];
-        NSLog(@"placemark %@",placemark);
-        
-        //address starts here
-        NSString *locatedAt = [[placemark.addressDictionary valueForKey:@"FormattedAddressLines"] componentsJoinedByString:@", "];
-        NSLog(@"addressDictionary %@", placemark.addressDictionary);
-        
-        NSLog(@"placemark %@",placemark.region);
-        NSLog(@"placemark %@",placemark.country);
-        NSLog(@"placemark %@",placemark.locality);
-        NSLog(@"location %@",placemark.name);
-        NSLog(@"location %@",placemark.ocean);
-        NSLog(@"location %@",placemark.postalCode);
-        NSLog(@"location %@",placemark.subLocality);
-        
-        NSLog(@"location %@",placemark.location);
-        //Print the location to console
-        NSLog(@"I am currently at %@",locatedAt);
-        [self.locationManager stopUpdatingLocation];
-    }];
     
     PFQuery *postsPerUser = [Post query];
     [postsPerUser whereKey:@"username" equalTo:[PFUser currentUser].username];

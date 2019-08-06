@@ -562,10 +562,10 @@
             </objects>
             <point key="canvasLocation" x="5733.6000000000004" y="939.58020989505258"/>
         </scene>
-        <!--View Controller-->
+        <!--Place Details View Controller-->
         <scene sceneID="vu4-Oj-wAm">
             <objects>
-                <viewController id="cTC-4g-PaH" sceneMemberID="viewController">
+                <viewController id="cTC-4g-PaH" customClass="PlaceDetailsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pSh-E3-UST">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -574,8 +574,8 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="161"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DVI-2b-PV3">
-                                <rect key="frame" x="16" y="198" width="343" height="206"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DVI-2b-PV3">
+                                <rect key="frame" x="16" y="305" width="343" height="99"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -586,22 +586,37 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Create an event at this place"/>
                                 <connections>
-                                    <segue destination="Ila-KQ-bje" kind="presentation" id="BEl-JV-13v"/>
+                                    <segue destination="Ila-KQ-bje" kind="presentation" identifier="segueToEventsVC" id="BEl-JV-13v"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ffM-XG-yRh">
                                 <rect key="frame" x="108" y="509" width="159" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Upcoming events here!"/>
+                                <connections>
+                                    <segue destination="KO4-Kf-72b" kind="presentation" identifier="segueToEventsHereVC" id="bbY-UU-yQT"/>
+                                </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z7N-u2-xyH">
+                                <rect key="frame" x="16" y="216" width="359" height="54"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="3fY-mZ-uxR"/>
                     </view>
+                    <connections>
+                        <outlet property="address" destination="DVI-2b-PV3" id="9FY-yV-dDb"/>
+                        <outlet property="backdrop" destination="xeA-5y-DfD" id="JUX-As-URu"/>
+                        <outlet property="name" destination="z7N-u2-xyH" id="EtU-Qt-f8Q"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1XT-Ts-COJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4196" y="1606"/>
+            <point key="canvasLocation" x="4196" y="1605.2473763118442"/>
         </scene>
         <!--Events View Controller-->
         <scene sceneID="zSQ-kn-DGB">
@@ -832,60 +847,56 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="a9u-Iz-uAM">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="rZp-B6-7vZ">
-                                    <size key="itemSize" width="171" height="259"/>
+                                    <size key="itemSize" width="179" height="273"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gBj-hx-co1">
-                                        <rect key="frame" x="0.0" y="0.0" width="171" height="259"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="EventCollectionViewCell" id="gBj-hx-co1" customClass="EventCollectionViewCell">
+                                        <rect key="frame" x="0.0" y="0.0" width="179" height="273"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="171" height="259"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="179" height="273"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b8B-Y0-TEz">
-                                                    <rect key="frame" x="0.0" y="0.0" width="179" height="291"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Eagle Peak" translatesAutoresizingMaskIntoConstraints="NO" id="b8B-Y0-TEz">
+                                                    <rect key="frame" x="0.0" y="0.0" width="179" height="219"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="45Q-ay-93O">
+                                                    <rect key="frame" x="0.0" y="227" width="179" height="46"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </view>
                                         <connections>
+                                            <outlet property="placeName" destination="45Q-ay-93O" id="p0f-WX-hrc"/>
+                                            <outlet property="posterView" destination="b8B-Y0-TEz" id="73s-iT-VTG"/>
                                             <segue destination="cTC-4g-PaH" kind="show" id="IUF-nD-UOT"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8If-sh-aKs">
-                                <rect key="frame" x="175" y="471" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <segue destination="KO4-Kf-72b" kind="presentation" id="DNe-AH-36b"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1TL-99-cFU">
-                                <rect key="frame" x="127" y="401" width="143" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Create an event here"/>
-                                <connections>
-                                    <segue destination="Ila-KQ-bje" kind="presentation" id="C3G-13-jea"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="VCt-d5-Wwq"/>
                     </view>
                     <navigationItem key="navigationItem" id="hZl-tD-ZuF"/>
+                    <connections>
+                        <outlet property="collectionView" destination="a9u-Iz-uAM" id="7mU-Sp-5YD"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pyP-qF-gx5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3449" y="1606"/>
+            <point key="canvasLocation" x="3448.8000000000002" y="1605.2473763118442"/>
         </scene>
         <!--Full Post View Controller-->
         <scene sceneID="LPn-jh-vmq">
@@ -1217,7 +1228,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W55-Oh-PB4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5017" y="1631"/>
+            <point key="canvasLocation" x="4953" y="1605"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="R4b-xw-Gmy">
@@ -1240,6 +1251,7 @@
     </scenes>
     <resources>
         <image name="Activity Type" width="64" height="64"/>
+        <image name="Eagle Peak" width="274" height="184"/>
         <image name="Equipment" width="64" height="64"/>
         <image name="More Info" width="24" height="24"/>
         <image name="Organizer" width="50" height="50"/>
@@ -1251,7 +1263,6 @@
         <image name="profile_tab" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="C3G-13-jea"/>
         <segue reference="wEp-TM-qV6"/>
         <segue reference="v0F-gj-8R5"/>
         <segue reference="P2Q-rR-Rfd"/>
