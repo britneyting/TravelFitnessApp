@@ -94,15 +94,10 @@
     coordinate.longitude=self.locationManager.location.coordinate.longitude;
     PFGeoPoint *geoPoint = [PFGeoPoint geoPointWithLatitude:coordinate.latitude longitude:coordinate.longitude];
     currentUser[@"coordinates"] = geoPoint;
-    
-    [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-        if (succeeded)
-            NSLog(@"Successfully updated user's current location in backend");
-    }];
+    [currentUser saveInBackground];
 }
 
 -(void)mapView: (MKMapView *) mapView didUpdateUserLocation:(nonnull MKUserLocation *)userLocation{
-    NSLog(@"%f , %f !!", self.myMapView.userLocation.coordinate.latitude, self.myMapView.userLocation.coordinate.longitude);
     [self getCurrentLocation];
     MKMapCamera *camera = [MKMapCamera cameraLookingAtCenterCoordinate:userLocation.coordinate fromEyeCoordinate:CLLocationCoordinate2DMake(userLocation.coordinate.latitude, userLocation.coordinate.longitude) eyeAltitude:10000];
     [mapView setCamera:camera animated:NO];
@@ -214,7 +209,6 @@
     PhotoAnnotation *point = [[PhotoAnnotation alloc] init];
     point.coordinate = coordinate;
     point.subtitletitle = post[@"caption"];
-    NSLog(@"individual caption is: %@", point.subtitletitle);
     point.photo = [self circularScaleAndCropImage:self.editedPinImage frame:CGRectMake(0, 0, 40, 40)];
     point.fullPhoto = self.originalPinImage;
     
