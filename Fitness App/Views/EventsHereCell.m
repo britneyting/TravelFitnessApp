@@ -14,19 +14,16 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 - (IBAction)didTapRSVP:(id)sender {
     
     PFUser *currentUser = [PFUser currentUser];
-
+    
     // updates color and count of RSVP when pressed/unpressed
     if ([currentUser[@"eventsRSVPed"] containsObject:self.event.objectId]) {
         self.event.RSVPed -= 1;
@@ -51,7 +48,7 @@
             NSLog(@"Error in %@ :^(", action);
         }
     }];
-     }
+}
 
 - (void)saveUserInBackground:(PFUser *)currentUser withAction:(NSString *)action {
     [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
@@ -67,7 +64,7 @@
 - (void)refreshData:(Event *)event {
     
     PFUser *currentUser = [PFUser currentUser];
-
+    
     if ([currentUser[@"eventsRSVPed"] containsObject:self.event.objectId]) {
         [self.rsvpButton setSelected:YES];
         

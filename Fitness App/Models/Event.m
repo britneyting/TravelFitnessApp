@@ -26,7 +26,6 @@
 }
 
 + (void) createEvent: (NSString *)eventTitle withLocation: (NSString *)eventlocation withEventDate:(NSString *)eventDate withActivityType:(NSString *)activityType withRSVPsLimit:(NSNumber *)rsvpsLimit withEquipment:(NSString *)equipment withMoreInfo:(NSString *)moreInfo withCompletion: (PFBooleanResultBlock  _Nullable)completion {
-    
     Event *newEvent = [Event new];
     newEvent.poster = [PFUser currentUser];
     newEvent.username = newEvent.poster.username;

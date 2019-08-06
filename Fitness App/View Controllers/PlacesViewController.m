@@ -31,16 +31,6 @@
     [self fetchPlaces];
 }
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
-
 - (void)fetchPlaces {
     NSURL *url = [NSURL URLWithString:@"https://reverse.geocoder.api.here.com/6.2/reversegeocode.json?app_id=iy3n2fifoeJ39mPMVvg1&app_code=ItjY8yqzUcQMPmVjXtciqw&mode=retrieveLandmarks&prox=37.7442,-119.5931,1000"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10.0];
@@ -72,15 +62,11 @@
                     picture = [UIImage imageNamed:@"Yosemite National Park"];
                 NSData *imageData = UIImageJPEGRepresentation(picture, 1.0);
                 place.image = [PFFileObject fileObjectWithName:@"image.png" data:imageData];
-                
-                
                 [self.places addObject:place];
-                
             }
         }
         [self.collectionView reloadData];
     }];
-    
     [task resume];
 }
 
@@ -88,10 +74,7 @@
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
     Place *test = [Place new];
     EventCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"EventCollectionViewCell" forIndexPath:indexPath];
-    
-//    NSDictionary *locations = self.places[indexPath.row];
     test = ((Place *)(self.places[indexPath.row]));
-//    cell.place = test;
     cell.placeName.text = test.placeName;
     cell.placeType = test.placeType;
     UIImage *img = [UIImage imageNamed:cell.placeName.text];
@@ -104,17 +87,11 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
     UICollectionViewCell *tappedCell = sender;
     NSIndexPath *indexPath = [self.collectionView indexPathForCell:tappedCell];
-    
-    
-    
     Place *place = self.places[indexPath.row];
     PlaceDetailsViewController *placeDetailsViewController = [segue destinationViewController];
     placeDetailsViewController.location = place;
-//    placeDetailsViewController.place = place;
 }
 
 @end

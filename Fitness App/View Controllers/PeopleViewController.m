@@ -23,16 +23,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    
     [self fetchData];
-        
-    // code for activity indicator (refresh)
-    self.refreshControl = [[UIRefreshControl alloc] init]; // do self refreshControl instead of UIRefreshControl *refreshControl since we already declared the variable refreshControl in properties
+    self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(fetchData) forControlEvents:UIControlEventValueChanged];
-    [self.tableView insertSubview:self.refreshControl atIndex:0]; // inserts the activity indicator at index0 (before the first tweet)
+    [self.tableView insertSubview:self.refreshControl atIndex:0];
 }
 
 - (void)fetchData {
@@ -41,12 +37,10 @@
     PFUser *currentUser = [PFUser currentUser];
     NSLog(@"%@", currentUser[@"coordinates"]);
     
-    // construct query
     PFQuery *query = [PFQuery queryWithClassName:@"_User"];
     [query whereKey:@"username" notEqualTo:currentUser.username];
     [query whereKey:@"coordinates" nearGeoPoint:currentUser[@"coordinates"] withinMiles:10];
     
-    // fetch data asynchronously
     [query findObjectsInBackgroundWithBlock:^(NSArray *nearbyPeople, NSError *error) {
         if (nearbyPeople) {
             // do something with the array of object returned by the call
@@ -66,9 +60,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     PeopleCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PeopleCell" forIndexPath:indexPath];
-    
     PFUser *nearbyPerson = self.nearbyPeople[indexPath.row];
     cell.nearbyPerson = nearbyPerson;
     cell.nameLabel.text = nearbyPerson[@"name"];
@@ -77,14 +69,11 @@
     cell.descriptionLabel.text = nearbyPerson[@"description"];
     cell.profilePic.file = nearbyPerson[@"profilePicture"];
     [cell.profilePic loadInBackground];
-    
     return cell;
-
 }
 
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
@@ -96,7 +85,7 @@
         peopleDetailsViewController.nearbyPerson = nearbyPerson;
         [self addChildViewController:peopleDetailsViewController];
         [tappedCell setSelected:NO];
-}
+    }
 }
 
 @end

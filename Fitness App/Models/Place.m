@@ -27,8 +27,5 @@
 
 + (void) savePlaceBackend: (Place *) place withCompletion: (PFBooleanResultBlock  _Nullable)completion{
     [place saveInBackgroundWithBlock: completion];
-
 }
-
-
 @end

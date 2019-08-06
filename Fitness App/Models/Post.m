@@ -42,17 +42,12 @@ PFUser *author;
 
 + (PFFileObject *)getPFFileFromImage: (UIImage * _Nullable)image {
     
-    // check if image is not nil
-    if (!image) {
+    if (!image)
         return nil;
-    }
     
     NSData *imageData = UIImagePNGRepresentation(image);
-    // get image data and check if that is not nil
-    if (!imageData) {
+    if (!imageData)
         return nil;
-    }
-    
     return [PFFileObject fileObjectWithName:@"image.png" data:imageData];
 }
 

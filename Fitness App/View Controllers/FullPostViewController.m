@@ -21,9 +21,6 @@
     self.scrollView.delegate = self;
     self.imageView.image = self.photo;
     self.caption.text = self.annotation.subtitletitle;
-    NSLog (@"subtitle third time %@", self.caption.text);
-
-//    self.caption.text = caption.text;
 }
 
 - (void)didReceiveMemoryWarning {

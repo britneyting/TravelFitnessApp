@@ -40,13 +40,12 @@
     
     self.saveButton.hidden = YES;
     self.placeholderText = @"Write description...";
-    // Do any additional setup after loading the view.
-    
     PFUser *currentUser = [PFUser currentUser];
     self.nameLabel.text = currentUser[@"name"];
     self.ageLabel.text = [NSString stringWithFormat:@"%@", currentUser[@"age"]];
     self.genderLabel.text = currentUser[@"gender"];
     self.descriptionField.text = currentUser[@"description"];
+    
     if ([self.descriptionField.text isEqualToString:@""]) {
         self.descriptionField.text = self.placeholderText;
         self.descriptionField.textColor = [UIColor lightGrayColor];
@@ -59,7 +58,7 @@
     self.myMapView.showsBuildings = YES;
     self.myMapView.delegate = self;
     self.locationManager = [[CLLocationManager alloc] init];
-
+    
     [self.locationManager startUpdatingLocation];
     self.loc= [[CLGeocoder alloc]init];
     [self.locationManager requestWhenInUseAuthorization];
@@ -71,13 +70,9 @@
     [postsPerUser whereKey:@"username" equalTo:[PFUser currentUser].username];
     
     [postsPerUser findObjectsInBackgroundWithBlock:^(NSArray * _Nullable posts, NSError * _Nullable error) {
-        if (posts) {
-            for (Post *post in posts) {
+        if (posts)
+            for (Post *post in posts)
                 [self postPin:(post)];
-            }
-        } else {
-            NSLog(@"Error");
-        }
     }];
 }
 
@@ -86,13 +81,9 @@
     [postsPerUser whereKey:@"username" equalTo:[PFUser currentUser].username];
     
     [postsPerUser findObjectsInBackgroundWithBlock:^(NSArray * _Nullable posts, NSError * _Nullable error) {
-        if (posts) {
-            for (Post *post in posts) {
+        if (posts)
+            for (Post *post in posts)
                 [self postPin:(post)];
-            }
-        } else {
-            NSLog(@"Error");
-        }
     }];
 }
 
@@ -105,12 +96,8 @@
     currentUser[@"coordinates"] = geoPoint;
     
     [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-        if (succeeded) {
+        if (succeeded)
             NSLog(@"Successfully updated user's current location in backend");
-        }
-        else {
-            NSLog(@"%@", error.localizedDescription);
-        }
     }];
 }
 
@@ -131,20 +118,18 @@
     imagePickerVC.allowsEditing = YES;
     
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:(UIAlertControllerStyleAlert)];
-    UIAlertAction *pickPhoto = [UIAlertAction actionWithTitle:@"Photos" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *pickPhoto = [UIAlertAction actionWithTitle:@"Photos" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action){
         imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         [self presentViewController:imagePickerVC animated:YES completion:nil];
     }];
     
     [alert addAction:pickPhoto];
-    
-    UIAlertAction *pickCamera = [UIAlertAction actionWithTitle:@"Camera" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *pickCamera = [UIAlertAction actionWithTitle:@"Camera" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action){
         imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
         [self presentViewController:imagePickerVC animated:YES completion:nil];
     }];
     
     [alert addAction:pickCamera];
-    
     [self presentViewController:alert animated:YES completion:^{
     }];
 }
@@ -160,28 +145,20 @@
     PFUser *currentUser = [PFUser currentUser];
     currentUser[@"profilePicture"] = file;
     [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-        if (succeeded) {
+        if (succeeded)
             NSLog(@"Successfully uploaded new profile picture to backend");
-        } else {
-            NSLog(@"%@", error.localizedDescription);
-        }
     }];
-    
-    // Dismiss UIImagePickerController to go back to your original view controller
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (UIImage *)resizeImage:(UIImage *)image withSize:(CGSize)size {
     UIImageView *resizeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
-    
     resizeImageView.contentMode = UIViewContentModeScaleAspectFill;
     resizeImageView.image = image;
-    
     UIGraphicsBeginImageContext(size);
     [resizeImageView.layer renderInContext:UIGraphicsGetCurrentContext()];
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-    
     return newImage;
 }
 
@@ -202,11 +179,8 @@
     PFUser *currentUser = [PFUser currentUser];
     currentUser[@"description"] = self.descriptionField.text;
     [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-        if (succeeded) {
+        if (succeeded)
             NSLog(@"Successfully updated description in backend");
-        } else {
-            NSLog(@"%@", error.localizedDescription);
-        }
     }];
     if ([self.descriptionField.text isEqualToString:@""]) {
         self.descriptionField.text = self.placeholderText;
@@ -223,10 +197,7 @@
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
             LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"login"];
             appDelegate.window.rootViewController = loginViewController;
-            
             NSLog(@"User logged out successfully");
-        } else {
-            NSLog(@"Error logging out: %@", error);
         }
     }];
 }
@@ -248,14 +219,13 @@
     point.fullPhoto = self.originalPinImage;
     
     [self.myMapView addAnnotation:point];
-    // Pop back
     [self.navigationController popViewControllerAnimated:true];
 }
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
-    if ([annotation isKindOfClass:[MKUserLocation class]]) {
+    if ([annotation isKindOfClass:[MKUserLocation class]])
         return nil;
-    }
+    
     MKAnnotationView *annotationView = (MKPinAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:@"MapPin"];
     if (annotationView == nil) {
         annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"MapPin"];
@@ -287,47 +257,29 @@
     }
 }
 
-- (IBAction)unwindFromViewController2:(UIStoryboardSegue *)segue{
-    NSLog(@"and we are back");
+- (IBAction)unwindFromViewController2:(UIStoryboardSegue *)segue{ //although it seems it's doing nothing, this is needed to conduct the unwind
 }
 
 - (UIImage*)circularScaleAndCropImage:(UIImage*)image frame:(CGRect)frame {
     UIGraphicsBeginImageContextWithOptions(CGSizeMake(frame.size.width, frame.size.height), NO, 0.0);
     CGContextRef context = UIGraphicsGetCurrentContext();
-    
-    //Get the width and heights
     CGFloat imageWidth = image.size.width;
     CGFloat imageHeight = image.size.height;
     CGFloat rectWidth = frame.size.width;
     CGFloat rectHeight = frame.size.height;
-    
-    //Calculate the scale factor
     CGFloat scaleFactorX = rectWidth/imageWidth;
     CGFloat scaleFactorY = rectHeight/imageHeight;
-    
-    //Calculate the centre of the circle
     CGFloat imageCentreX = rectWidth/2;
-    CGFloat imageCentreY = rectHeight/2;
-    
-    // Create and CLIP to a CIRCULAR Path
-    // (This could be replaced with any closed path if you want a different shaped clip)
-    CGFloat radius = rectWidth/2;
+    CGFloat imageCentreY = rectHeight/2; CGFloat radius = rectWidth/2;
     CGContextBeginPath (context);
     CGContextAddArc (context, imageCentreX, imageCentreY, radius, 0, 2*M_PI, 0);
     CGContextClosePath (context);
     CGContextClip (context);
-    
-    //Set the SCALE factor for the graphics context
-    //All future draw calls will be scaled by this factor
     CGContextScaleCTM (context, scaleFactorX, scaleFactorY);
-    
-    // Draw the IMAGE
     CGRect myRect = CGRectMake(0, 0, imageWidth, imageHeight);
     [image drawInRect:myRect];
-    
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-    
     return newImage;
 }
 @end
