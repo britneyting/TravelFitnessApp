@@ -33,7 +33,7 @@
     // Do any additional setup after loading the view.
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-//    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    //    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.rowHeight = UITableViewAutomaticDimension; // temporary, non-dynamic row height
     self.messageField.layer.borderWidth = 1.0f;
     self.messageField.layer.borderColor = [[UIColor lightGrayColor] CGColor];
@@ -65,15 +65,11 @@
     self.client = [PubNub clientWithConfiguration:configuration];
     [self.client addListener:self];
     [self.client subscribeToChannels:self.channelsArray withPresence:YES];
-    
     [self loadLastMessages];
 }
 
 - (void)loadLastMessages {
-    
     [self addHistorywithStartTime:nil endTime:nil andLimit:100];
-    
-    //Bring the tableview down to the bottom to the most recent messages
     if (!(self.messages.firstObject == nil)) {
         NSIndexPath *indexPath = [[NSIndexPath alloc] init];
         indexPath = [NSIndexPath indexPathForRow:self.messages.count-1 inSection:0];
@@ -82,43 +78,13 @@
 }
 
 - (void)addHistorywithStartTime:(NSNumber *)start endTime:(NSNumber *)end andLimit:(NSUInteger)limit {
-    
-    //The PubNub Function that returns an object of X messages, and when the first and last messages were sent.
-    //The limit is how many messages are received with a maximum and default of 100.
-    
     [self.client historyForChannel:self.hybridChannelName start:start end:end limit:limit withCompletion:^(PNHistoryResult *result, PNErrorStatus *status) {
         
         if (result != nil && status == nil) {
-            
-            /**
-             Handle downloaded history using:
-             result.data.start - oldest message time stamp in response
-             result.data.end - newest message time stamp in response
-             result.data.messages - list of messages
-             */
-            
-            //We save when the earliest message was sent in order to get ones previous to it when we want to load more.
             self.earliestMessageTime = result.data.start;
-            
             [self.messages addObjectsFromArray:result.data.messages];
-            
             [self.tableView reloadData];
-            
-            //Making sure that we wont be able to try to reload more data until this is completed.
             self.loadingMore = NO;
-        }
-        else {
-            
-            /**
-             Handle message history download error. Check 'category' property
-             to find out possible reason because of which request did fail.
-             Review 'errorData' property (which has PNErrorData data type) of status
-             object to get additional information about issue.
-             
-             Request can be resent using: [status retry];
-             */
-            NSLog(@"Couldn't load message history");
-            NSLog(@"%@", status.errorData);
         }
     }];
 }
@@ -132,10 +98,8 @@
 }
 
 #pragma mark - keyboard movements
-- (void)keyboardWillShow:(NSNotification *)notification
-{
+- (void)keyboardWillShow:(NSNotification *)notification{
     CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    
     [UIView animateWithDuration:0.3 animations:^{
         CGRect f = self.view.frame;
         f.origin.y = -keyboardSize.height;
@@ -143,8 +107,7 @@
     }];
 }
 
--(void)keyboardWillHide:(NSNotification *)notification
-{
+-(void)keyboardWillHide:(NSNotification *)notification{
     [UIView animateWithDuration:0.3 animations:^{
         CGRect f = self.view.frame;
         f.origin.y = 0.0f;
@@ -153,9 +116,7 @@
 }
 
 - (IBAction)sendMessage:(id)sender {
-    
     if (![self.messageField.text isEqualToString:@""]) {
-        
         self.Message = [[NSMutableDictionary alloc] init];
         self.Message[@"message"] = self.messageField.text;
         self.Message[@"publisher"] = self.currentUser.username;
@@ -163,24 +124,9 @@
         NSLog(@"This is my messageObject: %@", self.Message);
         
         [self.client publish:self.Message toChannel:self.hybridChannelName withCompletion:^(PNPublishStatus *status) {
-            
             if (!status.isError) {
-                
-                // Message successfully published to specified channel.
                 self.messageField.text = @"";
                 NSLog(@"Successfully published message to hybrid channel!");
-            }
-            else {
-                
-                /**
-                 Handle message publish error. Check 'category' property to find
-                 out possible reason because of which request did fail.
-                 Review 'errorData' property (which has PNErrorData data type) of status
-                 object to get additional information about issue.
-                 
-                 Request can be resent using: [status retry];
-                 */
-                NSLog(@"Didn't publish message to hybrid channel");
             }
         }];
     }
@@ -201,11 +147,6 @@
         [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:NO];
         NSLog(@"Received message in channel: %@", message.data.message);
     }
-    else {
-        
-        // Message has been received on channel stored in message.data.channel.
-    }
-    
     NSLog(@"Received message: %@ on channel %@ at %@", message.data.message[@"message"],
           message.data.channel, message.data.timetoken);
 }
@@ -215,9 +156,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     ChatCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ChatCell" forIndexPath:indexPath];
-    
     NSDictionary *message = self.messages[indexPath.row];
     
     cell.usernameLabel.text = message[@"publisher"];
@@ -229,19 +168,15 @@
     [paragraphStyle setLineSpacing:4];
     [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, cell.messageLabel.text.length)];
     cell.messageLabel.attributedText = attributedString;
-
+    
     if (message[@"publisher"] == self.currentUser.username) {
         cell.usernameLabel.text = @"me";
         cell.messageLabel.textAlignment = NSTextAlignmentRight;
         cell.usernameLabel.textAlignment = NSTextAlignmentRight;
-//        cell.profilePicture.file = self.currentUser[@"profilePicture"];
-//        [cell.profilePicture loadInBackground];
     }
     else if (message[@"publisher"] == self.nearbyPerson.username) {
         cell.messageLabel.textAlignment = NSTextAlignmentLeft;
         cell.usernameLabel.textAlignment = NSTextAlignmentLeft;
-//        cell.profilePicture.file = self.nearbyPerson[@"profilePicture"];
-//        [cell.profilePicture loadInBackground];
     }
     
     return cell;
@@ -287,15 +222,5 @@
     return newImage;
 }
 
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end

@@ -17,7 +17,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *eventTitle;
 @property (nonatomic, strong) NSString *eventLocation;
 @property (nonatomic, strong) NSString *eventDate;
-
 @property (nonatomic, strong) NSString *activityType;
 @property (nonatomic, strong) NSNumber *rsvpsLimit;
 @property (nonatomic, strong) NSString *equipment;

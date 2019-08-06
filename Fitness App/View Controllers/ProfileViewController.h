@@ -12,13 +12,10 @@
 @import Parse;
 
 @class ProfileViewControllerDelegate;
-
-
 @protocol ProfileViewControllerDelegate
 @end
 
 @interface ProfileViewController : UIViewController
-
 @property (strong, nonatomic) IBOutlet PFImageView *profilePictureImage;
 @property (strong, nonatomic) IBOutlet UITapGestureRecognizer *editProfilePic;
 @property (strong, nonatomic) IBOutlet UILabel *nameLabel;
@@ -27,11 +24,9 @@
 @property (strong, nonatomic) IBOutlet UITextView *descriptionField;
 @property (strong, nonatomic) IBOutlet UIButton *saveButton;
 @property (strong, nonatomic) IBOutlet UINavigationItem *navItem;
-
 @property (weak, nonatomic) id<ProfileViewControllerDelegate> delegate;
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error;
-
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation;
 - (void)didPostImage:(UIImage *)photo withCaption:(NSString *)caption;
 - (void)mapView:(MKMapView *)mapViewannotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control;

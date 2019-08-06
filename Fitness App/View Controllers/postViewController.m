@@ -22,7 +22,6 @@
 @property (weak, nonatomic) IBOutlet UITextView *captionTextView;
 @property (strong, nonatomic) NSString *placeholderText;
 
-
 @end
 
 @implementation postViewController
@@ -119,6 +118,7 @@
     [Post postUserImage:resizedImage withCaption:self.captionTextView.text withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if(succeeded) {
             NSLog(@"Did post");
+            [self viewDidLoad];
             [self performSegueWithIdentifier:@"unwindToContainerVC" sender:self];
         }
         else {

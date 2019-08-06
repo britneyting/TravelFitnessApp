@@ -19,7 +19,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *placeType;
 @property (nonatomic, strong) Place *place;
 
-
 @end
 
 NS_ASSUME_NONNULL_END

@@ -16,9 +16,7 @@
 @implementation SignupViewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
-
+    [super viewDidLoad];    
 }
 
 - (void)createAlert:(NSString *)message withTitle:(NSString *)title {
@@ -48,7 +46,7 @@
     // this code is to sign a user up -- login is a separate page
     // initialize a user object
     PFUser *newUser = [PFUser user];
-
+    
     // set user properties
     newUser[@"name"] = self.nameField.text;
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc]init];
@@ -58,7 +56,6 @@
     newUser.username = self.usernameField.text;
     newUser.email = self.emailField.text;
     newUser.password = self.passwordField.text;
-    
     
     if ([self.nameField.text isEqual:@""]) {
         [self createAlert:@"Please enter your name" withTitle:@"Name Required"];
@@ -89,10 +86,8 @@
             NSLog(@"Error: %@", error.localizedDescription);
         } else {
             NSLog(@"User registered successfully");
-            
             // manually segue to logged in view
             [self performSegueWithIdentifier:@"segueToHomeFromSignup" sender:self];
-            
         }
     }];
 }
@@ -108,15 +103,5 @@
 - (IBAction)finishEditing:(id)sender {
     [self.view endEditing:YES];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
