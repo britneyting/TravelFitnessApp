@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSNumber *rsvpsLimit;
 @property (nonatomic, strong) NSString *equipment;
 @property (nonatomic, strong) NSString *moreInfo;
+@property (nonatomic) int RSVPed;
 
 + (void) createEvent: (NSString *)eventTitle withLocation: (PFGeoPoint *)eventlocation withEventDate:(NSString *)eventDate withActivityType:(NSString *)activityType withRSVPsLimit:(NSNumber *)rsvpsLimit withEquipment:(NSString *)equipment withMoreInfo:(NSString *)moreInfo withCompletion: (PFBooleanResultBlock  _Nullable)completion;
 

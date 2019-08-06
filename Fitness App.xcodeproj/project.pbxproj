@@ -29,11 +29,14 @@
 		7D5755D122DFDEB800C2823C /* PeopleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5755D022DFDEB800C2823C /* PeopleCell.m */; };
 		7D5C339022DFD46E00E667DD /* ExploreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5C338F22DFD46E00E667DD /* ExploreViewController.m */; };
 		7D752A7D22E28A5300FC6121 /* PeopleDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D752A7C22E28A5300FC6121 /* PeopleDetailsViewController.m */; };
+		7D93B6B322F4C42E00796325 /* EventsHereViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D93B6B222F4C42E00796325 /* EventsHereViewController.m */; };
+		7D93B6B622F4C49900796325 /* EventsHereCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D93B6B522F4C49900796325 /* EventsHereCell.m */; };
 		7D990ED522E64CDB005676AC /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D990ED422E64CDB005676AC /* ChatViewController.m */; };
 		7D990ED822E67C09005676AC /* ChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D990ED722E67C09005676AC /* ChatCell.m */; };
 		7DA8AF8022DE911000BD4098 /* SignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DA8AF7F22DE911000BD4098 /* SignupViewController.m */; };
 		7DBFB31022F2191C00EBBE74 /* EventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DBFB30F22F2191C00EBBE74 /* EventsViewController.m */; };
 		7DBFB31622F241B400EBBE74 /* CreateEventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DBFB31522F241B400EBBE74 /* CreateEventCell.m */; };
+		7DDAB8C422F4F86A00E5B581 /* UILabel+FormattedText.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DDAB8C322F4F86A00E5B581 /* UILabel+FormattedText.m */; };
 		7DEF648222DE8B580028C1BB /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DEF648122DE8B580028C1BB /* LoginViewController.m */; };
 		935D5053E533C4249FF11663 /* Pods_Fitness_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 656E3A80F765012921E2FAF4 /* Pods_Fitness_App.framework */; };
 /* End PBXBuildFile section */
@@ -103,6 +106,10 @@
 		7D5C338F22DFD46E00E667DD /* ExploreViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExploreViewController.m; sourceTree = "<group>"; };
 		7D752A7B22E28A5300FC6121 /* PeopleDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PeopleDetailsViewController.h; sourceTree = "<group>"; };
 		7D752A7C22E28A5300FC6121 /* PeopleDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PeopleDetailsViewController.m; sourceTree = "<group>"; };
+		7D93B6B122F4C42E00796325 /* EventsHereViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventsHereViewController.h; sourceTree = "<group>"; };
+		7D93B6B222F4C42E00796325 /* EventsHereViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventsHereViewController.m; sourceTree = "<group>"; };
+		7D93B6B422F4C49900796325 /* EventsHereCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventsHereCell.h; sourceTree = "<group>"; };
+		7D93B6B522F4C49900796325 /* EventsHereCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventsHereCell.m; sourceTree = "<group>"; };
 		7D990ED322E64CDB005676AC /* ChatViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
 		7D990ED422E64CDB005676AC /* ChatViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
 		7D990ED622E67C09005676AC /* ChatCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatCell.h; sourceTree = "<group>"; };
@@ -113,6 +120,8 @@
 		7DBFB30F22F2191C00EBBE74 /* EventsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventsViewController.m; sourceTree = "<group>"; };
 		7DBFB31422F241B400EBBE74 /* CreateEventCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreateEventCell.h; sourceTree = "<group>"; };
 		7DBFB31522F241B400EBBE74 /* CreateEventCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreateEventCell.m; sourceTree = "<group>"; };
+		7DDAB8C222F4F86A00E5B581 /* UILabel+FormattedText.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UILabel+FormattedText.h"; sourceTree = "<group>"; };
+		7DDAB8C322F4F86A00E5B581 /* UILabel+FormattedText.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UILabel+FormattedText.m"; sourceTree = "<group>"; };
 		7DEF648022DE8B580028C1BB /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		7DEF648122DE8B580028C1BB /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -169,6 +178,8 @@
 			children = (
 				7D1130B822EFAB9A00FB39AD /* CustomTextField.h */,
 				7D1130B922EFAB9A00FB39AD /* CustomTextField.m */,
+				7DDAB8C222F4F86A00E5B581 /* UILabel+FormattedText.h */,
+				7DDAB8C322F4F86A00E5B581 /* UILabel+FormattedText.m */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -244,6 +255,8 @@
 				7DBFB31522F241B400EBBE74 /* CreateEventCell.m */,
 				13F09A4A22F4D739009C3C17 /* EventCollectionViewCell.h */,
 				13F09A4B22F4D739009C3C17 /* EventCollectionViewCell.m */,
+				7D93B6B422F4C49900796325 /* EventsHereCell.h */,
+				7D93B6B522F4C49900796325 /* EventsHereCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -269,6 +282,8 @@
 				7D5755CD22DFDE5900C2823C /* PlacesViewController.m */,
 				7DBFB30E22F2191C00EBBE74 /* EventsViewController.h */,
 				7DBFB30F22F2191C00EBBE74 /* EventsViewController.m */,
+				7D93B6B122F4C42E00796325 /* EventsHereViewController.h */,
+				7D93B6B222F4C42E00796325 /* EventsHereViewController.m */,
 				13780E2C22E0201700689605 /* postViewController.h */,
 				13780E2D22E0201700689605 /* postViewController.m */,
 				131EDD0B22EA4E4400AF58AB /* FullPostViewController.h */,
@@ -482,10 +497,12 @@
 			files = (
 				131EDD1022EB5A9700AF58AB /* PhotoAnnotation.m in Sources */,
 				1399BDF622F8F9F50074B708 /* PlaceDetailsViewController.m in Sources */,
+				7D93B6B622F4C49900796325 /* EventsHereCell.m in Sources */,
 				7D752A7D22E28A5300FC6121 /* PeopleDetailsViewController.m in Sources */,
 				7D5755CE22DFDE5900C2823C /* PlacesViewController.m in Sources */,
 				7D990ED522E64CDB005676AC /* ChatViewController.m in Sources */,
 				7D1130BA22EFAB9A00FB39AD /* CustomTextField.m in Sources */,
+				7DDAB8C422F4F86A00E5B581 /* UILabel+FormattedText.m in Sources */,
 				7D416AF222D5054900B8A1D9 /* main.m in Sources */,
 				7D4E1F5322F357BC00F81F21 /* Event.m in Sources */,
 				7D5755CB22DFDE5000C2823C /* PeopleViewController.m in Sources */,
@@ -495,6 +512,7 @@
 				13F09A4C22F4D739009C3C17 /* EventCollectionViewCell.m in Sources */,
 				7DBFB31622F241B400EBBE74 /* CreateEventCell.m in Sources */,
 				131E759122DE95C20044CC08 /* ProfileViewController.m in Sources */,
+				7D93B6B322F4C42E00796325 /* EventsHereViewController.m in Sources */,
 				13780E2E22E0201700689605 /* postViewController.m in Sources */,
 				7D416AE422D5054800B8A1D9 /* AppDelegate.m in Sources */,
 				7DA8AF8022DE911000BD4098 /* SignupViewController.m in Sources */,

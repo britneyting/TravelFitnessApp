@@ -11,12 +11,15 @@
 @implementation Event
 
 @dynamic poster;
+@dynamic username;
+@dynamic eventTitle;
 @dynamic eventLocation;
 @dynamic eventDate;
 @dynamic activityType;
 @dynamic rsvpsLimit;
 @dynamic equipment;
 @dynamic moreInfo;
+@dynamic RSVPed;
 
 + (nonnull NSString *)parseClassName {
     return @"Event";
@@ -34,6 +37,7 @@
     newEvent.rsvpsLimit = rsvpsLimit;
     newEvent.equipment = equipment;
     newEvent.moreInfo = moreInfo;
+    newEvent.RSVPed = 0;
     [newEvent saveInBackgroundWithBlock: completion];
 }
 
