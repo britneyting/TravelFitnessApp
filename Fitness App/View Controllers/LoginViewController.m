@@ -20,6 +20,8 @@
     // Do any additional setup after loading the view.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    UIImage *logo = [UIImage imageNamed:@"official logo"];
+    [self.logo setImage:logo];
 }
 
 - (void)createAlert:(NSString *)message withTitle:(NSString *)title {

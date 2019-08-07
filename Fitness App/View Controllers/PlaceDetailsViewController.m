@@ -18,6 +18,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *placeDescription;
 @property CLGeocoder *loc;
 @property NSString *locatedAt;
+@property (strong, nonatomic) IBOutlet UIButton *eventsButton;
+@property (strong, nonatomic) IBOutlet UIButton *eventsHereButton;
 
 @end
 
@@ -46,6 +48,8 @@
     else if([self.name.text isEqualToString:(@"Union Point")])
         self.placeDescription.text = @"Glacier Point to Union Point is a 3.7 mile moderately trafficked out and back trail located near Yosemite Valley, California that features a great forest setting and is rated as moderate. The trail is primarily used for hiking and nature trips and is best used from April until September.";
     [super viewDidLoad];
+    self.eventsHereButton.layer.cornerRadius = 7;
+    self.eventsButton.layer.cornerRadius = 7;
 }
 
 -(NSString *)coordinatesIntoAddress{
