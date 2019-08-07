@@ -13,6 +13,8 @@
 		1355E47E22E0D3D8003036E3 /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 1355E47D22E0D3D8003036E3 /* Post.m */; };
 		13780E2E22E0201700689605 /* postViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13780E2D22E0201700689605 /* postViewController.m */; };
 		1399BDF622F8F9F50074B708 /* PlaceDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1399BDF522F8F9F50074B708 /* PlaceDetailsViewController.m */; };
+		13E2804A22FB5E86002090E1 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 13E2804922FB5E86002090E1 /* logo.png */; };
+		13E2804C22FB6101002090E1 /* initialLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 13E2804B22FB6100002090E1 /* initialLogo.png */; };
 		13F09A4C22F4D739009C3C17 /* EventCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 13F09A4B22F4D739009C3C17 /* EventCollectionViewCell.m */; };
 		13F09A5222F4F64F009C3C17 /* Place.m in Sources */ = {isa = PBXBuildFile; fileRef = 13F09A5122F4F64F009C3C17 /* Place.m */; };
 		7D1130BA22EFAB9A00FB39AD /* CustomTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1130B922EFAB9A00FB39AD /* CustomTextField.m */; };
@@ -71,6 +73,8 @@
 		13780E2D22E0201700689605 /* postViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = postViewController.m; sourceTree = "<group>"; };
 		1399BDF422F8F9F50074B708 /* PlaceDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlaceDetailsViewController.h; sourceTree = "<group>"; };
 		1399BDF522F8F9F50074B708 /* PlaceDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlaceDetailsViewController.m; sourceTree = "<group>"; };
+		13E2804922FB5E86002090E1 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo.png; path = ../../logo.png; sourceTree = "<group>"; };
+		13E2804B22FB6100002090E1 /* initialLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = initialLogo.png; path = ../../initialLogo.png; sourceTree = "<group>"; };
 		13F09A4A22F4D739009C3C17 /* EventCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventCollectionViewCell.h; sourceTree = "<group>"; };
 		13F09A4B22F4D739009C3C17 /* EventCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventCollectionViewCell.m; sourceTree = "<group>"; };
 		13F09A5022F4F64F009C3C17 /* Place.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Place.h; sourceTree = "<group>"; };
@@ -219,6 +223,8 @@
 				7D416AEB22D5054900B8A1D9 /* Assets.xcassets */,
 				7D416AED22D5054900B8A1D9 /* LaunchScreen.storyboard */,
 				7D416AF022D5054900B8A1D9 /* Info.plist */,
+				13E2804B22FB6100002090E1 /* initialLogo.png */,
+				13E2804922FB5E86002090E1 /* logo.png */,
 				7D416AF122D5054900B8A1D9 /* main.m */,
 			);
 			path = "Fitness App";
@@ -409,8 +415,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13E2804A22FB5E86002090E1 /* logo.png in Resources */,
 				7D416AEF22D5054900B8A1D9 /* LaunchScreen.storyboard in Resources */,
 				7D416AEC22D5054900B8A1D9 /* Assets.xcassets in Resources */,
+				13E2804C22FB6101002090E1 /* initialLogo.png in Resources */,
 				7D416AEA22D5054800B8A1D9 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
