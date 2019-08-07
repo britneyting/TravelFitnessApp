@@ -21,7 +21,6 @@
 @property (strong, nonatomic) NSArray *eventsHere;
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
 
 @end
 
@@ -111,10 +110,6 @@
 - (void)didCreate {
     [self fetchData];
     [self.tableView reloadData];
-}
-
-- (IBAction)cancel:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
      /*

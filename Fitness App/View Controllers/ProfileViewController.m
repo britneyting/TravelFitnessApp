@@ -250,6 +250,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"fullScreen"]) {
         FullPostViewController *fullScreen = [segue destinationViewController];
+        fullScreen.hidesBottomBarWhenPushed = YES;
         MKPinAnnotationView *pin = sender;
         PhotoAnnotation *annotation = (PhotoAnnotation*)pin.annotation;
         fullScreen.photo = annotation.fullPhoto;
