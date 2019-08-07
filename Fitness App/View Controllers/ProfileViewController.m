@@ -52,6 +52,7 @@
     }
     self.profilePictureImage.file = currentUser[@"profilePicture"];
     [self.profilePictureImage loadInBackground];
+    self.profilePictureImage.layer.cornerRadius = 50;
     self.navItem.title = currentUser[@"name"];
     
     self.myMapView.showsUserLocation = YES;
