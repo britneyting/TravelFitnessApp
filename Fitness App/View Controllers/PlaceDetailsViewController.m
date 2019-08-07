@@ -77,8 +77,9 @@
         eventController.locationHere = self.locatedAt;
     }
     if ([segue.identifier isEqualToString:@"segueToEventsHereVC"]){
-        UINavigationController *navigationController = [segue destinationViewController];
-        EventsHereViewController *eventHereController = (EventsHereViewController*)navigationController.topViewController;
+//        UINavigationController *navigationController = [segue destinationViewController];
+//        EventsHereViewController *eventHereController = (EventsHereViewController*)navigationController.topViewController;
+        EventsHereViewController *eventHereController = [segue destinationViewController];
         eventHereController.locationHere = self.locatedAt;
         eventHereController.coverPhotoImage = [UIImage imageNamed:self.location.placeName];
     }

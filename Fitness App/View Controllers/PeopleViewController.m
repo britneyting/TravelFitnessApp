@@ -82,6 +82,7 @@
         NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
         PFUser *nearbyPerson = self.nearbyPeople[indexPath.row];
         PeopleDetailsViewController *peopleDetailsViewController = [segue destinationViewController];
+        peopleDetailsViewController.hidesBottomBarWhenPushed = YES;
         peopleDetailsViewController.nearbyPerson = nearbyPerson;
         [self addChildViewController:peopleDetailsViewController];
         [tappedCell setSelected:NO];

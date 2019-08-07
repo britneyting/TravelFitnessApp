@@ -28,6 +28,17 @@
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     
+    //configuring collection view to have 2 posters/line and setting width and stuff
+    UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
+    
+    layout.minimumInteritemSpacing = 0;
+    layout.minimumLineSpacing = 0;
+    CGFloat postersPerLine = 2;
+//    CGFloat itemWidth = (self.collectionView.frame.size.width - layout.minimumInteritemSpacing *(postersPerLine -1))/ postersPerLine;
+    CGFloat itemWidth = self.collectionView.frame.size.width/postersPerLine;
+    CGFloat itemHeight = itemWidth * 1.45;
+    layout.itemSize = CGSizeMake(itemWidth, itemHeight);
+    
     [self fetchPlaces];
 }
 
@@ -76,6 +87,8 @@
     EventCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"EventCollectionViewCell" forIndexPath:indexPath];
     test = ((Place *)(self.places[indexPath.row]));
     cell.placeName.text = test.placeName;
+    cell.placeName.backgroundColor = [UIColor whiteColor];
+    cell.placeName.alpha = 0.7;
     cell.placeType = test.placeType;
     UIImage *img = [UIImage imageNamed:cell.placeName.text];
     cell.posterView.image = img;
@@ -91,6 +104,7 @@
     NSIndexPath *indexPath = [self.collectionView indexPathForCell:tappedCell];
     Place *place = self.places[indexPath.row];
     PlaceDetailsViewController *placeDetailsViewController = [segue destinationViewController];
+    placeDetailsViewController.hidesBottomBarWhenPushed = YES;
     placeDetailsViewController.location = place;
 }
 
