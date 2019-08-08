@@ -37,7 +37,6 @@
 
 -(void)viewDidLoad {
     [super viewDidLoad];
-    
     self.locationManager = [[CLLocationManager alloc] init];
     
     [self.locationManager startUpdatingLocation];
@@ -69,7 +68,7 @@
     
     PFQuery *postsPerUser = [Post query];
     [postsPerUser whereKey:@"username" equalTo:[PFUser currentUser].username];
-    
+
     [postsPerUser findObjectsInBackgroundWithBlock:^(NSArray * _Nullable posts, NSError * _Nullable error) {
         if (posts)
             for (Post *post in posts)
@@ -78,21 +77,9 @@
     [self.locationManager stopUpdatingLocation];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [self getCurrentLocation];
-    PFQuery *postsPerUser = [Post query];
-    [postsPerUser whereKey:@"username" equalTo:[PFUser currentUser].username];
-    
-    [postsPerUser findObjectsInBackgroundWithBlock:^(NSArray * _Nullable posts, NSError * _Nullable error) {
-        if (posts)
-            for (Post *post in posts)
-                [self postPin:(post)];
-    }];
-}
-
 - (void)viewDidAppear:(BOOL)animated {
     if (self.myMapView.userLocation.coordinate.latitude != 0 && self.myMapView.userLocation.coordinate.longitude != 0) {
-        MKMapCamera *camera = [MKMapCamera cameraLookingAtCenterCoordinate:self.myMapView.userLocation.coordinate fromEyeCoordinate:CLLocationCoordinate2DMake(self.myMapView.userLocation.coordinate.latitude, self.myMapView.userLocation.coordinate.longitude) eyeAltitude:10000];
+        MKMapCamera *camera = [MKMapCamera cameraLookingAtCenterCoordinate:self.myMapView.userLocation.coordinate fromEyeCoordinate:CLLocationCoordinate2DMake(self.myMapView.userLocation.coordinate.latitude, self.myMapView.userLocation.coordinate.longitude) eyeAltitude:100000];
         [self.myMapView setCamera:camera animated:YES];
     }
 }

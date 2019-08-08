@@ -42,7 +42,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="bottomBorderColor">
                                         <color key="value" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -455,6 +455,7 @@
                         <outlet property="myMapView" destination="7EF-ee-2na" id="SWu-Tf-V7c"/>
                         <outlet property="profilePictureImage" destination="kGh-Q9-yz8" id="6ek-ej-pKP"/>
                         <outlet property="titleBar" destination="Oz1-lC-jn9" id="APd-Sx-gWB"/>
+                        <segue destination="K36-1Q-k8p" kind="show" identifier="fullScreen2" id="Paf-6i-aaW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MdN-YE-YL2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1280,6 +1281,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="iNY-39-27c"/>
+        <segue reference="pAr-if-jvx"/>
         <segue reference="Izl-Ce-9Fu"/>
         <segue reference="FwR-YR-iEQ"/>
     </inferredMetricsTieBreakers>
