@@ -27,9 +27,9 @@
 @property (strong, nonatomic) UIImage *editedPinImage;
 @property (strong, nonatomic) UIImage *propic;
 @property (weak, nonatomic) IBOutlet MKMapView *myMapView;
-@property CLLocationManager *locationManager;
-@property CLGeocoder *loc;
 @property (strong, nonatomic) NSString *placeholderText;
+@property CLLocationManager *locationManager;
+@property MKUserLocation *userLocation;
 
 @end
 
@@ -38,6 +38,14 @@
 -(void)viewDidLoad {
     [super viewDidLoad];
     
+    self.locationManager = [[CLLocationManager alloc] init];
+    
+    [self.locationManager startUpdatingLocation];
+    
+    [self.locationManager requestWhenInUseAuthorization];
+    if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+        [self.locationManager requestWhenInUseAuthorization];
+    }
     self.saveButton.hidden = YES;
     self.placeholderText = @"Write description...";
     PFUser *currentUser = [PFUser currentUser];
@@ -58,15 +66,20 @@
     self.myMapView.showsUserLocation = YES;
     self.myMapView.showsBuildings = YES;
     self.myMapView.delegate = self;
-    self.locationManager = [[CLLocationManager alloc] init];
     
-    [self.locationManager startUpdatingLocation];
-    self.loc= [[CLGeocoder alloc]init];
-    [self.locationManager requestWhenInUseAuthorization];
-    if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
-        [self.locationManager requestWhenInUseAuthorization];
-    }
+    PFQuery *postsPerUser = [Post query];
+    [postsPerUser whereKey:@"username" equalTo:[PFUser currentUser].username];
     
+    [postsPerUser findObjectsInBackgroundWithBlock:^(NSArray * _Nullable posts, NSError * _Nullable error) {
+        if (posts)
+            for (Post *post in posts)
+                [self postPin:(post)];
+    }];
+    [self.locationManager stopUpdatingLocation];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [self getCurrentLocation];
     PFQuery *postsPerUser = [Post query];
     [postsPerUser whereKey:@"username" equalTo:[PFUser currentUser].username];
     
@@ -78,14 +91,10 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    PFQuery *postsPerUser = [Post query];
-    [postsPerUser whereKey:@"username" equalTo:[PFUser currentUser].username];
-    
-    [postsPerUser findObjectsInBackgroundWithBlock:^(NSArray * _Nullable posts, NSError * _Nullable error) {
-        if (posts)
-            for (Post *post in posts)
-                [self postPin:(post)];
-    }];
+    if (self.myMapView.userLocation.coordinate.latitude != 0 && self.myMapView.userLocation.coordinate.longitude != 0) {
+        MKMapCamera *camera = [MKMapCamera cameraLookingAtCenterCoordinate:self.myMapView.userLocation.coordinate fromEyeCoordinate:CLLocationCoordinate2DMake(self.myMapView.userLocation.coordinate.latitude, self.myMapView.userLocation.coordinate.longitude) eyeAltitude:10000];
+        [self.myMapView setCamera:camera animated:YES];
+    }
 }
 
 -(void)getCurrentLocation {
@@ -96,12 +105,6 @@
     PFGeoPoint *geoPoint = [PFGeoPoint geoPointWithLatitude:coordinate.latitude longitude:coordinate.longitude];
     currentUser[@"coordinates"] = geoPoint;
     [currentUser saveInBackground];
-}
-
--(void)mapView: (MKMapView *) mapView didUpdateUserLocation:(nonnull MKUserLocation *)userLocation{
-    [self getCurrentLocation];
-    MKMapCamera *camera = [MKMapCamera cameraLookingAtCenterCoordinate:userLocation.coordinate fromEyeCoordinate:CLLocationCoordinate2DMake(userLocation.coordinate.latitude, userLocation.coordinate.longitude) eyeAltitude:10000];
-    [mapView setCamera:camera animated:NO];
 }
 
 - (IBAction)editProfilePic:(id)sender {
