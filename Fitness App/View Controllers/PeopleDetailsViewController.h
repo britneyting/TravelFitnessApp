@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, nonatomic) PFUser *nearbyPerson;
 @property (strong, nonatomic) IBOutlet PFImageView *profilePictureImage;
+@property (strong, nonatomic) IBOutlet UILabel *nameLabel;
+@property (strong, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (strong, nonatomic) IBOutlet UILabel *ageLabel;
 @property (strong, nonatomic) IBOutlet UILabel *genderLabel;
 @property (strong, nonatomic) IBOutlet UILabel *descriptionLabel;

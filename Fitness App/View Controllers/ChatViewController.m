@@ -33,8 +33,9 @@
     // Do any additional setup after loading the view.
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    //    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.rowHeight = UITableViewAutomaticDimension; // temporary, non-dynamic row height
+//    self.tableView.rowHeight = 50;
     self.messageField.layer.borderWidth = 1.0f;
     self.messageField.layer.borderColor = [[UIColor lightGrayColor] CGColor];
     self.messageField.layer.backgroundColor = [[UIColor whiteColor] CGColor];
@@ -66,6 +67,10 @@
     [self.client addListener:self];
     [self.client subscribeToChannels:self.channelsArray withPresence:YES];
     [self loadLastMessages];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [self.tableView reloadData];
 }
 
 - (void)loadLastMessages {
@@ -162,19 +167,31 @@
     cell.usernameLabel.text = message[@"publisher"];
     [cell.usernameLabel setFont: [UIFont fontWithName:@"Arial" size:13.0f]];
     cell.messageLabel.text = message[@"message"];
+    cell.messageLabel.numberOfLines = 0;
     [cell.messageLabel setFont: [UIFont fontWithName:@"Arial" size:15.0f]];
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:cell.messageLabel.text];
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     [paragraphStyle setLineSpacing:4];
     [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, cell.messageLabel.text.length)];
     cell.messageLabel.attributedText = attributedString;
+    NSLayoutConstraint *nameTopConstraint = [cell.usernameLabel.topAnchor constraintEqualToAnchor:cell.contentView.topAnchor];
+    NSLayoutConstraint *nameLeftConstraint = [cell.usernameLabel.leftAnchor constraintEqualToAnchor:cell.contentView.leftAnchor];
+    NSLayoutConstraint *nameRightConstraint = [cell.usernameLabel.rightAnchor constraintEqualToAnchor:cell.contentView.rightAnchor];
+    NSLayoutConstraint *nameBottomConstraint = [cell.usernameLabel.bottomAnchor constraintEqualToAnchor:cell.usernameLabel.topAnchor];
+    NSLayoutConstraint *messageLeftConstraint = [cell.messageLabel.leftAnchor constraintEqualToAnchor:cell.contentView.leftAnchor];
+    NSLayoutConstraint *messageRightConstraint = [cell.messageLabel.rightAnchor constraintEqualToAnchor:cell.contentView.rightAnchor];
+    NSLayoutConstraint *messageBottomConstraint = [cell.messageLabel.bottomAnchor constraintEqualToAnchor:cell.contentView.bottomAnchor];
+    NSArray *layoutConstraints = [[NSArray alloc] initWithObjects:nameTopConstraint, nameLeftConstraint, nameRightConstraint, nameBottomConstraint, messageLeftConstraint, messageRightConstraint, messageBottomConstraint, nil];
+    [NSLayoutConstraint activateConstraints:layoutConstraints];
     
     if (message[@"publisher"] == self.currentUser.username) {
         cell.usernameLabel.text = @"me";
         cell.messageLabel.textAlignment = NSTextAlignmentRight;
         cell.usernameLabel.textAlignment = NSTextAlignmentRight;
+
     }
     else if (message[@"publisher"] == self.nearbyPerson.username) {
+        cell.messageLabel.text = message[@"message"];
         cell.messageLabel.textAlignment = NSTextAlignmentLeft;
         cell.usernameLabel.textAlignment = NSTextAlignmentLeft;
     }

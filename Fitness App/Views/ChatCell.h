@@ -14,9 +14,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ChatCell : UITableViewCell
 
-@property (strong, nonatomic) IBOutlet PFImageView *profilePicture;
 @property (strong, nonatomic) IBOutlet UILabel *messageLabel;
 @property (strong, nonatomic) IBOutlet UILabel *usernameLabel;
+
+- (void)showOutgoingMessageWithText:(NSString *)text;
 
 @end
 

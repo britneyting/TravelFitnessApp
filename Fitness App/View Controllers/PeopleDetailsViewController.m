@@ -7,7 +7,9 @@
 //
 
 #import "PeopleDetailsViewController.h"
+#import "UILabel+FormattedText.h"
 #import "ChatViewController.h"
+#import "UILabel+FormattedText.h"
 
 @interface PeopleDetailsViewController ()
 
@@ -16,11 +18,14 @@
 @implementation PeopleDetailsViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.ageLabel.text = [NSString stringWithFormat:@"Age: %@", self.nearbyPerson[@"age"]];
+    self.nameLabel.text = self.nearbyPerson[@"name"];
+    self.usernameLabel.text = [NSString stringWithFormat:@"@%@", self.nearbyPerson.username];
+    self.ageLabel.text = [NSString stringWithFormat:@"%@ years old,", self.nearbyPerson[@"age"]];
     self.genderLabel.text = [NSString stringWithFormat:@"Gender: %@", self.nearbyPerson[@"gender"]];
     self.descriptionLabel.text = self.nearbyPerson[@"description"];
     self.profilePictureImage.file = self.nearbyPerson[@"profilePicture"];
     [self.profilePictureImage loadInBackground];
+    self.profilePictureImage.layer.cornerRadius = 50;
     self.titleBar.title = self.nearbyPerson[@"name"];
 }
 
