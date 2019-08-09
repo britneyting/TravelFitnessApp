@@ -6,18 +6,12 @@
 //  Copyright © 2019 britneyting. All rights reserved.
 //
 
-//#import "PeopleDetailsViewController.h"
-//#import "ChatViewController.h"
-//#import "Post.h"
-//#import "PhotoAnnotation.h"
+
 #import "PeopleDetailsViewController.h"
 #import "ChatViewController.h"
-#import <UIKit/UIKit.h>
 #import "ProfileViewController.h"
 #import <MapKit/MapKit.h>
 #import "Parse/Parse.h"
-#import "AppDelegate.h"
-#import "LoginViewController.h"
 #import "postViewController.h"
 #import "Post.h"
 #import "FullPostViewController.h"
@@ -28,16 +22,12 @@
 @property (strong, nonatomic) UIImage *originalPinImage;
 @property (strong, nonatomic) UIImage *editedPinImage;
 @property CLLocationManager *locationManager;
-@property BOOL *firstTime;
-
 
 @end
 
 @implementation PeopleDetailsViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.firstTime = YES;
-
     self.locationManager = [[CLLocationManager alloc] init];
     [self.locationManager startUpdatingLocation];
     
@@ -59,23 +49,17 @@
             for (Post *post in posts)
                 [self postPin:(post)];
     }];
+    
     if (self.myMapView.userLocation.coordinate.latitude != 0 && self.myMapView.userLocation.coordinate.longitude != 0) {
         MKMapCamera *camera = [MKMapCamera cameraLookingAtCenterCoordinate:self.myMapView.userLocation.coordinate fromEyeCoordinate:CLLocationCoordinate2DMake(self.myMapView.userLocation.coordinate.latitude, self.myMapView.userLocation.coordinate.longitude) eyeAltitude:100000];
-        if(!self.firstTime)
-            [self.myMapView setCamera:camera animated:YES];
-        else
-            [self.myMapView setCamera:camera animated:NO];    }
+            [self.myMapView setCamera:camera animated:NO];
+        
+    }
 }
+
 
 - (void)fetchData:(MKMapView *)mapView { //it is useful
 }
-
-//- (void)viewDidAppear:(BOOL)animated {
-//    if (self.myMapView.userLocation.coordinate.latitude != 0 && self.myMapView.userLocation.coordinate.longitude != 0) {
-//        MKMapCamera *camera = [MKMapCamera cameraLookingAtCenterCoordinate:self.myMapView.userLocation.coordinate fromEyeCoordinate:CLLocationCoordinate2DMake(self.myMapView.userLocation.coordinate.latitude, self.myMapView.userLocation.coordinate.longitude) eyeAltitude:100000];
-//        [self.myMapView setCamera:camera animated:YES];
-//    }
-//}
 
 - (void)postPin:(Post *)post{
     NSLog(@"post");
@@ -94,7 +78,6 @@
     point.fullPhoto = self.originalPinImage;
 
     [self.myMapView addAnnotation:point];
-//    [self.navigationController popViewControllerAnimated:true];
 }
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
