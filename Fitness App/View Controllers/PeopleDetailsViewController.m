@@ -59,20 +59,19 @@
     
     PFQuery *userPosts = [Post query];
     [userPosts whereKey:@"username" equalTo:self.nearbyPerson.username];
-    
+
     [userPosts findObjectsInBackgroundWithBlock:^(NSArray * _Nullable posts, NSError * _Nullable error) {
         if (posts)
             for (Post *post in posts)
                 [self postPin:(post)];
     }];
-    
+
     if (self.myMapView.userLocation.coordinate.latitude != 0 && self.myMapView.userLocation.coordinate.longitude != 0) {
         MKMapCamera *camera = [MKMapCamera cameraLookingAtCenterCoordinate:self.myMapView.userLocation.coordinate fromEyeCoordinate:CLLocationCoordinate2DMake(self.myMapView.userLocation.coordinate.latitude, self.myMapView.userLocation.coordinate.longitude) eyeAltitude:1000000];
             [self.myMapView setCamera:camera animated:NO];
-        
+
     }
 }
-
 
 - (void)fetchData:(MKMapView *)mapView { //it is useful
 }
