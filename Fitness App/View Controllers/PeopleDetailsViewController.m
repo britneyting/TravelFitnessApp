@@ -76,6 +76,15 @@
 - (void)fetchData:(MKMapView *)mapView { //it is useful
 }
 
+- (IBAction)followedUser:(id)sender {
+    if (![self.followButton isSelected]) {
+        [self.followButton setSelected:YES];
+    }
+    else {
+        [self.followButton setSelected:NO];
+    }
+}
+
 - (void)postPin:(Post *)post{
     NSLog(@"post");
     PFFileObject *imageFile = post[@"image"];

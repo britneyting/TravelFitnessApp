@@ -19,6 +19,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.view.backgroundColor = [self colorWithHexString:@"efeeec"];
+    self.navigationController.navigationBar.tintColor = [self colorWithHexString:@"157F1F"];
+    self.navigationController.navigationBar.barTintColor = [self colorWithHexString:@"efeeec"];
+    
     self.segmentControl.backgroundColor = [UIColor clearColor];
     self.segmentControl.tintColor = [UIColor clearColor];
     [self.segmentControl setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue" size:18.0f], NSForegroundColorAttributeName:[UIColor lightGrayColor]} forState:UIControlStateNormal];

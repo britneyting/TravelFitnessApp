@@ -78,7 +78,7 @@
     [self.profilePictureImage loadInBackground];
     self.profilePictureImage.layer.cornerRadius = self.profilePictureImage.frame.size.width/2;
     [[self.profilePictureImage layer] setBorderWidth:5.0f];
-    [[self.profilePictureImage layer] setBorderColor:[UIColor whiteColor].CGColor];
+    [[self.profilePictureImage layer] setBorderColor:[self colorWithHexString:@"efeeec"].CGColor];
     self.editProfilePicIcon.image = [UIImage imageNamed:@"camera_icon"];
     self.editProfilePicIcon.backgroundColor = [self colorWithHexString:@"dbdbdb"];
     self.editProfilePicIcon.layer.cornerRadius = 3;

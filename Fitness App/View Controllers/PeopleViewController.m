@@ -29,6 +29,9 @@
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(fetchData) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:self.refreshControl atIndex:0];
+    self.navigationController.navigationBar.tintColor = [self colorWithHexString:@"157F1F"];
+    self.navigationController.navigationBar.barTintColor = [self colorWithHexString:@"efeeec"];
+    self.view.backgroundColor = [self colorWithHexString:@"efeeec"];
 }
 
 - (void)fetchData {
@@ -61,6 +64,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     PeopleCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PeopleCell" forIndexPath:indexPath];
+    cell.backgroundColor = [self colorWithHexString:@"efeeec"];
     PFUser *nearbyPerson = self.nearbyPeople[indexPath.row];
     cell.nearbyPerson = nearbyPerson;
     cell.nameLabel.text = nearbyPerson[@"name"];
