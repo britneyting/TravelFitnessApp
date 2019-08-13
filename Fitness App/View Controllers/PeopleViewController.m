@@ -42,7 +42,7 @@
     
     PFQuery *query = [PFQuery queryWithClassName:@"_User"];
     [query whereKey:@"username" notEqualTo:currentUser.username];
-    [query whereKey:@"coordinates" nearGeoPoint:currentUser[@"coordinates"] withinMiles:10];
+    [query whereKey:@"coordinates" nearGeoPoint:currentUser[@"coordinates"] withinMiles:50];
     
     [query findObjectsInBackgroundWithBlock:^(NSArray *nearbyPeople, NSError *error) {
         if (nearbyPeople) {

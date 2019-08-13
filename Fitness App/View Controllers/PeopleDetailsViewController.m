@@ -29,6 +29,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.view.backgroundColor = [self colorWithHexString:@"efeeec"];
     self.navigationController.navigationBar.tintColor = [self colorWithHexString:@"157F1F"];
     
     self.nameLabel.text = self.nearbyPerson[@"name"];

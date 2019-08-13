@@ -23,6 +23,9 @@
     self.descriptionField.textColor = [UIColor lightGrayColor];
     self.signupButton.layer.cornerRadius = 8;
     self.view.backgroundColor = [self colorWithHexString:@"efeeec"];
+    [[self.descriptionField layer] setBorderWidth:1.0f];
+    [[self.descriptionField layer] setBorderColor:[self colorWithHexString:@"0C3823"].CGColor];
+    [[self.descriptionField layer] setCornerRadius:4.0f];
 }
 
 - (void)createAlert:(NSString *)message withTitle:(NSString *)title {

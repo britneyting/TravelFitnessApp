@@ -22,6 +22,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     UIImage *logo = [UIImage imageNamed:@"logo.png"];
     [self.logo setImage:logo];
+    self.loginButton.layer.cornerRadius = 8;
 }
 
 - (void)createAlert:(NSString *)message withTitle:(NSString *)title {

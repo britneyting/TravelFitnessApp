@@ -107,6 +107,7 @@
         MKMapCamera *camera = [MKMapCamera cameraLookingAtCenterCoordinate:self.myMapView.userLocation.coordinate fromEyeCoordinate:CLLocationCoordinate2DMake(self.myMapView.userLocation.coordinate.latitude, self.myMapView.userLocation.coordinate.longitude) eyeAltitude:1000000];
         [self.myMapView setCamera:camera animated:YES];
     }
+    [self getCurrentLocation];
 }
 
 -(void)getCurrentLocation {
