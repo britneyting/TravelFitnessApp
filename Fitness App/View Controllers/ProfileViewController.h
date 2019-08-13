@@ -18,9 +18,14 @@
 @interface ProfileViewController : UIViewController
 @property (strong, nonatomic) IBOutlet PFImageView *profilePictureImage;
 @property (strong, nonatomic) IBOutlet UITapGestureRecognizer *editProfilePic;
+@property (strong, nonatomic) IBOutlet UIImageView *editProfilePicIcon;
 @property (strong, nonatomic) IBOutlet UILabel *nameLabel;
+@property (strong, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (strong, nonatomic) IBOutlet UILabel *ageLabel;
 @property (strong, nonatomic) IBOutlet UILabel *genderLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *usernameIcon;
+@property (strong, nonatomic) IBOutlet UIImageView *ageIcon;
+@property (strong, nonatomic) IBOutlet UIImageView *genderIcon;
 @property (strong, nonatomic) IBOutlet UITextView *descriptionField;
 @property (strong, nonatomic) IBOutlet UIButton *saveButton;
 @property (strong, nonatomic) IBOutlet UINavigationItem *navItem;
@@ -28,7 +33,7 @@
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error;
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation;
-- (void)mapView:(MKMapView *)mapViewannotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control;
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control;
 
 @end
 

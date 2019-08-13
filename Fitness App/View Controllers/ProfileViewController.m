@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
 #import "ProfileViewController.h"
 #import <MapKit/MapKit.h>
 #import "Parse/Parse.h"
@@ -38,33 +39,57 @@
 -(void)viewDidLoad {
     [super viewDidLoad];
     self.locationManager = [[CLLocationManager alloc] init];
-    
+
     [self.locationManager startUpdatingLocation];
     
     [self.locationManager requestWhenInUseAuthorization];
     if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
         [self.locationManager requestWhenInUseAuthorization];
     }
+    
+    self.view.backgroundColor = [self colorWithHexString:@"efeeec"];
+    
+    self.navigationController.navigationBar.tintColor = [self colorWithHexString:@"157F1F"];
+    self.navigationController.navigationBar.barTintColor = [self colorWithHexString:@"efeeec"];
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[self colorWithHexString:@"0C3823"]};
+    
     self.saveButton.hidden = YES;
     self.placeholderText = @"Write description...";
     PFUser *currentUser = [PFUser currentUser];
     self.nameLabel.text = currentUser[@"name"];
-    self.ageLabel.text = [NSString stringWithFormat:@"%@", currentUser[@"age"]];
+    self.usernameLabel.text = [NSString stringWithFormat:@"@%@", currentUser.username];
+    self.ageLabel.text = [NSString stringWithFormat:@"%@ years old", currentUser[@"age"]];
     self.genderLabel.text = currentUser[@"gender"];
+    [self.usernameIcon setImage:[UIImage imageNamed:@"username_icon"]];
+    [self.ageIcon setImage:[UIImage imageNamed:@"age_icon"]];
+    [self.genderIcon setImage:[UIImage imageNamed:@"gender_icon"]];
+    self.nameLabel.textColor = [self colorWithHexString:@"0C3823"];
+    self.usernameLabel.textColor = [self colorWithHexString:@"157F1F"];
+    self.ageLabel.textColor = [self colorWithHexString:@"157F1F"];
+    self.genderLabel.textColor = [self colorWithHexString:@"157F1F"];
     self.descriptionField.text = currentUser[@"description"];
     
     if ([self.descriptionField.text isEqualToString:@""]) {
         self.descriptionField.text = self.placeholderText;
         self.descriptionField.textColor = [UIColor lightGrayColor];
     }
+
     self.profilePictureImage.file = currentUser[@"profilePicture"];
     [self.profilePictureImage loadInBackground];
-    self.profilePictureImage.layer.cornerRadius = 50;
+    self.profilePictureImage.layer.cornerRadius = self.profilePictureImage.frame.size.width/2;
+    [[self.profilePictureImage layer] setBorderWidth:5.0f];
+    [[self.profilePictureImage layer] setBorderColor:[UIColor whiteColor].CGColor];
+    self.editProfilePicIcon.image = [UIImage imageNamed:@"camera_icon"];
+    self.editProfilePicIcon.backgroundColor = [self colorWithHexString:@"dbdbdb"];
+    self.editProfilePicIcon.layer.cornerRadius = 3;
+    [[self.editProfilePicIcon layer] setBorderColor:[self colorWithHexString:@"dbdbdb"].CGColor];
+    self.editProfilePicIcon.layer.borderWidth = 2.0f;
     self.navItem.title = currentUser[@"name"];
     
     self.myMapView.showsUserLocation = YES;
     self.myMapView.showsBuildings = YES;
     self.myMapView.delegate = self;
+    self.myMapView.layer.cornerRadius = 15;
     
     PFQuery *postsPerUser = [Post query];
     [postsPerUser whereKey:@"username" equalTo:[PFUser currentUser].username];
@@ -79,7 +104,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     if (self.myMapView.userLocation.coordinate.latitude != 0 && self.myMapView.userLocation.coordinate.longitude != 0) {
-        MKMapCamera *camera = [MKMapCamera cameraLookingAtCenterCoordinate:self.myMapView.userLocation.coordinate fromEyeCoordinate:CLLocationCoordinate2DMake(self.myMapView.userLocation.coordinate.latitude, self.myMapView.userLocation.coordinate.longitude) eyeAltitude:100000];
+        MKMapCamera *camera = [MKMapCamera cameraLookingAtCenterCoordinate:self.myMapView.userLocation.coordinate fromEyeCoordinate:CLLocationCoordinate2DMake(self.myMapView.userLocation.coordinate.latitude, self.myMapView.userLocation.coordinate.longitude) eyeAltitude:1000000];
         [self.myMapView setCamera:camera animated:YES];
     }
 }
@@ -188,6 +213,87 @@
     }];
 }
 
+- (UIImage *)addBorderToImage:(UIImage *)image {
+    CGImageRef bgimage = [image CGImage];
+    float width = CGImageGetWidth(bgimage);
+    float height = CGImageGetHeight(bgimage);
+    
+    // Create a temporary texture data buffer
+    void *data = malloc(width * height * 4);
+    
+    // Draw image to buffer
+    CGContextRef ctx = CGBitmapContextCreate(data,
+                                             width,
+                                             height,
+                                             8,
+                                             width * 4,
+                                             CGImageGetColorSpace(image.CGImage),
+                                             kCGImageAlphaPremultipliedLast);
+    CGContextDrawImage(ctx, CGRectMake(0, 0, (CGFloat)width, (CGFloat)height), bgimage);
+    
+    //Set the stroke (pen) color
+    CGContextSetStrokeColorWithColor(ctx, [UIColor greenColor].CGColor);
+    
+    //Set the width of the pen mark
+    CGFloat borderWidth = (float)width*0.05;
+    CGContextSetLineWidth(ctx, borderWidth);
+    
+    //Start at 0,0 and draw a square
+    CGContextMoveToPoint(ctx, 0.0, 0.0);
+    CGContextAddLineToPoint(ctx, 0.0, height);
+    CGContextAddLineToPoint(ctx, width, height);
+    CGContextAddLineToPoint(ctx, width, 0.0);
+    CGContextAddLineToPoint(ctx, 0.0, 0.0);
+    
+    //Draw it
+    CGContextStrokePath(ctx);
+    
+    // write it to a new image
+    CGImageRef cgimage = CGBitmapContextCreateImage(ctx);
+    UIImage *newImage = [UIImage imageWithCGImage:cgimage];
+    CFRelease(cgimage);
+    CGContextRelease(ctx);
+    
+    // auto-released
+    return newImage;
+}
+
+-(UIColor*)colorWithHexString:(NSString*)hex
+{
+    NSString *cString = [[hex stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] uppercaseString];
+    
+    // String should be 6 or 8 characters
+    if ([cString length] < 6) return [UIColor grayColor];
+    
+    // strip 0X if it appears
+    if ([cString hasPrefix:@"0X"]) cString = [cString substringFromIndex:2];
+    
+    if ([cString length] != 6) return  [UIColor grayColor];
+    
+    // Separate into r, g, b substrings
+    NSRange range;
+    range.location = 0;
+    range.length = 2;
+    NSString *rString = [cString substringWithRange:range];
+    
+    range.location = 2;
+    NSString *gString = [cString substringWithRange:range];
+    
+    range.location = 4;
+    NSString *bString = [cString substringWithRange:range];
+    
+    // Scan values
+    unsigned int r, g, b;
+    [[NSScanner scannerWithString:rString] scanHexInt:&r];
+    [[NSScanner scannerWithString:gString] scanHexInt:&g];
+    [[NSScanner scannerWithString:bString] scanHexInt:&b];
+    
+    return [UIColor colorWithRed:((float) r / 255.0f)
+                           green:((float) g / 255.0f)
+                            blue:((float) b / 255.0f)
+                           alpha:1.0f];
+}
+
 - (void)postPin:(Post *)post{
     PFFileObject *imageFile = post[@"image"];
     NSURL *postPic = [NSURL URLWithString:imageFile.url];
@@ -244,6 +350,7 @@
 }
 
 - (IBAction)unwindFromViewController2:(UIStoryboardSegue *)segue{ //although it seems it's doing nothing, this is needed to conduct the unwind
+    [self viewDidLoad];
 }
 
 - (UIImage*)circularScaleAndCropImage:(UIImage*)image frame:(CGRect)frame {

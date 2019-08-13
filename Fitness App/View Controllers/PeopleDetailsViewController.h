@@ -22,10 +22,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (strong, nonatomic) IBOutlet UILabel *ageLabel;
 @property (strong, nonatomic) IBOutlet UILabel *genderLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *usernameIcon;
+@property (strong, nonatomic) IBOutlet UIImageView *ageIcon;
+@property (strong, nonatomic) IBOutlet UIImageView *genderIcon;
 @property (strong, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (strong, nonatomic) IBOutlet MKMapView *myMapView;
 @property (strong, nonatomic) IBOutlet UINavigationItem *titleBar;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *chatButton;
+@property (strong, nonatomic) IBOutlet UIButton *followButton;
 
 @end
 

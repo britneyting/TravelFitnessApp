@@ -28,20 +28,34 @@
 @implementation PeopleDetailsViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.navigationController.navigationBar.tintColor = [self colorWithHexString:@"157F1F"];
+    
     self.nameLabel.text = self.nearbyPerson[@"name"];
     self.usernameLabel.text = [NSString stringWithFormat:@"@%@", self.nearbyPerson.username];
-    self.ageLabel.text = [NSString stringWithFormat:@"%@ years old,", self.nearbyPerson[@"age"]];
+    self.ageLabel.text = [NSString stringWithFormat:@"%@ years old", self.nearbyPerson[@"age"]];
     self.locationManager = [[CLLocationManager alloc] init];
     [self.locationManager startUpdatingLocation];
     
     self.myMapView.delegate = self;
     self.myMapView.showsUserLocation = YES;
-    self.genderLabel.text = [NSString stringWithFormat:@"Gender: %@", self.nearbyPerson[@"gender"]];
+    self.genderLabel.text = [NSString stringWithFormat:@"%@", self.nearbyPerson[@"gender"]];
+    [self.usernameIcon setImage:[UIImage imageNamed:@"username_icon"]];
+    [self.ageIcon setImage:[UIImage imageNamed:@"age_icon"]];
+    [self.genderIcon setImage:[UIImage imageNamed:@"gender_icon"]];
+    self.nameLabel.textColor = [self colorWithHexString:@"0C3823"];
+    self.usernameLabel.textColor = [self colorWithHexString:@"157F1F"];
+    self.ageLabel.textColor = [self colorWithHexString:@"157F1F"];
+    self.genderLabel.textColor = [self colorWithHexString:@"157F1F"];
     self.descriptionLabel.text = self.nearbyPerson[@"description"];
     self.profilePictureImage.file = self.nearbyPerson[@"profilePicture"];
     [self.profilePictureImage loadInBackground];
-    self.profilePictureImage.layer.cornerRadius = 50;
+    self.profilePictureImage.layer.cornerRadius = self.profilePictureImage.frame.size.height/2;
+    [[self.profilePictureImage layer] setBorderWidth:5.0f];
+    [[self.profilePictureImage layer] setBorderColor:[UIColor whiteColor].CGColor];
     self.titleBar.title = self.nearbyPerson[@"name"];
+    self.myMapView.layer.cornerRadius = 15;
+    self.followButton.layer.cornerRadius = 8;
     
     PFQuery *userPosts = [Post query];
     [userPosts whereKey:@"username" equalTo:self.nearbyPerson.username];
@@ -53,7 +67,7 @@
     }];
     
     if (self.myMapView.userLocation.coordinate.latitude != 0 && self.myMapView.userLocation.coordinate.longitude != 0) {
-        MKMapCamera *camera = [MKMapCamera cameraLookingAtCenterCoordinate:self.myMapView.userLocation.coordinate fromEyeCoordinate:CLLocationCoordinate2DMake(self.myMapView.userLocation.coordinate.latitude, self.myMapView.userLocation.coordinate.longitude) eyeAltitude:100000];
+        MKMapCamera *camera = [MKMapCamera cameraLookingAtCenterCoordinate:self.myMapView.userLocation.coordinate fromEyeCoordinate:CLLocationCoordinate2DMake(self.myMapView.userLocation.coordinate.latitude, self.myMapView.userLocation.coordinate.longitude) eyeAltitude:1000000];
             [self.myMapView setCamera:camera animated:NO];
         
     }
@@ -138,6 +152,42 @@
 }
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
     [self performSegueWithIdentifier:@"fullScreen2" sender:view];
+}
+
+-(UIColor*)colorWithHexString:(NSString*)hex
+{
+    NSString *cString = [[hex stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] uppercaseString];
+    
+    // String should be 6 or 8 characters
+    if ([cString length] < 6) return [UIColor grayColor];
+    
+    // strip 0X if it appears
+    if ([cString hasPrefix:@"0X"]) cString = [cString substringFromIndex:2];
+    
+    if ([cString length] != 6) return  [UIColor grayColor];
+    
+    // Separate into r, g, b substrings
+    NSRange range;
+    range.location = 0;
+    range.length = 2;
+    NSString *rString = [cString substringWithRange:range];
+    
+    range.location = 2;
+    NSString *gString = [cString substringWithRange:range];
+    
+    range.location = 4;
+    NSString *bString = [cString substringWithRange:range];
+    
+    // Scan values
+    unsigned int r, g, b;
+    [[NSScanner scannerWithString:rString] scanHexInt:&r];
+    [[NSScanner scannerWithString:gString] scanHexInt:&g];
+    [[NSScanner scannerWithString:bString] scanHexInt:&b];
+    
+    return [UIColor colorWithRed:((float) r / 255.0f)
+                           green:((float) g / 255.0f)
+                            blue:((float) b / 255.0f)
+                           alpha:1.0f];
 }
 #pragma mark - Navigation
 
