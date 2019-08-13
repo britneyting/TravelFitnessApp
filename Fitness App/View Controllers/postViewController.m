@@ -33,7 +33,7 @@
     
     self.photo = [UIImage imageNamed:@"imagePlaceholder"];
     self.imageView.image = self.photo;
-    
+
     self.captionTextView.delegate = self;
     self.placeholderText = @"Write caption...";
     self.captionTextView.text = self.placeholderText;
@@ -127,8 +127,9 @@
             NSLog(@"Error: %@", error);
         }
     }];
+    
+    
 }
-
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
